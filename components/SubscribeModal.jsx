@@ -60,17 +60,17 @@ export default function SubscribeModal(props) {
       <form>
         <Fieldset css={{ marginTop: '-1.5rem' }}>
           <Label>Email address</Label>
-          <Input type="email" required></Input>
+          <Input name="email" type="email" required></Input>
         </Fieldset>
 
         <Fieldset>
           <Label>First name</Label>
-          <Input type="text"></Input>
+          <Input name="firstName" type="text"></Input>
         </Fieldset>
 
         <Fieldset>
           <Label>Last name</Label>
-          <Input type="text"></Input>
+          <Input name="lastName" type="text"></Input>
         </Fieldset>
 
         <Fieldset>
