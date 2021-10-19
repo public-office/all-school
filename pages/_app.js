@@ -1,7 +1,7 @@
-import '../styles/globals.css'
+import 'react-lite-youtube-embed/dist/LiteYouTubeEmbed.css'
+import globalStyles from 'global'
 
-function MyApp({ Component, pageProps }) {
+export default function App({ Component, pageProps }) {
+  globalStyles()
   return <Component {...pageProps} />
 }
-
-export default MyApp
