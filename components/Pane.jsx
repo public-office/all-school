@@ -27,6 +27,8 @@ const PaneContainer = motion(
     borderTopLeftRadius: '1rem',
     borderBottomLeftRadius: '1rem',
     boxShadow: '$shadow',
+    overflowY: 'auto',
+    WebkitOverflowScrolling: 'touch',
   })
 )
 
