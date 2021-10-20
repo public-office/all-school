@@ -1,3 +1,3 @@
-import Landing from 'templates/landing'
+import Landing from 'templates/Landing'
 
 export default Landing

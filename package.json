@@ -16,8 +16,10 @@
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-fast-marquee": "^1.2.1",
+    "react-hook-form": "^7.17.4",
     "react-lite-youtube-embed": "^2.1.0",
-    "react-prevent-outside-scroll": "^0.0.2"
+    "react-prevent-outside-scroll": "^0.0.2",
+    "react-use": "^17.3.1"
   },
   "devDependencies": {
     "eslint": "8.0.1",
