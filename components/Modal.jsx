@@ -41,6 +41,9 @@ const ModalClose = styled('div', {
   button: {
     display: 'block',
     width: '100%',
+    '&:hover svg path': {
+      stroke: '$highlight',
+    },
     'svg path': {
       vectorEffect: 'non-scaling-stroke',
     },
