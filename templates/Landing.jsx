@@ -4,9 +4,9 @@ import SubscribeModal from 'components/SubscribeModal'
 import YouTubeEmbed from 'react-lite-youtube-embed'
 import { styled } from 'stitches.config'
 import FastMarquee from 'react-fast-marquee'
-import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import Disc from 'components/Disc'
 
 const Page = styled('div', {
   display: 'flex',
@@ -30,7 +30,6 @@ const Hero = styled('div', {
   padding: '0 $margin $margin',
   zIndex: 2,
   position: 'relative',
-  marginTop: '-0.17em',
   '& p:not(:last-child)': {
     marginBottom: '0.5em',
   },
@@ -38,24 +37,12 @@ const Hero = styled('div', {
 
 const HeroImage = styled('figure', {
   position: 'absolute',
-  bottom: '5.8rem',
+  bottom: '4.4rem',
   right: '$margin',
   left: 'calc(50% + $margin / 2)',
   overflow: 'hidden',
   borderRadius: '3rem',
 })
-
-const Disc = motion(
-  styled('div', {
-    background: '$highlight',
-    borderRadius: '50%',
-    width: '18rem',
-    position: 'absolute',
-    top: '40vw',
-    zIndex: 2,
-    right: '$margin2',
-  })
-)
 
 const Footer = styled('div', {
   display: 'grid',
@@ -122,17 +109,7 @@ export default function Landing() {
         </p>
       </Hero>
 
-      <Disc
-        animate={{ rotate: 360 }}
-        transition={{ ease: 'linear', duration: 10, repeat: Infinity }}
-      >
-        <img
-          src="/images/disc.svg"
-          width="100%"
-          height="100%"
-          alt="All School, by Next Wave!"
-        />
-      </Disc>
+      <Disc />
 
       <Pane
         show={showAuslanPane}
