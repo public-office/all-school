@@ -61,7 +61,7 @@ const Footer = styled('div', {
   display: 'grid',
   gridTemplateColumns: '1fr 1fr',
   alignItems: 'flex-end',
-  padding: '$margin3 $margin $margin',
+  padding: '$margin3 $margin $1',
   marginTop: 'auto',
   columnGap: '$gutter',
   a: {
