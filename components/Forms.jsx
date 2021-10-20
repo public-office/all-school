@@ -27,6 +27,10 @@ export const Label = styled('label', {
 export const Input = styled('input', {
   padding: '1rem 0',
   width: '100%',
+  '&::placeholder': {
+    color: '$fg',
+    opacity: 0.2,
+  },
   '&[type="radio"]': {
     display: 'none',
   },
