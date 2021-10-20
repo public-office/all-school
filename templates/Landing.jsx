@@ -20,7 +20,7 @@ const Marquee = styled(FastMarquee, {
   fontSize: '$serif1',
   whiteSpace: 'nowrap',
   overflow: 'hidden',
-  padding: '$margin 0',
+  paddingTop: '$1',
   textTransform: 'uppercase',
 })
 
@@ -30,6 +30,7 @@ const Hero = styled('div', {
   padding: '0 $margin $margin',
   zIndex: 2,
   position: 'relative',
+  marginTop: '-0.17em',
   '& p:not(:last-child)': {
     marginBottom: '0.5em',
   },
