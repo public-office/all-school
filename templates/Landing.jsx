@@ -78,7 +78,7 @@ const PopdownOptions = styled('div', {
   left: '50%',
   transform: 'translateX(-50%)',
   background: '$bg',
-  padding: '$1',
+  padding: '$1 3rem',
   textAlign: 'center',
   borderRadius: '1em',
   boxShadow: '$shadow',

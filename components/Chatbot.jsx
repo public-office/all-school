@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { theme, createTheme } from 'stitches.config'
 import PreventOutsideScroll from 'react-prevent-outside-scroll'
 import { Input } from 'components/Forms'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useCallback, useState } from 'react'
 
 const modalTheme = createTheme({
   colors: {
@@ -101,7 +101,7 @@ const MessageInput = styled(Input, {
   background: '$bg',
 })
 
-const messages = [
+const initialMessages = [
   { from: 'bot', text: "Oh, it's you! I was just thinking about you today!" },
   { from: 'user', text: 'You were?' },
   { from: 'bot', text: "Yeah. Sorry if that's a little forward." },
@@ -110,11 +110,25 @@ const messages = [
   { from: 'bot', text: 'Sad but true' },
 ]
 
+const useChatbot = () => {
+  const [messages, setMessages] = useState(initialMessages)
+
+  const submitMessage = useCallback((text) => {
+    const message = { from: 'user', text }
+    setMessages([...messages, message])
+  })
+
+  return { messages, submitMessage }
+}
+
 export default function Chatbot({ show = true, onClose = () => {} }) {
   const handleClickClose = (e) => {
     e.preventDefault()
     onClose()
   }
+
+  const { messages, submitMessage } = useChatbot()
+  const [newMessage, setNewMessage] = useState('')
 
   const overflowRef = useRef(null)
   useEffect(() => {
@@ -122,7 +136,16 @@ export default function Chatbot({ show = true, onClose = () => {} }) {
       const bottom = overflowRef.current.scrollHeight - overflowRef.current.clientHeight
       overflowRef.current.scrollTo({ top: bottom, behavior: 'smooth' })
     }
-  }, [overflowRef, show])
+  }, [overflowRef, show, messages])
+
+  const handleSubmit = useCallback(
+    (e) => {
+      e.preventDefault(0)
+      submitMessage(newMessage)
+      setNewMessage('')
+    },
+    [newMessage]
+  )
 
   return (
     <>
@@ -152,7 +175,13 @@ export default function Chatbot({ show = true, onClose = () => {} }) {
               </Messages>
 
               <Footer>
-                <MessageInput placeholder="Enter message..." />
+                <form onSubmit={handleSubmit}>
+                  <MessageInput
+                    placeholder="Enter message..."
+                    value={newMessage}
+                    onChange={(e) => setNewMessage(e.target.value)}
+                  />
+                </form>
               </Footer>
             </Content>
           </Container>
