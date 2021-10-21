@@ -2,12 +2,14 @@ import Head from 'next/head'
 import Pane from 'components/Pane'
 import SubscribeModal from 'components/SubscribeModal'
 import YouTubeEmbed from 'react-lite-youtube-embed'
-import { styled } from 'stitches.config'
+import { createTheme, styled } from 'stitches.config'
 import FastMarquee from 'react-fast-marquee'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import Disc from 'components/Disc'
 import Chatbot from 'components/Chatbot'
+import { theme } from 'stitches.config'
+import { useState } from 'react'
 
 const Page = styled('div', {
   display: 'flex',
@@ -65,11 +67,69 @@ const Footer = styled('div', {
   },
 })
 
+const PopdownWrapper = styled('div', {
+  position: 'relative',
+  whiteSpace: 'nowrap',
+})
+
+const PopdownOptions = styled('div', {
+  position: 'absolute',
+  bottom: 'calc(0rem - $1)',
+  left: '50%',
+  transform: 'translateX(-50%)',
+  background: '$bg',
+  padding: '$1',
+  textAlign: 'center',
+  borderRadius: '1em',
+  boxShadow: '$shadow',
+  'button:hover': {
+    color: '$highlight',
+  },
+})
+
+const popdownTheme = createTheme({
+  colors: {
+    bg: theme.colors.highlight.value,
+    highlight: theme.colors.bg.value,
+  },
+})
+
+function Popdown({ label, options }) {
+  const [open, setOpen] = useState(false)
+
+  const handleClick = (e) => {
+    e.preventDefault()
+    setOpen(!open)
+  }
+  return (
+    <PopdownWrapper>
+      <a href="#" onClick={handleClick}>
+        {label}
+      </a>
+      {open && (
+        <PopdownOptions className={popdownTheme}>
+          <div>
+            <a href="#" onClick={handleClick}>
+              {label}
+            </a>
+          </div>
+          <br />
+          {options.map((option, idx) => (
+            <div key={idx}>
+              <button>{option}</button>
+            </div>
+          ))}
+        </PopdownOptions>
+      )}
+    </PopdownWrapper>
+  )
+}
+
 export default function Landing() {
   const router = useRouter()
   const { query } = router
 
-  const showAuslanPane = query.slug === 'auslan'
+  const showAuslanPane = ['auslan', 'access'].includes(query.slug)
   const showSubscribeModal = query.slug === 'subscribe'
   const showChatbot = query.slug === 'chatbot'
 
@@ -174,14 +234,26 @@ export default function Landing() {
             Vivamus quis tincidunt dolor, ac tincidunt ipsum. Quisque ornare varius sem.
             Suspendisse hendrerit sapien risus, nec tempus massa aliquet at. Integer non
             hendrerit justo. Morbi feugiat ac orci ut tincidunt. Maecenas ac volutpat
-            dolor, pharetra vulputate justo. Mauris venenatis ipsum quam
+            dolor, pharetra vulputate justo. Mauris venenatis ipsum quam.
           </figcaption>
           <nav>
-            <a href="#">Access</a>
+            <Link href="/access" scroll={false}>
+              Access
+            </Link>
             <Link href="/auslan" scroll={false}>
               Auslan
             </Link>
-            <a href="#">Screen options</a>
+            <Popdown
+              label="Screen options"
+              options={[
+                'Screen reader',
+                'Plain site',
+                'No javascript',
+                'Remove clutter',
+                'Toggle lines',
+                'Screen mask',
+              ]}
+            />
           </nav>
         </div>
         <div>
