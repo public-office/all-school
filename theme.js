@@ -26,6 +26,7 @@ const theme = {
   },
   space: {
     1: '1rem',
+    2: '2rem',
     margin: '2rem',
     margin2: '4rem',
     margin3: '6rem',

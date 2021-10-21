@@ -34,10 +34,16 @@ const PaneContainer = motion(
 
 const PaneContent = styled('div', {
   color: '$fg',
-  padding: '$gutter',
   display: 'flex',
   flexDirection: 'column',
   minHeight: '100%',
+})
+
+const PaneInner = styled('div', {
+  display: 'flex',
+  flexDirection: 'column',
+  flex: 1,
+  padding: '$gutter',
 })
 
 const Blanket = styled('div', {
@@ -63,7 +69,9 @@ export default function Pane({ children, show = true, onClose = () => {} }) {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
             >
-              <PaneContent>{children}</PaneContent>
+              <PaneContent>
+                <PaneInner>{children}</PaneInner>
+              </PaneContent>
             </PaneContainer>
           </PreventOutsideScroll>
         )}

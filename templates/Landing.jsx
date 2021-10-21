@@ -7,6 +7,7 @@ import FastMarquee from 'react-fast-marquee'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import Disc from 'components/Disc'
+import Chatbot from 'components/Chatbot'
 
 const Page = styled('div', {
   display: 'flex',
@@ -70,6 +71,7 @@ export default function Landing() {
 
   const showAuslanPane = query.slug === 'auslan'
   const showSubscribeModal = query.slug === 'subscribe'
+  const showChatbot = query.slug === 'chatbot'
 
   return (
     <Page>
@@ -138,7 +140,9 @@ export default function Landing() {
         <p>
           For All School updates, follow us on our socials (<a href="#">FB</a>,{' '}
           <a href="#">IG</a> or <a href="#">TW</a>) and/or subscribe to our newsletter{' '}
-          <a href="#">here</a>
+          <Link href="/subscribe" scroll={false}>
+            here
+          </Link>
         </p>
 
         <footer style={{ marginTop: 'auto' }}>
@@ -158,6 +162,11 @@ export default function Landing() {
       <HeroImage>
         <img src="/images/A_24_L_26_1.jpeg" alt="" />
       </HeroImage>
+
+      <Chatbot
+        onClose={() => router.replace('/', undefined, { scroll: false })}
+        show={showChatbot}
+      />
 
       <Footer>
         <div>
@@ -180,7 +189,9 @@ export default function Landing() {
             <a href="#">FB</a>
             <a href="#">IG</a>
             <a href="#">TW</a>
-            <a href="#">Chatbot</a>
+            <Link href="/chatbot" scroll={false}>
+              Chatbot
+            </Link>
           </nav>
         </div>
       </Footer>
