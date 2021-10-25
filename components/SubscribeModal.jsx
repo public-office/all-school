@@ -1,10 +1,19 @@
 import Modal from 'components/Modal'
 import { Button, Fieldset, Label, Input, RadioGroup, RadioLabel } from 'components/Forms'
+import { styled } from 'stitches.config'
+
+const Form = styled('form', {
+  '@mobile': {
+    '.format': {
+      display: 'none',
+    },
+  },
+})
 
 export default function SubscribeModal(props) {
   return (
     <Modal {...props}>
-      <form>
+      <Form>
         <Fieldset css={{ marginTop: '-1.5rem' }}>
           <Label>Email address</Label>
           <Input name="email" type="email" placeholder="your@email.com" required></Input>
@@ -20,7 +29,7 @@ export default function SubscribeModal(props) {
           <Input name="lastName" type="text" placeholder="Last name"></Input>
         </Fieldset>
 
-        <Fieldset>
+        <Fieldset className="format">
           <Label>Preferred format</Label>
           <RadioGroup>
             <RadioLabel>
@@ -37,7 +46,7 @@ export default function SubscribeModal(props) {
         <Fieldset css={{ marginTop: '$gutter', gridTemplateColumns: '1fr' }}>
           <Button type="submit">Subscribe</Button>
         </Fieldset>
-      </form>
+      </Form>
     </Modal>
   )
 }

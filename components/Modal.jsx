@@ -13,6 +13,21 @@ const modalTheme = createTheme({
 
 const MODAL_LAYER = 10000
 
+const ModalBackdrop = motion(
+  styled('div', {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    zIndex: MODAL_LAYER - 1,
+    background: 'rgba(240, 240, 240, 0.3)',
+    '@desktop': {
+      display: 'none',
+    },
+  })
+)
+
 const ModalContainer = motion(
   styled('div', {
     background: '$bg',
@@ -27,6 +42,11 @@ const ModalContainer = motion(
     gridTemplateColumns: '1fr 10rem',
     borderRadius: '1rem',
     boxShadow: '$shadow',
+    '@mobile': {
+      display: 'block',
+      width: 'auto',
+      left: '$margin',
+    },
   })
 )
 
@@ -38,6 +58,9 @@ const ModalContent = styled('div', {
 
 const ModalClose = styled('div', {
   margin: '$gutter',
+  '@mobile': {
+    display: 'none',
+  },
   button: {
     display: 'block',
     width: '100%',
@@ -50,15 +73,28 @@ const ModalClose = styled('div', {
   },
 })
 
+const transition = { duration: 0.5, type: 'tween', ease: [0.16, 1, 0.3, 1] }
+
 export default function Modal({ children, show = true, onClose = () => {} }) {
   return (
     <>
       <AnimatePresence>
         {show && children && (
+          <ModalBackdrop
+            onClick={onClose}
+            transition={transition}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          />
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {show && children && (
           <PreventOutsideScroll>
             <ModalContainer
               className={modalTheme}
-              transition={{ duration: 0.5, type: 'tween', ease: [0.16, 1, 0.3, 1] }}
+              transition={transition}
               initial={{ y: '-130%' }}
               animate={{ y: 0 }}
               exit={{ y: '-130%' }}

@@ -27,9 +27,14 @@ const Marquee = styled(FastMarquee, {
   textTransform: 'uppercase',
 })
 
-const Hero = styled('div', {
+const HeroText = styled('div', {
   fontSize: '$sans4',
   lineHeight: '$sans4',
+  '@mobile': {
+    fontSize: '$sans3',
+    lineHeight: '$sans3',
+    marginBottom: '$margin',
+  },
   padding: '0 $margin $margin',
   zIndex: 2,
   position: 'relative',
@@ -39,30 +44,65 @@ const Hero = styled('div', {
 })
 
 const HeroImage = styled('figure', {
-  position: 'absolute',
-  bottom: '4.4rem',
-  right: '$margin',
-  left: 'calc(50% + $margin / 2)',
-  overflow: 'hidden',
   borderRadius: '3rem',
+  overflow: 'hidden',
+  margin: '0 $margin',
+  '@mobile': {
+    marginTop: 'auto',
+  },
+  '@desktop': {
+    margin: 0,
+    position: 'absolute',
+    bottom: '4.4rem',
+    right: '$margin',
+    left: 'calc(50% + $margin / 2)',
+  },
 })
 
-const Footer = styled('div', {
-  display: 'grid',
-  gridTemplateColumns: '1fr 1fr',
-  alignItems: 'flex-end',
+const Footer = styled('footer', {
   padding: '$margin3 $margin $1',
   marginTop: 'auto',
-  columnGap: '$gutter',
+  '> div': {
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr',
+    alignItems: 'flex-end',
+    columnGap: '$gutter',
+  },
   a: {
     textTransform: 'uppercase',
     textDecoration: 'none',
   },
   nav: {
     display: 'flex',
-    gap: '1.2em',
-    '&.socials a:last-child': {
+    columnGap: '1.2em',
+  },
+  '@desktop': {
+    '.mobile': {
+      display: 'none',
+    },
+    'nav.socials a.chatbot': {
       marginLeft: 'auto',
+    },
+    figcaption: {
+      maxWidth: '39em',
+    },
+  },
+  '@mobile': {
+    '.desktop': {
+      display: 'none',
+    },
+    marginTop: 0,
+    paddingTop: 0,
+    figcaption: {
+      gridColumn: 'span 2',
+      marginBottom: '$margin',
+    },
+    nav: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      '.chatbot': {
+        width: '100%',
+      },
     },
   },
 })
@@ -94,7 +134,7 @@ const popdownTheme = createTheme({
   },
 })
 
-function Popdown({ label, options }) {
+function Popdown({ label, options, className }) {
   const [open, setOpen] = useState(false)
 
   const handleClick = (e) => {
@@ -102,7 +142,7 @@ function Popdown({ label, options }) {
     setOpen(!open)
   }
   return (
-    <PopdownWrapper>
+    <PopdownWrapper className={className}>
       <a href="#" onClick={handleClick}>
         {label}
       </a>
@@ -150,7 +190,7 @@ export default function Landing() {
         onClose={() => router.replace('/', undefined, { scroll: false })}
       />
 
-      <Hero>
+      <HeroText>
         <p>
           <a style={{ textDecoration: 'none' }} href="#">
             All School
@@ -169,7 +209,7 @@ export default function Landing() {
           </Link>
           .
         </p>
-      </Hero>
+      </HeroText>
 
       <Disc />
 
@@ -236,35 +276,74 @@ export default function Landing() {
             hendrerit justo. Morbi feugiat ac orci ut tincidunt. Maecenas ac volutpat
             dolor, pharetra vulputate justo. Mauris venenatis ipsum quam.
           </figcaption>
-          <nav>
-            <Link href="/access" scroll={false}>
-              Access
-            </Link>
-            <Link href="/auslan" scroll={false}>
-              Auslan
-            </Link>
-            <Popdown
-              label="Screen options"
-              options={[
-                'Screen reader',
-                'Plain site',
-                'No javascript',
-                'Remove clutter',
-                'Toggle lines',
-                'Screen mask',
-              ]}
-            />
-          </nav>
         </div>
-        <div>
-          <nav className="socials">
-            <a href="#">FB</a>
-            <a href="#">IG</a>
-            <a href="#">TW</a>
-            <Link href="/chatbot" scroll={false}>
-              Chatbot
-            </Link>
-          </nav>
+        <div className="mobile">
+          <div>
+            <nav className="tools">
+              <Link href="/access" scroll={false}>
+                <a className="access">Access</a>
+              </Link>
+              <Link href="/auslan" scroll={false}>
+                <a className="auslan">Auslan</a>
+              </Link>
+            </nav>
+          </div>
+          <div>
+            <nav className="socials">
+              <Link href="/chatbot" scroll={false}>
+                <a className="chatbot">Chatbot</a>
+              </Link>
+              <a className="social" href="#">
+                FB
+              </a>
+              <a className="social" href="#">
+                IG
+              </a>
+              <a className="social" href="#">
+                TW
+              </a>
+            </nav>
+          </div>
+        </div>
+        <div className="desktop">
+          <div>
+            <nav className="tools">
+              <Link href="/access" scroll={false}>
+                <a className="access">Access</a>
+              </Link>
+              <Link href="/auslan" scroll={false}>
+                <a className="auslan">Auslan</a>
+              </Link>
+              <Popdown
+                className="screen-options"
+                label="Screen options"
+                options={[
+                  'Screen reader',
+                  'Plain site',
+                  'No javascript',
+                  'Remove clutter',
+                  'Toggle lines',
+                  'Screen mask',
+                ]}
+              />
+            </nav>
+          </div>
+          <div>
+            <nav className="socials">
+              <a className="social" href="#">
+                FB
+              </a>
+              <a className="social" href="#">
+                IG
+              </a>
+              <a className="social" href="#">
+                TW
+              </a>
+              <Link href="/chatbot" scroll={false}>
+                <a className="chatbot">Chatbot</a>
+              </Link>
+            </nav>
+          </div>
         </div>
       </Footer>
     </Page>

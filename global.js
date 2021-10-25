@@ -23,6 +23,9 @@ export default globalCss({
   },
   html: {
     fontSize: '1vw',
+    '@mobile': {
+      fontSize: '2.75vw',
+    },
   },
   a: {
     color: 'inherit',
@@ -37,6 +40,8 @@ export default globalCss({
     fontSize: '$sans1',
     fontFamily: '$sans',
     lineHeight: '$sans1',
+    width: '100vw',
+    overflowX: 'hidden',
   },
   'p:not(:last-child)': {
     marginBottom: '1.2em',

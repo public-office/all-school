@@ -10,6 +10,11 @@ const DiscElement = motion(
     top: '21vh',
     zIndex: 2,
     right: '$margin2',
+    '@mobile': {
+      top: '35rem',
+      width: '14rem',
+      right: 'calc($margin / 2)',
+    },
   })
 )
 
