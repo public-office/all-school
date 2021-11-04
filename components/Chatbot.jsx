@@ -170,7 +170,7 @@ export default function Chatbot({ show = true, onClose = () => {} }) {
   )
 
   useEffect(() => {
-    if (!messages.length) submitMessage({ text: 'hello', initial: true })
+    if (show && !messages.length) submitMessage({ text: 'hello', initial: true })
   }, [show])
 
   return (
