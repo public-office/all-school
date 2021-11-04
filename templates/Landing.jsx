@@ -314,18 +314,6 @@ export default function Landing() {
               <Link href="/auslan" scroll={false}>
                 <a className="auslan">Auslan</a>
               </Link>
-              <Popdown
-                className="screen-options"
-                label="Screen options"
-                options={[
-                  'Screen reader',
-                  'Plain site',
-                  'No javascript',
-                  'Remove clutter',
-                  'Toggle lines',
-                  'Screen mask',
-                ]}
-              />
             </nav>
           </div>
           <div>
