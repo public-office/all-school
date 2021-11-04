@@ -1,9 +1,10 @@
 import { styled } from '../stitches.config'
 import { motion, AnimatePresence } from 'framer-motion'
 import { theme, createTheme } from 'stitches.config'
-import PreventOutsideScroll from 'react-prevent-outside-scroll'
 import { Input } from 'components/Forms'
 import { useEffect, useRef, useCallback, useState } from 'react'
+import ReactMarkdown from 'react-markdown'
+import { useChatbot } from 'hooks/useChatbot'
 
 const modalTheme = createTheme({
   colors: {
@@ -69,20 +70,61 @@ const Messages = styled('div', {
   flexDirection: 'column',
 })
 
-const Message = styled('div', {
-  boxShadow: '$shadow',
-  borderRadius: '1.5em',
-  padding: '1rem 1.6rem',
-  width: 'auto',
-  maxWidth: '60%',
-  marginBottom: '$2',
-  '&.bot': {
-    marginRight: 'auto',
-  },
-  '&.user': {
-    marginLeft: 'auto',
-  },
-})
+const BaseMessage = motion(
+  styled('div', {
+    boxShadow: '$shadow',
+    borderRadius: '1.5em',
+    padding: '1rem 1.6rem',
+    width: 'auto',
+    maxWidth: '60%',
+    marginBottom: '$2',
+    '&.bot': {
+      marginRight: 'auto',
+    },
+    '&.user': {
+      marginLeft: 'auto',
+    },
+  })
+)
+
+const Message = (props) => (
+  <BaseMessage
+    {...props}
+    initial={{ opacity: 0, scale: 0.5 }}
+    animate={{ opacity: 1, scale: 1, delay: 0.2 }}
+    exit={{ opacity: 0, scale: 0.5 }}
+  />
+)
+
+const TypingMessageBubbleBase = motion(styled('span'))
+const TypingMessageBubble = ({ delay, ...props }) => (
+  <TypingMessageBubbleBase
+    {...props}
+    transition={{ repeat: Infinity, duration: 1, delay }}
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+  >
+    &bull;
+  </TypingMessageBubbleBase>
+)
+
+const TypingMessage = (props) => (
+  <Message
+    className="bot"
+    css={{
+      display: 'flex',
+      gap: '0.2em',
+      '> span': {
+        transform: 'scale(1.2)',
+      },
+    }}
+  >
+    <TypingMessageBubble key={0} delay={0} />
+    <TypingMessageBubble key={1} delay={0.1} />
+    <TypingMessageBubble key={2} delay={0.2} />
+  </Message>
+)
 
 const Footer = styled('footer', {
   position: 'absolute',
@@ -100,26 +142,6 @@ const MessageInput = styled(Input, {
   borderRadius: '2em',
   background: '$bg',
 })
-
-const initialMessages = [
-  { from: 'bot', text: "Oh, it's you! I was just thinking about you today!" },
-  { from: 'user', text: 'You were?' },
-  { from: 'bot', text: "Yeah. Sorry if that's a little forward." },
-  { from: 'bot', text: "I don't really get out much..." },
-  { from: 'user', text: 'Really?' },
-  { from: 'bot', text: 'Sad but true' },
-]
-
-const useChatbot = () => {
-  const [messages, setMessages] = useState(initialMessages)
-
-  const submitMessage = useCallback((text) => {
-    const message = { from: 'user', text }
-    setMessages([...messages, message])
-  })
-
-  return { messages, submitMessage }
-}
 
 export default function Chatbot({ show = true, onClose = () => {} }) {
   const handleClickClose = (e) => {
@@ -140,12 +162,16 @@ export default function Chatbot({ show = true, onClose = () => {} }) {
 
   const handleSubmit = useCallback(
     (e) => {
-      e.preventDefault(0)
-      submitMessage(newMessage)
+      e.preventDefault()
+      submitMessage({ text: newMessage })
       setNewMessage('')
     },
     [newMessage]
   )
+
+  useEffect(() => {
+    if (!messages.length) submitMessage({ text: 'hello', initial: true })
+  }, [show])
 
   return (
     <>
@@ -167,11 +193,17 @@ export default function Chatbot({ show = true, onClose = () => {} }) {
               </Heading>
 
               <Messages>
-                {messages.map((message, idx) => (
-                  <Message key={idx} className={message.from}>
-                    {message.text}
-                  </Message>
-                ))}
+                {messages
+                  .filter((m) => !m.initial)
+                  .map((message) =>
+                    message.typing ? (
+                      <TypingMessage key={message.id} className={message.from} />
+                    ) : (
+                      <Message key={message.id} className={message.from}>
+                        <ReactMarkdown>{message.text}</ReactMarkdown>
+                      </Message>
+                    )
+                  )}
               </Messages>
 
               <Footer>
