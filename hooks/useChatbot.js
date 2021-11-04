@@ -37,7 +37,7 @@ export const useChatbot = () => {
   const submitMessage = useCallback(async ({ text, initial }) => {
     addMessage('user', { text, initial })
 
-    await delay(500 + Math.random() * 1000)
+    if (!initial) await delay(500 + Math.random() * 1000)
 
     setTyping(true)
 
