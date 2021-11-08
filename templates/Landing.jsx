@@ -13,13 +13,22 @@ import Template from 'components/Template'
 import classnames from 'classnames'
 import { useScreenOptionsContext } from 'hooks/useScreenOptions'
 
-const Marquee = styled(FastMarquee, {
+const marqueeStyle = {
   fontFamily: '$serif',
   fontSize: '$serif1',
-  whiteSpace: 'nowrap',
-  overflow: 'hidden',
   paddingTop: '$1',
   textTransform: 'uppercase',
+}
+
+const Marquee = styled(FastMarquee, {
+  ...marqueeStyle,
+  whiteSpace: 'nowrap',
+  overflow: 'hidden',
+})
+const StaticMarquee = styled('div', {
+  ...marqueeStyle,
+  paddingLeft: '$margin',
+  marginBottom: '$1',
 })
 
 const HeroText = styled('div', {
@@ -186,15 +195,21 @@ export default function Landing() {
   const showSubscribeModal = query.slug === 'subscribe'
   const showChatbot = query.slug === 'chatbot'
 
-  const { screenOptions, setScreenOption } = useScreenOptionsContext()
+  const {
+    screenOptions,
+    screenOptions: { motion, plain },
+    setScreenOption,
+  } = useScreenOptionsContext()
+
+  const marqueeText = `All School is a platform by NextWave exploring new artist-led learning experiences; hosting a mix of content including talks, livestreams, videos and downloable resources. Subscribe here. `
 
   return (
     <Template>
-      <Marquee gradient={false}>
-        All School is a platform by NextWave exploring new artist-led learning
-        experiences; hosting a mix of content including talks, livestreams, videos and
-        downloable resources. Subscribe here.&nbsp;
-      </Marquee>
+      {motion ? (
+        <Marquee gradient={false}>{marqueeText}</Marquee>
+      ) : (
+        <StaticMarquee>{marqueeText}</StaticMarquee>
+      )}
 
       <SubscribeModal
         show={showSubscribeModal}
@@ -271,7 +286,12 @@ export default function Landing() {
       </Pane>
 
       <HeroImage>
-        <img src="/images/A_24_L_26_1.jpeg" alt="" />
+        <img
+          src="/images/A_24_L_26_1.jpeg"
+          alt=""
+          width={plain ? 1517 / 2 : '100%'}
+          height={plain ? 1000 / 2 : 'auto'}
+        />
       </HeroImage>
 
       <Chatbot
@@ -288,34 +308,36 @@ export default function Landing() {
             dolor, pharetra vulputate justo. Mauris venenatis ipsum quam.
           </figcaption>
         </div>
-        <div className="mobile">
-          <div>
-            <nav className="tools">
-              <Link href="/access" scroll={false}>
-                <a className="access">Access</a>
-              </Link>
-              <Link href="/auslan" scroll={false}>
-                <a className="auslan">Auslan</a>
-              </Link>
-            </nav>
+        {!plain && (
+          <div className="mobile">
+            <div>
+              <nav className="tools">
+                <Link href="/access" scroll={false}>
+                  <a className="access">Access</a>
+                </Link>
+                <Link href="/auslan" scroll={false}>
+                  <a className="auslan">Auslan</a>
+                </Link>
+              </nav>
+            </div>
+            <div>
+              <nav className="socials">
+                <Link href="/chatbot" scroll={false}>
+                  <a className="chatbot">Chatbot</a>
+                </Link>
+                <a className="social" href="#">
+                  FB
+                </a>
+                <a className="social" href="#">
+                  IG
+                </a>
+                <a className="social" href="#">
+                  TW
+                </a>
+              </nav>
+            </div>
           </div>
-          <div>
-            <nav className="socials">
-              <Link href="/chatbot" scroll={false}>
-                <a className="chatbot">Chatbot</a>
-              </Link>
-              <a className="social" href="#">
-                FB
-              </a>
-              <a className="social" href="#">
-                IG
-              </a>
-              <a className="social" href="#">
-                TW
-              </a>
-            </nav>
-          </div>
-        </div>
+        )}
         <div className="desktop">
           <div>
             <nav className="tools">

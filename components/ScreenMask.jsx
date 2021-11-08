@@ -1,5 +1,6 @@
 import { styled } from 'stitches.config'
 import { useState, useEffect } from 'react'
+import { useScreenOptionsContext } from 'hooks/useScreenOptions'
 
 const Mask = styled('div', {
   position: 'fixed',
@@ -14,6 +15,9 @@ const Mask = styled('div', {
 const maskSize = '200px'
 
 export default function ScreenMask({ active }) {
+  const {
+    screenOptions: { plain },
+  } = useScreenOptionsContext()
   const [y, setY] = useState(0)
 
   const topHeight = `calc(${y}px - (${maskSize} / 2))`
@@ -29,7 +33,7 @@ export default function ScreenMask({ active }) {
     return () => window.removeEventListener('mousemove', listener)
   })
 
-  return active ? (
+  return active && !plain ? (
     <>
       {<Mask aria-hidden style={{ top: 0, height: topHeight }}></Mask>}
       {<Mask aria-hidden style={{ bottom: 0, height: btmHeight }}></Mask>}

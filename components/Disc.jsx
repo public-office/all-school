@@ -11,6 +11,10 @@ const DiscElement = motion(
     top: '21vh',
     zIndex: 2,
     right: '$margin2',
+    img: {
+      width: '100%',
+      height: '100%',
+    },
     '@mobile': {
       top: '35rem',
       width: '14rem',
@@ -31,8 +35,8 @@ export default function Disc() {
     >
       <img
         src="/images/disc.svg"
-        width="100%"
-        height="100%"
+        width="200"
+        height="200"
         alt="All School, by Next Wave!"
       />
     </DiscElement>

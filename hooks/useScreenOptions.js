@@ -5,7 +5,7 @@ import ScreenOptionsContext from 'context/ScreenOptionsContext'
 export const defaultScreenOptions = { mask: false, plain: false, motion: true }
 
 export const useScreenOptions = () => {
-  const [screenOptions, setScreenOptions] = useLocalStorage(
+  const [screenOptionsState, setScreenOptions] = useLocalStorage(
     'screenOptions',
     defaultScreenOptions
   )
@@ -21,6 +21,11 @@ export const useScreenOptions = () => {
     if (name === 'plain' && prevOptions.plain !== value) {
       window.location.reload()
     }
+  }
+
+  const screenOptions = {
+    ...screenOptionsState,
+    motion: screenOptionsState.plain ? false : screenOptionsState.motion,
   }
 
   return { screenOptions, setScreenOption }
