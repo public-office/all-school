@@ -1,8 +1,7 @@
 import Head from 'next/head'
 import { styled } from 'stitches.config'
 import ScreenMask from 'components/ScreenMask'
-import ScreenOptionsContext from 'context/ScreenOptionsContext'
-import { useContext } from 'react'
+import { useScreenOptionsContext } from 'hooks/useScreenOptions'
 
 const Page = styled('div', {
   display: 'flex',
@@ -12,13 +11,16 @@ const Page = styled('div', {
 })
 
 export default function Template({ title, children, ...props }) {
-  const { screenOptions } = useContext(ScreenOptionsContext)
+  const {
+    screenOptions: { mask },
+  } = useScreenOptionsContext()
+
   return (
     <>
       <Head>
         <title>All School, by Next Wave!</title>
       </Head>
-      <ScreenMask active={screenOptions.mask} />
+      <ScreenMask active={mask} />
       <Page {...props}>{children}</Page>
     </>
   )

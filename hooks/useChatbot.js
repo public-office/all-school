@@ -1,6 +1,5 @@
 import axios from 'axios'
-import { useCounter } from 'rooks'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useState, useRef } from 'react'
 
 const BOTPRESS_BASE_URL = 'https://botpress.nextwave.org.au'
 
@@ -14,7 +13,7 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
 export const useChatbot = () => {
   const [messages, setMessages] = useState([])
-  const { value: messageId, increment: incrementMessageId } = useCounter(0)
+  const messageId = useRef(0)
 
   const setTyping = useCallback((typing) => {
     if (typing) {
@@ -26,8 +25,8 @@ export const useChatbot = () => {
 
   const addMessage = useCallback(
     (from, { text = null, typing = false, initial = false }) => {
-      incrementMessageId()
-      const id = messageId
+      messageId.current++
+      const id = messageId.current
       const message = { id, from, text, typing, initial }
       setMessages((messages) => [...messages, message])
     },

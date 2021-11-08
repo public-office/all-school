@@ -29,12 +29,10 @@ export default function ScreenMask({ active }) {
     return () => window.removeEventListener('mousemove', listener)
   })
 
-  return (
-    active && (
-      <>
-        {<Mask aria-hidden style={{ top: 0, height: topHeight }}></Mask>}
-        {<Mask aria-hidden style={{ bottom: 0, height: btmHeight }}></Mask>}
-      </>
-    )
-  )
+  return active ? (
+    <>
+      {<Mask aria-hidden style={{ top: 0, height: topHeight }}></Mask>}
+      {<Mask aria-hidden style={{ bottom: 0, height: btmHeight }}></Mask>}
+    </>
+  ) : null
 }

@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { theme, createTheme } from 'stitches.config'
 import PreventOutsideScroll from 'react-prevent-outside-scroll'
 import CloseIcon from '../icons/close.svg'
+import { useScreenOptionsContext } from 'hooks/useScreenOptions'
 
 const modalTheme = createTheme({
   colors: {
@@ -76,6 +77,9 @@ const ModalClose = styled('div', {
 const transition = { duration: 0.5, type: 'tween', ease: [0.16, 1, 0.3, 1] }
 
 export default function Modal({ children, show = true, onClose = () => {} }) {
+  const {
+    screenOptions: { motion },
+  } = useScreenOptionsContext()
   return (
     <>
       <AnimatePresence>
@@ -95,9 +99,9 @@ export default function Modal({ children, show = true, onClose = () => {} }) {
             <ModalContainer
               className={modalTheme}
               transition={transition}
-              initial={{ y: '-130%' }}
-              animate={{ y: 0 }}
-              exit={{ y: '-130%' }}
+              initial={motion ? { y: '-130%' } : { opacity: 0 }}
+              animate={motion ? { y: 0 } : { opacity: 1 }}
+              exit={motion ? { y: '-130%' } : { opacity: 0 }}
             >
               <ModalContent>{children}</ModalContent>
               <ModalClose>

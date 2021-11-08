@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { useScreenOptionsContext } from 'hooks/useScreenOptions'
 import { styled } from 'stitches.config'
 
 const DiscElement = motion(
@@ -19,10 +20,14 @@ const DiscElement = motion(
 )
 
 export default function Disc() {
+  const {
+    screenOptions: { motion },
+  } = useScreenOptionsContext()
+
   return (
     <DiscElement
-      animate={{ rotate: 360 }}
-      transition={{ ease: 'linear', duration: 10, repeat: Infinity }}
+      animate={motion ? { rotate: 360 } : undefined}
+      transition={motion ? { ease: 'linear', duration: 10, repeat: Infinity } : undefined}
     >
       <img
         src="/images/disc.svg"

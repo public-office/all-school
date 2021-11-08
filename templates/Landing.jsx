@@ -8,10 +8,10 @@ import { useRouter } from 'next/router'
 import Disc from 'components/Disc'
 import Chatbot from 'components/Chatbot'
 import { theme } from 'stitches.config'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import Template from 'components/Template'
 import classnames from 'classnames'
-import ScreenOptionsContext from 'context/ScreenOptionsContext'
+import { useScreenOptionsContext } from 'hooks/useScreenOptions'
 
 const Marquee = styled(FastMarquee, {
   fontFamily: '$serif',
@@ -186,7 +186,7 @@ export default function Landing() {
   const showSubscribeModal = query.slug === 'subscribe'
   const showChatbot = query.slug === 'chatbot'
 
-  const { screenOptions, setScreenOption } = useContext(ScreenOptionsContext)
+  const { screenOptions, setScreenOption } = useScreenOptionsContext()
 
   return (
     <Template>
@@ -331,6 +331,7 @@ export default function Landing() {
                 options={[
                   { name: 'plain', label: 'Plain site', checked: screenOptions.plain },
                   { name: 'mask', label: 'Screen mask', checked: screenOptions.mask },
+                  { name: 'motion', label: 'Motion', checked: screenOptions.motion },
                 ]}
                 onChange={(option, value) => setScreenOption(option, value)}
               />

@@ -5,6 +5,7 @@ import { Input } from 'components/Forms'
 import { useEffect, useRef, useCallback, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { useChatbot } from 'hooks/useChatbot'
+import { useScreenOptionsContext } from 'hooks/useScreenOptions'
 
 const modalTheme = createTheme({
   colors: {
@@ -92,7 +93,6 @@ const Message = (props) => (
     {...props}
     initial={{ opacity: 0, scale: 0.5 }}
     animate={{ opacity: 1, scale: 1, delay: 0.2 }}
-    exit={{ opacity: 0, scale: 0.5 }}
   />
 )
 
@@ -144,6 +144,10 @@ const MessageInput = styled(Input, {
 })
 
 export default function Chatbot({ show = true, onClose = () => {} }) {
+  const {
+    screenOptions: { motion },
+  } = useScreenOptionsContext()
+
   const handleClickClose = (e) => {
     e.preventDefault()
     onClose()
@@ -180,9 +184,10 @@ export default function Chatbot({ show = true, onClose = () => {} }) {
           <Container
             className={modalTheme}
             transition={{ duration: 0.5, type: 'tween', ease: [0.16, 1, 0.3, 1] }}
-            initial={{ y: '130%' }}
-            animate={{ y: 0 }}
-            exit={{ y: '130%' }}
+            initial={motion ? { y: '130%' } : { opacity: 0 }}
+            animate={motion ? { y: 0 } : { opacity: 1 }}
+            exit={motion ? { y: '130%' } : { opacity: 0 }}
+            style={show ? {} : { pointerEvents: 'none' }}
           >
             <Content ref={overflowRef}>
               <Heading>

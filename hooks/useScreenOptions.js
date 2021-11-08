@@ -1,10 +1,14 @@
 import { useLocalStorage } from 'react-use'
+import { useContext } from 'react'
+import ScreenOptionsContext from 'context/ScreenOptionsContext'
+
+export const defaultScreenOptions = { mask: false, plain: false, motion: true }
 
 export const useScreenOptions = () => {
-  const [screenOptions, setScreenOptions] = useLocalStorage('screenOptions', {
-    plain: false,
-    mask: false,
-  })
+  const [screenOptions, setScreenOptions] = useLocalStorage(
+    'screenOptions',
+    defaultScreenOptions
+  )
 
   const setScreenOption = (name, value) => {
     const prevOptions = { ...screenOptions }
@@ -20,4 +24,8 @@ export const useScreenOptions = () => {
   }
 
   return { screenOptions, setScreenOption }
+}
+
+export const useScreenOptionsContext = () => {
+  return useContext(ScreenOptionsContext)
 }
