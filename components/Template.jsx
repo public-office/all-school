@@ -1,7 +1,8 @@
 import Head from 'next/head'
-import { useEffect } from 'react'
 import { styled } from 'stitches.config'
 import ScreenMask from 'components/ScreenMask'
+import ScreenOptionsContext from 'context/ScreenOptionsContext'
+import { useContext } from 'react'
 
 const Page = styled('div', {
   display: 'flex',
@@ -10,23 +11,14 @@ const Page = styled('div', {
   position: 'relative',
 })
 
-const qsa = (selector) => Array.from(document.querySelectorAll(selector))
-
-export default function Template({ title, children, plain, ...props }) {
-  useEffect(() => {
-    if (plain) {
-      qsa('style, link[rel="stylesheet"]').forEach((el) => {
-        el.parentNode.removeChild(el)
-      })
-    }
-  }, [])
-
+export default function Template({ title, children, ...props }) {
+  const { screenOption } = useContext(ScreenOptionsContext)
   return (
     <>
       <Head>
         <title>All School, by Next Wave!</title>
       </Head>
-      <ScreenMask />
+      {screenOption === 'Screen mask' && <ScreenMask />}
       <Page {...props}>{children}</Page>
     </>
   )

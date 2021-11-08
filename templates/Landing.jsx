@@ -8,10 +8,10 @@ import { useRouter } from 'next/router'
 import Disc from 'components/Disc'
 import Chatbot from 'components/Chatbot'
 import { theme } from 'stitches.config'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import Template from 'components/Template'
 import classnames from 'classnames'
-import { useScreenOption } from 'hooks/useScreenOption'
+import ScreenOptionsContext from 'context/ScreenOptionsContext'
 
 const Marquee = styled(FastMarquee, {
   fontFamily: '$serif',
@@ -190,10 +190,10 @@ export default function Landing() {
   const showSubscribeModal = query.slug === 'subscribe'
   const showChatbot = query.slug === 'chatbot'
 
-  const { screenOption, setScreenOption } = useScreenOption()
+  const { screenOption, setScreenOption } = useContext(ScreenOptionsContext)
 
   return (
-    <Template plain={screenOption === 'Plain site'}>
+    <Template>
       <Marquee gradient={false}>
         All School is a platform by NextWave exploring new artist-led learning
         experiences; hosting a mix of content including talks, livestreams, videos and
