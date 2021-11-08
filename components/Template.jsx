@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { useEffect } from 'react'
 import { styled } from 'stitches.config'
+import ScreenMask from 'components/ScreenMask'
 
 const Page = styled('div', {
   display: 'flex',
@@ -25,6 +26,7 @@ export default function Template({ title, children, plain, ...props }) {
       <Head>
         <title>All School, by Next Wave!</title>
       </Head>
+      <ScreenMask />
       <Page {...props}>{children}</Page>
     </>
   )
