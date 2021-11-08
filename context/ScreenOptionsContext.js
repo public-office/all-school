@@ -1,7 +1,6 @@
 import { createContext } from 'react'
 
 export default createContext({
-  screenOption: null,
-  setScreenOption: () => {},
-  plain: false,
+  screenOptions: { mask: false, plain: false },
+  setScreenOption: (key, value) => {},
 })

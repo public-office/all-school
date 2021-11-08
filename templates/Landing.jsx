@@ -146,11 +146,7 @@ function Popdown({ label, options, className, value, onChange }) {
 
   const handleClickOption = (e, option) => {
     e.preventDefault()
-    if (option === value) {
-      onChange(null)
-    } else {
-      onChange(option)
-    }
+    onChange(option.name, !option.checked)
   }
 
   return (
@@ -170,9 +166,9 @@ function Popdown({ label, options, className, value, onChange }) {
             <div key={idx}>
               <button
                 onClick={(e) => handleClickOption(e, option)}
-                className={classnames({ selected: option === value })}
+                className={classnames({ selected: option.checked })}
               >
-                {option}
+                {option.label}
               </button>
             </div>
           ))}
@@ -190,7 +186,7 @@ export default function Landing() {
   const showSubscribeModal = query.slug === 'subscribe'
   const showChatbot = query.slug === 'chatbot'
 
-  const { screenOption, setScreenOption } = useContext(ScreenOptionsContext)
+  const { screenOptions, setScreenOption } = useContext(ScreenOptionsContext)
 
   return (
     <Template>
@@ -332,9 +328,11 @@ export default function Landing() {
               <Popdown
                 className="screen-options"
                 label="Screen options"
-                options={['Plain site', 'Screen mask']}
-                onChange={(option) => setScreenOption(option)}
-                value={screenOption}
+                options={[
+                  { name: 'plain', label: 'Plain site', checked: screenOptions.plain },
+                  { name: 'mask', label: 'Screen mask', checked: screenOptions.mask },
+                ]}
+                onChange={(option, value) => setScreenOption(option, value)}
               />
             </nav>
           </div>

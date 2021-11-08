@@ -13,7 +13,7 @@ const Mask = styled('div', {
 
 const maskSize = '200px'
 
-export default function ScreenMask() {
+export default function ScreenMask({ active }) {
   const [y, setY] = useState(0)
 
   const topHeight = `calc(${y}px - (${maskSize} / 2))`
@@ -30,9 +30,11 @@ export default function ScreenMask() {
   })
 
   return (
-    <>
-      {<Mask aria-hidden style={{ top: 0, height: topHeight }}></Mask>}
-      {<Mask aria-hidden style={{ bottom: 0, height: btmHeight }}></Mask>}
-    </>
+    active && (
+      <>
+        {<Mask aria-hidden style={{ top: 0, height: topHeight }}></Mask>}
+        {<Mask aria-hidden style={{ bottom: 0, height: btmHeight }}></Mask>}
+      </>
+    )
   )
 }

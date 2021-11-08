@@ -12,13 +12,13 @@ const Page = styled('div', {
 })
 
 export default function Template({ title, children, ...props }) {
-  const { screenOption } = useContext(ScreenOptionsContext)
+  const { screenOptions } = useContext(ScreenOptionsContext)
   return (
     <>
       <Head>
         <title>All School, by Next Wave!</title>
       </Head>
-      {screenOption === 'Screen mask' && <ScreenMask />}
+      <ScreenMask active={screenOptions.mask} />
       <Page {...props}>{children}</Page>
     </>
   )
