@@ -21,12 +21,6 @@ export default globalCss({
     background: 'none',
     outline: 'none',
   },
-  html: {
-    fontSize: '1vw',
-    '@mobile': {
-      fontSize: '2.75vw',
-    },
-  },
   a: {
     color: 'inherit',
     textDecorationThickness: '0.05em',

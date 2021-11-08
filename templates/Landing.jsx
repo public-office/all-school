@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import Pane from 'components/Pane'
 import SubscribeModal from 'components/SubscribeModal'
 import YouTubeEmbed from 'react-lite-youtube-embed'
@@ -10,13 +9,9 @@ import Disc from 'components/Disc'
 import Chatbot from 'components/Chatbot'
 import { theme } from 'stitches.config'
 import { useState } from 'react'
-
-const Page = styled('div', {
-  display: 'flex',
-  flexDirection: 'column',
-  minHeight: '100vh',
-  position: 'relative',
-})
+import Template from 'components/Template'
+import classnames from 'classnames'
+import { useScreenOption } from 'hooks/useScreenOption'
 
 const Marquee = styled(FastMarquee, {
   fontFamily: '$serif',
@@ -122,8 +117,15 @@ const PopdownOptions = styled('div', {
   textAlign: 'center',
   borderRadius: '1em',
   boxShadow: '$shadow',
-  'button:hover': {
-    color: '$highlight',
+  button: {
+    '&:hover': {
+      color: '$highlight',
+    },
+    '&.selected': {
+      '&:after': {
+        content: ' ✔',
+      },
+    },
   },
 })
 
@@ -134,13 +136,23 @@ const popdownTheme = createTheme({
   },
 })
 
-function Popdown({ label, options, className }) {
+function Popdown({ label, options, className, value, onChange }) {
   const [open, setOpen] = useState(false)
 
   const handleClick = (e) => {
     e.preventDefault()
     setOpen(!open)
   }
+
+  const handleClickOption = (e, option) => {
+    e.preventDefault()
+    if (option === value) {
+      onChange(null)
+    } else {
+      onChange(option)
+    }
+  }
+
   return (
     <PopdownWrapper className={className}>
       <a href="#" onClick={handleClick}>
@@ -156,7 +168,12 @@ function Popdown({ label, options, className }) {
           <br />
           {options.map((option, idx) => (
             <div key={idx}>
-              <button>{option}</button>
+              <button
+                onClick={(e) => handleClickOption(e, option)}
+                className={classnames({ selected: option === value })}
+              >
+                {option}
+              </button>
             </div>
           ))}
         </PopdownOptions>
@@ -173,12 +190,10 @@ export default function Landing() {
   const showSubscribeModal = query.slug === 'subscribe'
   const showChatbot = query.slug === 'chatbot'
 
-  return (
-    <Page>
-      <Head>
-        <title>All School, by Next Wave!</title>
-      </Head>
+  const { screenOption, setScreenOption } = useScreenOption()
 
+  return (
+    <Template plain={screenOption === 'Plain site'}>
       <Marquee gradient={false}>
         All School is a platform by NextWave exploring new artist-led learning
         experiences; hosting a mix of content including talks, livestreams, videos and
@@ -314,6 +329,13 @@ export default function Landing() {
               <Link href="/auslan" scroll={false}>
                 <a className="auslan">Auslan</a>
               </Link>
+              <Popdown
+                className="screen-options"
+                label="Screen options"
+                options={['Plain site', 'Screen mask']}
+                onChange={(option) => setScreenOption(option)}
+                value={screenOption}
+              />
             </nav>
           </div>
           <div>
@@ -334,6 +356,6 @@ export default function Landing() {
           </div>
         </div>
       </Footer>
-    </Page>
+    </Template>
   )
 }
