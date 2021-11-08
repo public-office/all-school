@@ -160,7 +160,7 @@ export default function Chatbot({ show = true, onClose = () => {} }) {
   useEffect(() => {
     if (overflowRef.current) {
       const bottom = overflowRef.current.scrollHeight - overflowRef.current.clientHeight
-      overflowRef.current.scrollTo({ top: bottom, behavior: 'smooth' })
+      overflowRef.current.scrollTo({ top: bottom, behavior: motion ? 'smooth' : 'auto' })
     }
   }, [overflowRef, show, messages])
 
