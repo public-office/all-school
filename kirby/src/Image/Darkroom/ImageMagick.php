@@ -3,8 +3,8 @@
 namespace Kirby\Image\Darkroom;
 
 use Exception;
+use Kirby\Filesystem\F;
 use Kirby\Image\Darkroom;
-use Kirby\Toolkit\F;
 
 /**
  * ImageMagick
@@ -177,7 +177,7 @@ class ImageMagick extends Darkroom
     {
         // simple resize
         if ($options['crop'] === false) {
-            return sprintf('-resize %sx%s!', $options['width'], $options['height']);
+            return sprintf('-thumbnail %sx%s!', $options['width'], $options['height']);
         }
 
         $gravities = [
@@ -195,7 +195,7 @@ class ImageMagick extends Darkroom
         // translate the gravity option into something imagemagick understands
         $gravity = $gravities[$options['crop']] ?? 'Center';
 
-        $command  = sprintf('-resize %sx%s^', $options['width'], $options['height']);
+        $command  = sprintf('-thumbnail %sx%s^', $options['width'], $options['height']);
         $command .= sprintf(' -gravity %s -crop %sx%s+0+0', $gravity, $options['width'], $options['height']);
 
         return $command;
@@ -211,6 +211,10 @@ class ImageMagick extends Darkroom
      */
     protected function save(string $file, array $options): string
     {
+        if ($options['format'] !== null) {
+            $file = pathinfo($file, PATHINFO_DIRNAME) . '/' . pathinfo($file, PATHINFO_FILENAME) . '.' . $options['format'];
+        }
+
         return sprintf('-limit thread 1 "%s"', $file);
     }
 
@@ -223,6 +227,14 @@ class ImageMagick extends Darkroom
      */
     protected function strip(string $file, array $options): string
     {
-        return '-strip';
+        if (F::extension($file) === 'png') {
+            // ImageMagick does not support keeping ICC profiles while
+            // stripping other privacy- and security-related information,
+            // such as GPS data; so discard all color profiles for PNG files
+            // (tested with ImageMagick 7.0.11-14 Q16 x86_64 2021-05-31)
+            return '-strip';
+        }
+
+        return '';
     }
 }

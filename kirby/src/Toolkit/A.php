@@ -375,6 +375,20 @@ class A
     }
 
     /**
+     * A simple wrapper around array_map
+     * with a sane argument order
+     * @since 3.6.0
+     *
+     * @param array $array
+     * @param callable $map
+     * @return array
+     */
+    public static function map(array $array, callable $map): array
+    {
+        return array_map($map, $array);
+    }
+
+    /**
      * Move an array item to a new index
      *
      * @param array $array
@@ -418,7 +432,7 @@ class A
      *
      * $required = ['cat', 'elephant'];
      *
-     * $missng = A::missing($array, $required);
+     * $missing = A::missing($array, $required);
      * // missing: [
      * //    'elephant'
      * // ];
@@ -453,10 +467,7 @@ class A
     {
         // convert a simple ignore list to a nested $key => true array
         if (isset($ignore[0]) === true) {
-            $ignore = array_map(function () {
-                return true;
-            }, array_flip($ignore));
-
+            $ignore = array_map(fn () => true, array_flip($ignore));
             $ignore = A::nest($ignore);
         }
 
@@ -599,7 +610,7 @@ class A
     }
 
     /**
-     * Checks wether an array is associative or not
+     * Checks whether an array is associative or not
      *
      * <code>
      * $array = ['a', 'b', 'c'];
