@@ -1,6 +1,5 @@
 import Pane from 'components/Pane'
 import SubscribeModal from 'components/SubscribeModal'
-import YouTubeEmbed from 'react-lite-youtube-embed'
 import { createTheme, styled } from 'stitches.config'
 import FastMarquee from 'react-fast-marquee'
 import Link from 'next/link'
@@ -12,6 +11,7 @@ import { useState } from 'react'
 import Template from 'components/Template'
 import classnames from 'classnames'
 import { useScreenOptionsContext } from 'hooks/useScreenOptions'
+import Markdown from 'components/Markdown'
 
 const marqueeStyle = {
   fontFamily: '$serif',
@@ -187,7 +187,7 @@ function Popdown({ label, options, className, value, onChange }) {
   )
 }
 
-export default function Landing() {
+export default function Landing({ page = {} }) {
   const router = useRouter()
   const { query } = router
 
@@ -201,7 +201,7 @@ export default function Landing() {
     setScreenOption,
   } = useScreenOptionsContext()
 
-  const marqueeText = `All School is a platform by NextWave exploring new artist-led learning experiences; hosting a mix of content including talks, livestreams, videos and downloable resources. Subscribe here. `
+  const marqueeText = page.marquee
 
   return (
     <Template>
@@ -217,17 +217,7 @@ export default function Landing() {
       />
 
       <HeroText>
-        <p>
-          <a style={{ textDecoration: 'none' }} href="#">
-            All School
-          </a>{' '}
-          is a platform by{' '}
-          <a href="https://nextwave.org.au" target="_blank" rel="noreferrer">
-            NextWave
-          </a>{' '}
-          exploring new artist-led learning experiences; hosting a mix of content
-          including talks, livestreams, videos and downloable resources.
-        </p>
+        <Markdown>{page.masthead}</Markdown>
 
         <p>
           <Link href="/subscribe" scroll={false}>
@@ -243,7 +233,8 @@ export default function Landing() {
         show={showAuslanPane}
         onClose={() => router.replace('/', undefined, { scroll: false })}
       >
-        <figure>
+        <Markdown>{page.access}</Markdown>
+        {/*<figure>
           <YouTubeEmbed id="XyXqOlhtENk" />
           <figcaption>
             How to use the Next Wave website,{' '}
@@ -282,12 +273,12 @@ export default function Landing() {
             Brunswick VIC 3056
           </p>
           <p>hi@allschool.org.au</p>
-        </footer>
+        </footer> */}
       </Pane>
 
       <HeroImage>
         <img
-          src="/images/A_24_L_26_1.jpeg"
+          src={page.image?.original}
           alt=""
           width={plain ? 1517 / 2 : '100%'}
           height={plain ? 1000 / 2 : 'auto'}
@@ -301,12 +292,7 @@ export default function Landing() {
 
       <Footer>
         <div>
-          <figcaption>
-            Vivamus quis tincidunt dolor, ac tincidunt ipsum. Quisque ornare varius sem.
-            Suspendisse hendrerit sapien risus, nec tempus massa aliquet at. Integer non
-            hendrerit justo. Morbi feugiat ac orci ut tincidunt. Maecenas ac volutpat
-            dolor, pharetra vulputate justo. Mauris venenatis ipsum quam.
-          </figcaption>
+          <figcaption>{page.image?.caption}</figcaption>
         </div>
         {!plain && (
           <div className="mobile">
