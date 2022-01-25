@@ -1,7 +1,7 @@
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import remarkBreaks from 'remark-breaks'
-import YouTubeEmbed from 'react-lite-youtube-embed'
+// import YouTubeEmbed from 'react-lite-youtube-embed'
 
 export default function Markdown({ remarkPlugins = [], ...props }) {
   const plugins = [...remarkPlugins, remarkGfm, remarkBreaks]
