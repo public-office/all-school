@@ -23,9 +23,6 @@ sections:
   content:
     type: fields
     fields:
-      description:
-        label: Description
-        type: text
       facebook:
         label: Facebook
         type: url
