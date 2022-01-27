@@ -1,0 +1,9 @@
+Title: Courses
+sections:
+  pages:
+    label: Pages
+    type: pages
+    status: all
+    sortable: true
+    templates: course
+    info: "with {{ page.artists.toPage.title }} on {{ page.start_date.toDate('Y-m-d') }} at {{ page.start_time }}"

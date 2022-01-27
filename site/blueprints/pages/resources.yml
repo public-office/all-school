@@ -1,0 +1,8 @@
+Title: Resources
+sections:
+  pages:
+    label: Pages
+    type: pages
+    status: all
+    sortable: true
+    templates: resource

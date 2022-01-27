@@ -1,0 +1,15 @@
+Title: Course
+preset: page
+pages: false
+fields:
+  website:
+    label: Website
+    type: url
+    width: 1/2
+  tags:
+    label: Tags
+    type: tags
+    width: 1/2
+  biography:
+    label: Biography
+    type: textarea
