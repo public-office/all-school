@@ -1,0 +1,9 @@
+Title: Lectures
+sections:
+  pages:
+    label: Pages
+    type: pages
+    status: all
+    sortable: true
+    templates: lecture
+    info: "with {{ page.artists.toPage.title }} on {{ page.start_date.toDate('Y-m-d') }} at {{ page.start_time }}"
