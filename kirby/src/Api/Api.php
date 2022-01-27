@@ -5,9 +5,9 @@ namespace Kirby\Api;
 use Closure;
 use Exception;
 use Kirby\Exception\NotFoundException;
+use Kirby\Filesystem\F;
 use Kirby\Http\Response;
 use Kirby\Http\Router;
-use Kirby\Toolkit\F;
 use Kirby\Toolkit\Pagination;
 use Kirby\Toolkit\Properties;
 use Kirby\Toolkit\Str;
@@ -162,7 +162,7 @@ class Api
      */
     public function call(string $path = null, string $method = 'GET', array $requestData = [])
     {
-        $path = rtrim($path, '/');
+        $path = rtrim($path ?? '', '/');
 
         $this->setRequestMethod($method);
         $this->setRequestData($requestData);

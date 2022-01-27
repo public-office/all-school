@@ -11,17 +11,14 @@ const theme = {
   fontSizes: {
     sans1: '1.6rem',
     sans2: '1.6rem',
-    sans3: '1.6rem',
+    sans3: '3rem',
     sans4: '5.4rem',
     serif1: '1.1rem',
-    serif2: '1.1rem',
-    serif3: '1.1rem',
-    serif4: '1.1rem',
   },
   lineHeights: {
     sans1: 1.2,
     sans2: 1.2,
-    sans3: 1.2,
+    sans3: 1,
     sans4: 1,
   },
   space: {

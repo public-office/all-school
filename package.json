@@ -10,19 +10,25 @@
   },
   "dependencies": {
     "@stitches/react": "^1.2.5",
+    "axios": "^0.25.0",
     "babel-plugin-inline-react-svg": "^2.0.1",
-    "framer-motion": "^4.1.17",
-    "next": "11.1.2",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
+    "classnames": "^2.3.1",
+    "framer-motion": "^5.6.0",
+    "next": "12",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-fast-marquee": "^1.2.1",
     "react-hook-form": "^7.17.4",
     "react-lite-youtube-embed": "^2.1.0",
+    "react-markdown": "^8.0.0",
     "react-prevent-outside-scroll": "^0.0.2",
-    "react-use": "^17.3.1"
+    "react-use": "^17.3.1",
+    "remark-breaks": "^3.0.2",
+    "remark-gfm": "^3.0.1",
+    "rooks": "^5.7.3"
   },
   "devDependencies": {
-    "eslint": "8.0.1",
-    "eslint-config-next": "11.1.2"
+    "eslint": "^8.7.0",
+    "eslint-config-next": "^12.0.8"
   }
 }

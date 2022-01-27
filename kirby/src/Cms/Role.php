@@ -4,7 +4,7 @@ namespace Kirby\Cms;
 
 use Exception;
 use Kirby\Data\Data;
-use Kirby\Toolkit\F;
+use Kirby\Filesystem\F;
 use Kirby\Toolkit\I18n;
 
 /**
@@ -210,7 +210,7 @@ class Role extends Model
      */
     public function title(): string
     {
-        return $this->title = $this->title ?? ucfirst($this->name());
+        return $this->title ??= ucfirst($this->name());
     }
 
     /**

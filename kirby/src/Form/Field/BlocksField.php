@@ -5,10 +5,10 @@ namespace Kirby\Form\Field;
 use Kirby\Cms\Block;
 use Kirby\Cms\Blocks as BlocksCollection;
 use Kirby\Cms\Fieldsets;
-use Kirby\Cms\Form;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\NotFoundException;
 use Kirby\Form\FieldClass;
+use Kirby\Form\Form;
 use Kirby\Form\Mixin\EmptyState;
 use Kirby\Form\Mixin\Max;
 use Kirby\Form\Mixin\Min;
@@ -49,7 +49,7 @@ class BlocksField extends FieldClass
                 $type = $block['type'];
 
                 // get and cache fields at the same time
-                $fields[$type] = $fields[$type] ?? $this->fields($block['type']);
+                $fields[$type] ??= $this->fields($block['type']);
 
                 // overwrite the block content with form values
                 $block['content'] = $this->form($fields[$type], $block['content'])->$to();
@@ -144,6 +144,15 @@ class BlocksField extends FieldClass
                 'pattern' => 'uuid',
                 'action'  => function () {
                     return ['uuid' => uuid()];
+                }
+            ],
+            [
+                'pattern' => 'paste',
+                'method'  => 'POST',
+                'action'  => function () use ($field) {
+                    $value  = BlocksCollection::parse(get('html'));
+                    $blocks = BlocksCollection::factory($value);
+                    return $field->blocksToValues($blocks->toArray());
                 }
             ],
             [

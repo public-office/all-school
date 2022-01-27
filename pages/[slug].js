@@ -1,3 +1,5 @@
-import Landing from 'templates/Landing'
+import IndexPage, { getServerSideProps } from 'pages/index'
 
-export default Landing
+export { getServerSideProps }
+
+export default IndexPage

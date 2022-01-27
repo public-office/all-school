@@ -21,9 +21,6 @@ export default globalCss({
     background: 'none',
     outline: 'none',
   },
-  html: {
-    fontSize: '1vw',
-  },
   a: {
     color: 'inherit',
     textDecorationThickness: '0.05em',
@@ -37,6 +34,8 @@ export default globalCss({
     fontSize: '$sans1',
     fontFamily: '$sans',
     lineHeight: '$sans1',
+    width: '100vw',
+    overflowX: 'hidden',
   },
   'p:not(:last-child)': {
     marginBottom: '1.2em',
