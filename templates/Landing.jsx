@@ -41,7 +41,6 @@ const Subscribe = styled('div', {
       borderRadius: '2em',
       position: 'sticky',
       top: '1em',
-      // bottom: '1.2em',
     },
   },
 })
@@ -60,6 +59,7 @@ const Marquee = styled(FastMarquee, {
   whiteSpace: 'nowrap',
   overflow: 'hidden',
 })
+
 const StaticMarquee = styled('div', {
   ...marqueeStyle,
   paddingLeft: '$margin',
@@ -313,13 +313,6 @@ export default function Landing({ page = {} }) {
 
       <HeroText>
         <Markdown>{page.masthead}</Markdown>
-
-        <p>
-          <Link href="/subscribe" scroll={false}>
-            Subscribe here
-          </Link>
-          .
-        </p>
       </HeroText>
 
       <Sticky>
@@ -331,46 +324,6 @@ export default function Landing({ page = {} }) {
         onClose={() => router.replace('/', undefined, { scroll: false })}
       >
         <Markdown>{page.access}</Markdown>
-        {/*<figure>
-          <YouTubeEmbed id="XyXqOlhtENk" />
-          <figcaption>
-            How to use the Next Wave website,{' '}
-            <a
-              href="https://www.youtube.com/watch?v=XyXqOlhtENk"
-              target="_blank"
-              rel="noreferrer"
-            >
-              YouTube
-            </a>
-            .
-          </figcaption>
-        </figure>
-        <p>
-          All School is a values-driven organisation and industry leader, advocating for
-          cultural inclusion, broad accessibility and best practice in environmental
-          sustainability, with deep respect for the traditional custodians of the lands
-          and waters that sustain us, Aboriginal and Torres Strait Islander people.
-        </p>
-        <p>
-          For All School updates, follow us on our socials (<a href="#">FB</a>,{' '}
-          <a href="#">IG</a> or <a href="#">TW</a>) and/or subscribe to our newsletter{' '}
-          <Link href="/subscribe" scroll={false}>
-            here
-          </Link>
-        </p>
-
-        <footer style={{ marginTop: 'auto' }}>
-          <p>
-            All School
-            <br />
-            Brunswick Mechanics Institute
-            <br />
-            270 Sydney Road
-            <br />
-            Brunswick VIC 3056
-          </p>
-          <p>hi@allschool.org.au</p>
-        </footer> */}
       </Pane>
 
       <HeroImage>
