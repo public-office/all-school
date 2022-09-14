@@ -5,11 +5,8 @@ const DiscElement = motion(
   styled('div', {
     background: '$highlight',
     borderRadius: '50%',
-    width: '18rem',
-    position: 'absolute',
-    top: '21vh',
-    zIndex: 2,
-    right: '$margin2',
+    position: 'sticky',
+    top: '2em',
   })
 )
 

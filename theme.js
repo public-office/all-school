@@ -3,14 +3,16 @@ const theme = {
     fg: 'black',
     bg: 'white',
     highlight: '#d9c1fa',
+    green: '#54d16a',
+    orange: '#ff8528',
   },
   fonts: {
     sans: '"Neue Haas Grotesk", sans-serif',
     serif: '"Synt", serif',
   },
   fontSizes: {
-    sans1: '1.6rem',
-    sans2: '1.6rem',
+    sans1: '1.2rem',
+    sans2: '2.1rem',
     sans3: '1.6rem',
     sans4: '5.4rem',
     serif1: '1.1rem',
