@@ -54,6 +54,13 @@ const Sticky = styled('div', {
   zIndex: 2,
 })
 
+const marqueeStyle = {
+  fontFamily: '$serif',
+  fontSize: '$serif1',
+  paddingTop: '$1',
+  textTransform: 'uppercase',
+}
+
 const Marquee = styled(FastMarquee, {
   ...marqueeStyle,
   whiteSpace: 'nowrap',
