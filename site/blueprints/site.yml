@@ -15,16 +15,23 @@ sections:
         label: Email
         type: email
         width: 1/3
+  pages:
+    label: Pages
+    type: pages
+    sortable: true
+    status: all
+  content:
+    type: fields
+    fields:
       facebook:
         label: Facebook
+        type: url
+        width: 1/3
+      twitter:
+        label: Twitter
         type: url
         width: 1/3
       instagram:
         label: Instagram
         type: url
         width: 1/3
-  pages:
-    label: Pages
-    type: pages
-    sortable: true
-    status: all

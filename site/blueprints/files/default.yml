@@ -1,0 +1,6 @@
+title: File
+fields:
+  caption:
+    label: Caption
+    type: textarea
+    buttons: false

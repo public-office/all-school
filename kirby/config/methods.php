@@ -121,13 +121,14 @@ return function (App $app) {
                 return null;
             }
 
-            $time = empty($field->value) === true ? strtotime($fallback) : $field->toTimestamp();
-
-            if ($format === null) {
-                return $time;
+            if (empty($field->value) === false) {
+                $time = $field->toTimestamp();
+            } else {
+                $time = strtotime($fallback);
             }
 
-            return ($app->option('date.handler', 'date'))($format, $time);
+            $handler = $app->option('date.handler', 'date');
+            return Str::date($time, $format, $handler);
         },
 
         /**
@@ -366,7 +367,7 @@ return function (App $app) {
          * @return \Kirby\Cms\Field
          */
         'html' => function (Field $field) {
-            $field->value = htmlentities($field->value, ENT_COMPAT, 'utf-8');
+            $field->value = Html::encode($field->value);
             return $field;
         },
 
@@ -384,7 +385,7 @@ return function (App $app) {
             // Obsolete elements, script tags, image maps and form elements have
             // been excluded for safety reasons and as they are most likely not
             // needed in most cases.
-            $field->value = strip_tags($field->value, '<b><i><small><abbr><cite><code><dfn><em><kbd><strong><samp><var><a><bdo><br><img><q><span><sub><sup>');
+            $field->value = strip_tags($field->value, Html::$inlineList);
             return $field;
         },
 
@@ -498,13 +499,14 @@ return function (App $app) {
          */
         'replace' => function (Field $field, array $data = [], string $fallback = '') use ($app) {
             if ($parent = $field->parent()) {
-                $field->value = $field->parent()->toString($field->value, $data, $fallback);
+                // never pass `null` as the $template to avoid the fallback to the model ID
+                $field->value = $parent->toString($field->value ?? '', $data, $fallback);
             } else {
                 $field->value = Str::template($field->value, array_replace([
                     'kirby' => $app,
                     'site'  => $app->site(),
                     'page'  => $app->page()
-                ], $data), $fallback);
+                ], $data), ['fallback' => $fallback]);
             }
 
             return $field;

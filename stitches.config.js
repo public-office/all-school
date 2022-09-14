@@ -11,5 +11,9 @@ export const {
   createTheme,
   config,
 } = createStitches({
+  media: {
+    mobile: '(max-width: 640px)',
+    desktop: '(min-width: 640px)',
+  },
   theme: defaultTheme,
 })

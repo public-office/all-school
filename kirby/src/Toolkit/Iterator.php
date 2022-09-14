@@ -40,7 +40,7 @@ class Iterator implements IteratorAggregate
      *
      * @return \ArrayIterator
      */
-    public function getIterator()
+    public function getIterator(): ArrayIterator
     {
         return new ArrayIterator($this->data);
     }
@@ -98,7 +98,7 @@ class Iterator implements IteratorAggregate
     }
 
     /**
-     * Moves the cusor to the first element
+     * Moves the cursor to the first element
      */
     public function rewind()
     {

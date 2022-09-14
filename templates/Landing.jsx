@@ -1,7 +1,5 @@
-import Head from 'next/head'
 import Pane from 'components/Pane'
 import SubscribeModal from 'components/SubscribeModal'
-import YouTubeEmbed from 'react-lite-youtube-embed'
 import { createTheme, styled } from 'stitches.config'
 import FastMarquee from 'react-fast-marquee'
 import Link from 'next/link'
@@ -58,18 +56,25 @@ const Sticky = styled('div', {
 })
 
 const Marquee = styled(FastMarquee, {
-  fontFamily: '$serif',
-  fontSize: '$serif1',
+  ...marqueeStyle,
   whiteSpace: 'nowrap',
   overflow: 'hidden',
-  paddingTop: '$1',
-  textTransform: 'uppercase',
+})
+const StaticMarquee = styled('div', {
+  ...marqueeStyle,
+  paddingLeft: '$margin',
+  marginBottom: '$1',
 })
 
-const Hero = styled('div', {
+const HeroText = styled('div', {
   fontSize: '$sans4',
   lineHeight: '$sans4',
   height: '100vh',
+  '@mobile': {
+    fontSize: '$sans3',
+    lineHeight: '$sans3',
+    marginBottom: '$margin',
+  },
   padding: '0 $margin $margin',
   zIndex: 2,
   position: 'relative',
@@ -132,12 +137,19 @@ const New = styled('div', {
 })
 
 const HeroImage = styled('figure', {
-  position: 'absolute',
-  bottom: '6.25rem',
-  right: '$margin',
-  left: 'calc(50% + $margin / 2)',
-  overflow: 'hidden',
   borderRadius: '3rem',
+  overflow: 'hidden',
+  margin: '0 $margin',
+  '@mobile': {
+    marginTop: 'auto',
+  },
+  '@desktop': {
+    margin: 0,
+    position: 'absolute',
+    bottom: '4.4rem',
+    right: '$margin',
+    left: 'calc(50% + $margin / 2)',
+  },
 })
 
 const Networked = styled('figure', {
@@ -170,6 +182,27 @@ const Footer = styled('div', {
     '&.socials a:last-child': {
       marginLeft: 'auto',
     },
+    figcaption: {
+      maxWidth: '39em',
+    },
+  },
+  '@mobile': {
+    '.desktop': {
+      display: 'none',
+    },
+    marginTop: 0,
+    paddingTop: 0,
+    figcaption: {
+      gridColumn: 'span 2',
+      marginBottom: '$margin',
+    },
+    nav: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      '.chatbot': {
+        width: '100%',
+      },
+    },
   },
 })
 
@@ -188,8 +221,15 @@ const PopdownOptions = styled('div', {
   textAlign: 'center',
   borderRadius: '1em',
   boxShadow: '$shadow',
-  'button:hover': {
-    color: '$highlight',
+  button: {
+    '&:hover': {
+      color: '$highlight',
+    },
+    '&.selected': {
+      '&:after': {
+        content: ' ✔',
+      },
+    },
   },
 })
 
@@ -200,15 +240,21 @@ const popdownTheme = createTheme({
   },
 })
 
-function Popdown({ label, options }) {
+function Popdown({ label, options, className, value, onChange }) {
   const [open, setOpen] = useState(false)
 
   const handleClick = (e) => {
     e.preventDefault()
     setOpen(!open)
   }
+
+  const handleClickOption = (e, option) => {
+    e.preventDefault()
+    onChange(option.name, !option.checked)
+  }
+
   return (
-    <PopdownWrapper>
+    <PopdownWrapper className={className}>
       <a href="#" onClick={handleClick}>
         {label}
       </a>
@@ -222,7 +268,12 @@ function Popdown({ label, options }) {
           <br />
           {options.map((option, idx) => (
             <div key={idx}>
-              <button>{option}</button>
+              <button
+                onClick={(e) => handleClickOption(e, option)}
+                className={classnames({ selected: option.checked })}
+              >
+                {option.label}
+              </button>
             </div>
           ))}
         </PopdownOptions>
@@ -231,7 +282,7 @@ function Popdown({ label, options }) {
   )
 }
 
-export default function Landing() {
+export default function Landing({ page = {} }) {
   const router = useRouter()
   const { query } = router
 
@@ -239,40 +290,37 @@ export default function Landing() {
   const showSubscribeModal = query.slug === 'subscribe'
   const showChatbot = query.slug === 'chatbot'
 
-  return (
-    <Page>
-      <Head>
-        <title>All School, by Next Wave!</title>
-      </Head>
+  const {
+    screenOptions,
+    screenOptions: { motion, plain },
+    setScreenOption,
+  } = useScreenOptionsContext()
 
-      <Marquee gradient={false}>
-        All School is a platform by NextWave exploring new artist-led learning
-        experiences; hosting a mix of content including talks, livestreams, videos and
-        downloable resources. Subscribe here.&nbsp;
-      </Marquee>
+  const marqueeText = page.marquee
+
+  return (
+    <Template>
+      {motion ? (
+        <Marquee gradient={false}>{marqueeText}</Marquee>
+      ) : (
+        <StaticMarquee>{marqueeText}</StaticMarquee>
+      )}
 
       <SubscribeModal
         show={showSubscribeModal}
         onClose={() => router.replace('/', undefined, { scroll: false })}
       />
 
-      <Hero>
-        <p>
-          <a style={{ textDecoration: 'none' }} href="#">
-            All School
-          </a>{' '}
-          is a platform by{' '}
-          <a href="https://nextwave.org.au" target="_blank" rel="noreferrer">
-            NextWave
-          </a>{' '}
-          exploring new artist-led learning experiences; hosting a mix of content
-          including talks, livestreams and videos.
-        </p>
+      <HeroText>
+        <Markdown>{page.masthead}</Markdown>
 
-        <HeroImage>
-          <img src="/images/A_24_L_26_1.jpeg" alt="" />
-        </HeroImage>
-      </Hero>
+        <p>
+          <Link href="/subscribe" scroll={false}>
+            Subscribe here
+          </Link>
+          .
+        </p>
+      </HeroText>
 
       <Sticky>
         <Disc />
@@ -282,7 +330,8 @@ export default function Landing() {
         show={showAuslanPane}
         onClose={() => router.replace('/', undefined, { scroll: false })}
       >
-        <figure>
+        <Markdown>{page.access}</Markdown>
+        {/*<figure>
           <YouTubeEmbed id="XyXqOlhtENk" />
           <figcaption>
             How to use the Next Wave website,{' '}
@@ -321,8 +370,17 @@ export default function Landing() {
             Brunswick VIC 3056
           </p>
           <p>hi@allschool.org.au</p>
-        </footer>
+        </footer> */}
       </Pane>
+
+      <HeroImage>
+        <img
+          src={page.image?.original}
+          alt=""
+          width={plain ? 1517 / 2 : '100%'}
+          height={plain ? 1000 / 2 : 'auto'}
+        />
+      </HeroImage>
 
       <Chatbot
         onClose={() => router.replace('/', undefined, { scroll: false })}
@@ -384,38 +442,75 @@ export default function Landing() {
       </Main>
 
       <Footer>
-        <div>
-          <nav>
-            <Link href="/access" scroll={false}>
-              Access
-            </Link>
-            <Link href="/auslan" scroll={false}>
-              Auslan
-            </Link>
-            <Popdown
-              label="Screen options"
-              options={[
-                'Screen reader',
-                'Plain site',
-                'No javascript',
-                'Remove clutter',
-                'Toggle lines',
-                'Screen mask',
-              ]}
-            />
-          </nav>
-        </div>
-        <div>
-          <nav className="socials">
-            <a href="#">FB</a>
-            <a href="#">IG</a>
-            <a href="#">TW</a>
-            <Link href="/chatbot" scroll={false}>
-              Chatbot
-            </Link>
-          </nav>
+        {!plain && (
+          <div className="mobile">
+            <div>
+              <nav className="tools">
+                <Link href="/access" scroll={false}>
+                  <a className="access">Access</a>
+                </Link>
+                <Link href="/auslan" scroll={false}>
+                  <a className="auslan">Auslan</a>
+                </Link>
+              </nav>
+            </div>
+            <div>
+              <nav className="socials">
+                <Link href="/chatbot" scroll={false}>
+                  <a className="chatbot">Chatbot</a>
+                </Link>
+                <a className="social" href="#">
+                  FB
+                </a>
+                <a className="social" href="#">
+                  IG
+                </a>
+                <a className="social" href="#">
+                  TW
+                </a>
+              </nav>
+            </div>
+          </div>
+        )}
+        <div className="desktop">
+          <div>
+            <nav className="tools">
+              <Link href="/access" scroll={false}>
+                <a className="access">Access</a>
+              </Link>
+              <Link href="/auslan" scroll={false}>
+                <a className="auslan">Auslan</a>
+              </Link>
+              <Popdown
+                className="screen-options"
+                label="Screen options"
+                options={[
+                  { name: 'plain', label: 'Plain site', checked: screenOptions.plain },
+                  { name: 'mask', label: 'Screen mask', checked: screenOptions.mask },
+                  { name: 'motion', label: 'Motion', checked: screenOptions.motion },
+                ]}
+                onChange={(option, value) => setScreenOption(option, value)}
+              />
+            </nav>
+          </div>
+          <div>
+            <nav className="socials">
+              <a className="social" href="#">
+                FB
+              </a>
+              <a className="social" href="#">
+                IG
+              </a>
+              <a className="social" href="#">
+                TW
+              </a>
+              <Link href="/chatbot" scroll={false}>
+                <a className="chatbot">Chatbot</a>
+              </Link>
+            </nav>
+          </div>
         </div>
       </Footer>
-    </Page>
+    </Template>
   )
 }
