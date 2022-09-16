@@ -1,8 +1,0 @@
-title: Information
-preset: page
-pages: false
-fields:
-  text:
-    label: Text
-    type: textarea
-    size: large
