@@ -55,7 +55,7 @@ const Blanket = styled('div', {
   height: '100%',
 })
 
-export default function Pane({ children, show = true, onClose = () => {} }) {
+export function Pane({ children, show = true, onClose = () => {} }) {
   return (
     <>
       {show && children && <Blanket onClick={onClose} />}

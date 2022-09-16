@@ -1,4 +1,4 @@
-import Modal from 'components/Modal'
+import { Modal } from 'components/Modal'
 import { Label, Input, Button, Fieldset } from 'components/Forms'
 import { useForm } from 'react-hook-form'
 import { useState, useMemo, useEffect } from 'react'

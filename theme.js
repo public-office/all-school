@@ -1,4 +1,4 @@
-const theme = {
+export const theme = {
   colors: {
     fg: 'black',
     bg: 'white',
@@ -39,5 +39,3 @@ const theme = {
     shadow: '0 0 2rem rgba(0, 0, 0, 0.2)',
   },
 }
-
-export default theme

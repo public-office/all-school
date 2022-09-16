@@ -1,6 +1,6 @@
 import { createContext } from 'react'
 
-export default createContext({
+export const ScreenOptionsContext = createContext({
   screenOptions: {},
   setScreenOption: (key, value) => {},
 })

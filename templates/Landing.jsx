@@ -1,11 +1,11 @@
-import Pane from 'components/Pane'
-import SubscribeModal from 'components/SubscribeModal'
+import { Pane } from 'components/Pane'
+import { SubscribeModal } from 'components/SubscribeModal'
 import { createTheme, styled } from 'stitches.config'
 import FastMarquee from 'react-fast-marquee'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import Disc from 'components/Disc'
-import Chatbot from 'components/Chatbot'
+import { Disc } from 'components/Disc'
+import { Chatbot } from 'components/Chatbot'
 import { theme } from 'stitches.config'
 import { useState } from 'react'
 import {
@@ -15,6 +15,9 @@ import {
   AccordionItemButton,
   AccordionItemPanel,
 } from 'react-accessible-accordion'
+import { useScreenOptionsContext } from 'hooks/useScreenOptions'
+import { Template } from 'components/Template'
+import { Markdown } from 'components/Markdown'
 
 const Page = styled('div', {
   display: 'flex',
@@ -289,7 +292,7 @@ function Popdown({ label, options, className, value, onChange }) {
   )
 }
 
-export default function Landing({ page = {} }) {
+export function Landing({ page = {} }) {
   const router = useRouter()
   const { query } = router
 
@@ -304,7 +307,7 @@ export default function Landing({ page = {} }) {
   } = useScreenOptionsContext()
 
   const marqueeText = page.marquee
-
+  
   return (
     <Template>
       {motion ? (

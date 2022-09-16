@@ -14,7 +14,7 @@ const Mask = styled('div', {
 
 const maskSize = '200px'
 
-export default function ScreenMask({ active }) {
+export function ScreenMask({ active }) {
   const {
     screenOptions: { plain },
   } = useScreenOptionsContext()

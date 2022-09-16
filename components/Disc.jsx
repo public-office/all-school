@@ -23,7 +23,7 @@ const DiscElement = motion(
   })
 )
 
-export default function Disc() {
+export function Disc() {
   const {
     screenOptions: { motion },
   } = useScreenOptionsContext()

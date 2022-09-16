@@ -143,9 +143,9 @@ const MessageInput = styled(Input, {
   background: '$bg',
 })
 
-export default function Chatbot({ show = true, onClose = () => {} }) {
+export function Chatbot({ show = true, onClose = () => {} }) {
   const {
-    screenOptions: { motion },
+    screenOptions: { motion: enableMotion },
   } = useScreenOptionsContext()
 
   const handleClickClose = (e) => {
@@ -160,7 +160,7 @@ export default function Chatbot({ show = true, onClose = () => {} }) {
   useEffect(() => {
     if (overflowRef.current) {
       const bottom = overflowRef.current.scrollHeight - overflowRef.current.clientHeight
-      overflowRef.current.scrollTo({ top: bottom, behavior: motion ? 'smooth' : 'auto' })
+      overflowRef.current.scrollTo({ top: bottom, behavior: enableMotion ? 'smooth' : 'auto' })
     }
   }, [overflowRef, show, messages])
 
@@ -184,9 +184,9 @@ export default function Chatbot({ show = true, onClose = () => {} }) {
           <Container
             className={modalTheme}
             transition={{ duration: 0.5, type: 'tween', ease: [0.16, 1, 0.3, 1] }}
-            initial={motion ? { y: '130%' } : { opacity: 0 }}
-            animate={motion ? { y: 0 } : { opacity: 1 }}
-            exit={motion ? { y: '130%' } : { opacity: 0 }}
+            initial={enableMotion ? { y: '130%' } : { opacity: 0 }}
+            animate={enableMotion ? { y: 0 } : { opacity: 1 }}
+            exit={enableMotion ? { y: '130%' } : { opacity: 0 }}
             style={show ? {} : { pointerEvents: 'none' }}
           >
             <Content ref={overflowRef}>

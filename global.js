@@ -1,6 +1,6 @@
 import { globalCss } from './stitches.config'
 
-export default globalCss({
+export const globalStyles = globalCss({
   '@font-face': [
     {
       fontFamily: 'Synt',
