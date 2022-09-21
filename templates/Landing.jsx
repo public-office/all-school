@@ -8,13 +8,6 @@ import { Disc } from 'components/Disc'
 import { Chatbot } from 'components/Chatbot'
 import { theme } from 'stitches.config'
 import { useState } from 'react'
-import {
-  Accordion,
-  AccordionItem,
-  AccordionItemHeading,
-  AccordionItemButton,
-  AccordionItemPanel,
-} from 'react-accessible-accordion'
 import { useScreenOptionsContext } from 'hooks/useScreenOptions'
 import { Template } from 'components/Template'
 import { Markdown } from 'components/Markdown'
@@ -31,7 +24,7 @@ const Subscribe = styled('div', {
   position: 'absolute',
   left: '50%',
   transform: 'translateX(-50%)',
-  padding: '3.5em $margin 1em',
+  padding: '2.75em $margin 1em',
   p: {
     letterSpacing: '-2px',
   },
@@ -53,7 +46,7 @@ const Sticky = styled('div', {
   right: '$margin2',
   position: 'fixed',
   right: '1em',
-  top: '10vh',
+  top: '2em',
   zIndex: 2,
 })
 
@@ -61,7 +54,9 @@ const marqueeStyle = {
   fontFamily: '$serif',
   fontSize: '$serif1',
   paddingTop: '$1',
+  letterSpacing: '0.025rem',
   textTransform: 'uppercase',
+  zIndex: '100',
 }
 
 const Marquee = styled(FastMarquee, {
@@ -79,17 +74,89 @@ const StaticMarquee = styled('div', {
 const HeroText = styled('div', {
   fontSize: '$sans4',
   lineHeight: '$sans4',
-  height: '100vh',
+  height: 'calc(110vh - var(--space-margin))',
+  position: 'relative',
+  '.hide': {
+    display: 'none',
+  },
   '@mobile': {
     fontSize: '$sans3',
     lineHeight: '$sans3',
     marginBottom: '$margin',
   },
-  padding: '0 $margin $margin',
+  '.intro': {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(2, 1fr)',
+    gridColumnGap: '0',
+    gridAutoRows: 'calc(50vh + 4px)',
+    marginBottom: '2em',
+    marginTop: '-1.5em',
+    '@mobile': {
+      // gridTemplateColumns: '1fr',
+      // gridAutoRows: 'calc(25vh + 4px)',
+    },
+  },
+  '.menu': {
+    nav: {
+      paddingLeft: '6px',
+      a: {
+        display: 'block',
+        textDecoration: 'none',
+        '&:hover': {
+          color: '$green',
+        },
+      },
+    },
+  },
+  '.head': {
+    position: 'sticky',
+    top: '.15em',
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr',
+    '.nav-trigger': {
+      paddingLeft: '.5rem',
+      '&:hover': {
+        cursor: 'pointer',
+      },
+    },
+  },
+  span: {
+    '&.purple': {
+      color: '$highlight',
+    },
+    '&.green': {
+      color: '$green',
+    },
+    '&.orange': {
+      color: '$orange',
+    },
+  },
+  div: {
+    '&.color-block': {
+      background: '$purple',
+    },
+    '&.image-one': {
+      backgroundImage: 'url("../images/as_bluesky.png")',
+      backgroundSize: 'cover',
+      backgroundPosition: 'top left',
+    },
+    '&.image-two': {
+      backgroundImage: 'url("../images/as_classes.png")',
+      backgroundSize: 'cover',
+      backgroundPosition: 'top left',
+    },
+  },
+  // padding: '0 $margin $margin',
   zIndex: 2,
   position: 'relative',
+  h1: {
+    // marginTop: '-.25em',
+    letterSpacing: '-2px',
+    paddingLeft: 'var(--space-margin)',
+  },
   p: {
     letterSpacing: '-2px',
+    paddingLeft: 'var(--space-margin)',
   },
   '& p:not(:last-child)': {
     marginBottom: '0.5em',
@@ -101,13 +168,32 @@ const Main = styled('div', {
   minHeight: '110vh',
   position: 'relative',
   whiteSpace: 'nowrap',
-  padding: '0 $margin $margin',
+  padding: '.25em $margin $margin',
+  zIndex: 2,
+  '.extra-content': {
+    margin: '1em 8em',
+    fontSize: '$sans2',
+    letterSpacing: '0',
+    lineHeight: '$sans2',
+    '&_trigger': {
+      '&:hover': {
+        cursor: 'pointer',
+        color: '$purple',
+      },
+    },
+  },
   p: {
     letterSpacing: '-2px',
     fontSize: '$sans4',
     lineHeight: '$sans4',
     margin: '0',
     maxWidth: '100%',
+    whiteSpace: 'pre-wrap',
+    overflowWrap: 'break-word',
+    '@mobile': {
+      fontSize: '$sans3',
+      lineHeight: '$sans3',
+    },
   },
   '& .padded': {
     paddingTop: '1.1em',
@@ -165,29 +251,37 @@ const HeroImage = styled('figure', {
 const Networked = styled('figure', {
   maxWidth: '25%',
   margin: '0 auto',
-  paddingTop: '4em',
+  paddingTop: '8em',
   paddingBottom: '8em',
 })
 
 const Footer = styled('div', {
-  display: 'grid',
-  gridTemplateColumns: '1fr 1fr',
   alignItems: 'flex-end',
   width: '100%',
-  padding: '$margin3 $margin $1',
+  padding: '$margin $margin $1',
   marginTop: 'auto',
   columnGap: '$gutter',
   position: 'fixed',
   zIndex: '20',
   left: '0',
   bottom: '0',
+  '.desktop': {
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr',
+  },
+  '.screen-options': {
+    marginTop: '6px',
+  },
   nav: {
     display: 'flex',
-    gap: '1.2em',
+    gap: '.6em',
     a: {
       textDecoration: 'none',
       textTransform: 'uppercase',
       fontSize: '$sans1',
+      background: 'white',
+      padding: '6px 16px',
+      borderRadius: '1em',
     },
     '&.socials a:last-child': {
       marginLeft: 'auto',
@@ -198,13 +292,16 @@ const Footer = styled('div', {
   },
   '@mobile': {
     '.desktop': {
-      display: 'none',
+      // display: 'none',
     },
     marginTop: 0,
     paddingTop: 0,
     figcaption: {
       gridColumn: 'span 2',
       marginBottom: '$margin',
+    },
+    '.auslan, .access, .chatbot': {
+      display: 'none',
     },
     nav: {
       display: 'flex',
@@ -300,6 +397,18 @@ export function Landing({ page = {} }) {
   const showSubscribeModal = query.slug === 'subscribe'
   const showChatbot = query.slug === 'chatbot'
 
+  const [isShown, setIsShown] = useState(false)
+  const handleClick = (event) => {
+    setIsShown((isShown) => !isShown)
+  }
+  const [isVisible, setIsVisible] = useState(false)
+  const menuState = (event) => {
+    setIsVisible((isVisible) => !isVisible)
+  }
+
+  const [isExpanded, setisExpanded] = useState(false)
+  const [buttonText, setbuttonText] = useState('Menu')
+
   const {
     screenOptions,
     screenOptions: { motion, plain },
@@ -307,13 +416,23 @@ export function Landing({ page = {} }) {
   } = useScreenOptionsContext()
 
   const marqueeText = page.marquee
-  
+
   return (
     <Template>
       {motion ? (
-        <Marquee gradient={false}>{marqueeText}</Marquee>
+        <Marquee gradient={false}>
+          The Next Wave office is located on the land of the Wurundjeri people of the
+          Kulin nation. We pay our respects to Elders past and present, as well as to all
+          Aboriginal and Torres Strait Islander people in the wider Melbourne community
+          and beyond.
+        </Marquee>
       ) : (
-        <StaticMarquee>{marqueeText}</StaticMarquee>
+        <StaticMarquee>
+          The Next Wave office is located on the land of the Wurundjeri people of the
+          Kulin nation. We pay our respects to Elders past and present, as well as to all
+          Aboriginal and Torres Strait Islander people in the wider Melbourne community
+          and beyond.{' '}
+        </StaticMarquee>
       )}
 
       <SubscribeModal
@@ -322,39 +441,53 @@ export function Landing({ page = {} }) {
       />
 
       <HeroText>
-        <Markdown>{page.masthead}</Markdown>
+        <div className="head">
+          <h1>
+            <span className="purple">A</span>
+            <span className="orange">l</span>
+            <span className="green">l</span> <span className="purple">S</span>
+            <span className="orange">c</span>
+            <span className="green">h</span>
+            <span className="purple">o</span>
+            <span className="orange">o</span>
+            <span className="green">l</span>
+          </h1>
+          <div className="menu">
+            <span
+              className="nav-trigger"
+              onClick={function (event) {
+                menuState()
+                setbuttonText('Close x')
+              }}
+            >
+              {buttonText}
+            </span>
+            {isVisible && (
+              <nav>
+                <a href="#about">About</a>
+                <a href="#lab">LAB</a>
+              </nav>
+            )}
+          </div>
+        </div>
+        <div className="intro">
+          <div></div>
+          <div className="color-block"></div>
+          <div className="image-one"></div>
+          <div className="image-two"></div>
+        </div>
       </HeroText>
 
-      <Sticky>
-        <Disc />
-      </Sticky>
-
-      <Pane
-        show={showAuslanPane}
-        onClose={() => router.replace('/', undefined, { scroll: false })}
-      >
-        <Markdown>{page.access}</Markdown>
-      </Pane>
-
-      <HeroImage>
-        <img
-          src={page.image?.original}
-          alt=""
-          width={plain ? 1517 / 2 : '100%'}
-          height={plain ? 1000 / 2 : 'auto'}
-        />
-      </HeroImage>
-
-      <Chatbot
-        onClose={() => router.replace('/', undefined, { scroll: false })}
-        show={showChatbot}
-      />
-
       <Main>
+        <p id="about">
+          All School is a platform by <a href="https://nextwave.org.au">Next Wave</a>{' '}
+          exploring new artist-led learning experiences; hosting a mix of content
+          including talks, livestreams, videos, downloadable resources.
+        </p>
         <Networked>
           <img src="/images/networked.svg" alt="" />
         </Networked>
-        <p>
+        <p id="lab">
           <span className="purple">L</span>
           <span className="orange">A</span>
           <span className="green">B</span>
@@ -367,25 +500,21 @@ export function Landing({ page = {} }) {
           <span className="green">t</span>
           <span className="purple">.</span>
           <br />
-          is a two-day event Am derum re aut
-          <br />
-          dolorios es dit iur aut que perisciatiis et
-          <br />
-          estiquam voluptur.
-          <Accordion allowZeroExpanded>
-            <AccordionItem>
-              <AccordionItemHeading>
-                <AccordionItemButton>(read more)</AccordionItemButton>
-              </AccordionItemHeading>
-              <AccordionItemPanel>
-                <p>
-                  Exercitation in fugiat est ut ad ea cupidatat ut in cupidatat occaecat
-                  ut occaecat consequat est minim minim esse tempor laborum consequat esse
-                  adipisicing eu reprehenderit enim.
-                </p>
-              </AccordionItemPanel>
-            </AccordionItem>
-          </Accordion>
+          is a two-day event Am derum re aut dolorios es dit iur aut que perisciatiis et
+          estiquam voluptur.{' '}
+          <span className="extra-content_trigger" onClick={handleClick}>
+            (read more)
+          </span>
+          {isShown && (
+            <div className="extra-content">
+              Community networks are IP-based computer networks that are operated by a
+              community as a common good. In Europe, the most well-known community
+              networks are Guifi in Catalonia, Freifunk in Berlin, Ninux in Italy,
+              Funkfeuer in Vienna and the Athens Wireless Metropolitan Network in Greece.
+              This paper deals with community networks as alternative forms of Internet
+              access and alternative infrastructures.
+            </div>
+          )}
         </p>
         <p className="padded">
           Get tickets&nbsp;
@@ -396,7 +525,14 @@ export function Landing({ page = {} }) {
         </p>
 
         <Subscribe>
-          <p className="button">
+          <p
+            className="button"
+            aria-label="open subscribe"
+            role="button"
+            aria-controls="subscribe"
+            aria-expanded="false"
+            aria-haspopup="true"
+          >
             <Link href="/subscribe" scroll={false}>
               Subscribe
             </Link>
@@ -404,37 +540,23 @@ export function Landing({ page = {} }) {
         </Subscribe>
       </Main>
 
+      <Sticky>
+        <Disc />
+      </Sticky>
+
+      <Pane
+        show={showAuslanPane}
+        onClose={() => router.replace('/', undefined, { scroll: false })}
+      >
+        <Markdown>{page.access}</Markdown>
+      </Pane>
+
+      <Chatbot
+        onClose={() => router.replace('/', undefined, { scroll: false })}
+        show={showChatbot}
+      />
+
       <Footer>
-        {!plain && (
-          <div className="mobile">
-            <div>
-              <nav className="tools">
-                <Link href="/access" scroll={false}>
-                  <a className="access">Access</a>
-                </Link>
-                <Link href="/auslan" scroll={false}>
-                  <a className="auslan">Auslan</a>
-                </Link>
-              </nav>
-            </div>
-            <div>
-              <nav className="socials">
-                <Link href="/chatbot" scroll={false}>
-                  <a className="chatbot">Chatbot</a>
-                </Link>
-                <a className="social" href="#">
-                  FB
-                </a>
-                <a className="social" href="#">
-                  IG
-                </a>
-                <a className="social" href="#">
-                  TW
-                </a>
-              </nav>
-            </div>
-          </div>
-        )}
         <div className="desktop">
           <div>
             <nav className="tools">
@@ -468,7 +590,18 @@ export function Landing({ page = {} }) {
                 TW
               </a>
               <Link href="/chatbot" scroll={false}>
-                <a className="chatbot">Chatbot</a>
+                <a
+                  className="chatbot"
+                  aria-label="open chatbot"
+                  role="button"
+                  aria-controls="chatbot"
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                  onClick={() => setExpanded(!true)}
+                  aria-expanded={true}
+                >
+                  Chatbot
+                </a>
               </Link>
             </nav>
           </div>
