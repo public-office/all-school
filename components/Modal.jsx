@@ -76,7 +76,7 @@ const ModalClose = styled('div', {
 
 const transition = { duration: 0.5, type: 'tween', ease: [0.16, 1, 0.3, 1] }
 
-export default function Modal({ children, show = true, onClose = () => {} }) {
+export function Modal({ children, show = true, onClose = () => {} }) {
   const {
     screenOptions: { motion },
   } = useScreenOptionsContext()

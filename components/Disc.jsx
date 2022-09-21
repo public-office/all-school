@@ -8,22 +8,21 @@ const DiscElement = motion(
     borderRadius: '50%',
     width: '18rem',
     position: 'absolute',
-    top: '21vh',
+    top: '0',
     zIndex: 2,
-    right: '$margin2',
     img: {
       width: '100%',
       height: '100%',
     },
     '@mobile': {
-      top: '35rem',
-      width: '14rem',
-      right: 'calc($margin / 2)',
+      top: '4rem',
+      width: '13rem',
+      right: '0',
     },
   })
 )
 
-export default function Disc() {
+export function Disc() {
   const {
     screenOptions: { motion },
   } = useScreenOptionsContext()

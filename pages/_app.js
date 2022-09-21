@@ -1,7 +1,7 @@
 import 'react-lite-youtube-embed/dist/LiteYouTubeEmbed.css'
-import globalStyles from 'global'
-import Layout from 'components/Layout'
-import ScreenOptionsContext from 'context/ScreenOptionsContext'
+import { globalStyles } from 'global'
+import { Layout } from 'components/Layout'
+import { ScreenOptionsContext } from 'context/ScreenOptionsContext'
 import { useScreenOptions } from 'hooks/useScreenOptions'
 import { usePlainStyle } from 'hooks/usePlainStyle'
 

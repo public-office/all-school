@@ -1,6 +1,6 @@
 import { useLocalStorage } from 'react-use'
 import { useContext } from 'react'
-import ScreenOptionsContext from 'context/ScreenOptionsContext'
+import { ScreenOptionsContext } from 'context/ScreenOptionsContext'
 
 export const defaultScreenOptions = { mask: false, plain: false, motion: true }
 

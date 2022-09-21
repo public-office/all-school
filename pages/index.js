@@ -1,9 +1,7 @@
-import Landing from 'templates/Landing'
-import { getPage } from 'lib/util'
+import { Landing } from 'templates/Landing'
 
 export async function getServerSideProps() {
-  const props = await getPage('/splash.json')
-  return { props }
+  return { props: {} }
 }
 
 export default Landing

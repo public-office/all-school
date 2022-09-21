@@ -17,10 +17,14 @@ export const Fieldset = styled('fieldset', {
   display: 'grid',
   gridTemplateColumns: '1fr 1fr',
   columnGap: '$gutter',
+  button: {
+    width: '10rem',
+    margin: '0 auto',
+  },
 })
 
 export const Label = styled('label', {
-  padding: '1.5rem 0',
+  padding: '1.2rem 0',
   width: '100%',
 })
 
@@ -37,7 +41,7 @@ export const Input = styled('input', {
   '&[type="radio"] + span': {
     borderRadius: '2em',
     background: '$bg',
-    padding: '0.5rem 1.6rem',
+    padding: '0.5rem 1rem',
     position: 'relative',
   },
   '&[type="radio"][checked] + span': {

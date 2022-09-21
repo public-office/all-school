@@ -1,5 +1,5 @@
 import { createStitches } from '@stitches/react'
-import defaultTheme from './theme'
+import { theme as defaultTheme } from './theme'
 
 export const {
   styled,
@@ -15,5 +15,5 @@ export const {
     mobile: '(max-width: 640px)',
     desktop: '(min-width: 640px)',
   },
-  theme: defaultTheme,
+  theme: defaultTheme
 })

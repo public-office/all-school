@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { styled } from 'stitches.config'
-import ScreenMask from 'components/ScreenMask'
+import { ScreenMask } from 'components/ScreenMask'
 import { useScreenOptionsContext } from 'hooks/useScreenOptions'
 
 const Page = styled('div', {
@@ -10,7 +10,7 @@ const Page = styled('div', {
   position: 'relative',
 })
 
-export default function Template({ title, children, ...props }) {
+export function Template({ title, children, ...props }) {
   const {
     screenOptions: { mask, plain },
     setScreenOption,

@@ -1,4 +1,4 @@
-import Modal from 'components/Modal'
+import { Modal } from 'components/Modal'
 import { Button, Fieldset, Label, Input, RadioGroup, RadioLabel } from 'components/Forms'
 import { styled } from 'stitches.config'
 
@@ -10,7 +10,7 @@ const Form = styled('form', {
   },
 })
 
-export default function SubscribeModal(props) {
+export function SubscribeModal(props) {
   return (
     <Modal {...props}>
       <Form>
