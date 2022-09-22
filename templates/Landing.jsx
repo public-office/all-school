@@ -11,6 +11,7 @@ import { useState } from 'react'
 import { useScreenOptionsContext } from 'hooks/useScreenOptions'
 import { Template } from 'components/Template'
 import { Markdown } from 'components/Markdown'
+import clsx from 'classnames'
 
 const Page = styled('div', {
   display: 'flex',
@@ -377,7 +378,7 @@ function Popdown({ label, options, className, value, onChange }) {
             <div key={idx}>
               <button
                 onClick={(e) => handleClickOption(e, option)}
-                className={classnames({ selected: option.checked })}
+                className={clsx({ selected: option.checked })}
               >
                 {option.label}
               </button>
