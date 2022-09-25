@@ -480,11 +480,7 @@ export function Landing({ page = {} }) {
       </HeroText>
 
       <Main>
-        <p id="about">
-          All School is a platform by <a href="https://nextwave.org.au">Next Wave</a>{' '}
-          exploring new artist-led learning experiences; hosting a mix of content
-          including talks, livestreams, videos, downloadable resources.
-        </p>
+        <div id="about"><Markdown>{page.information}</Markdown></div>
         <Networked>
           <img src="/images/networked.svg" alt="" />
         </Networked>
