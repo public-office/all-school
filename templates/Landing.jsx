@@ -11,6 +11,7 @@ import { useState } from 'react'
 import { useScreenOptionsContext } from 'hooks/useScreenOptions'
 import { Template } from 'components/Template'
 import { Markdown } from 'components/Markdown'
+import { MainNav } from 'components/MainNav'
 import clsx from 'classnames'
 
 const Page = styled('div', {
@@ -72,31 +73,14 @@ const StaticMarquee = styled('div', {
   marginBottom: '$1',
 })
 
-const HeroText = styled('div', {
+const Header = styled('div', {
+  position: 'fixed',
+  width: '100%',
+  top: '.25em',
+  zIndex: '10',
   fontSize: '$sans4',
   lineHeight: '$sans4',
-  height: 'calc(110vh - var(--space-margin))',
-  position: 'relative',
-  '.hide': {
-    display: 'none',
-  },
-  '@mobile': {
-    fontSize: '$sans3',
-    lineHeight: '$sans3',
-    marginBottom: '$margin',
-  },
-  '.intro': {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(2, 1fr)',
-    gridColumnGap: '0',
-    gridAutoRows: 'calc(50vh + 4px)',
-    marginBottom: '2em',
-    marginTop: '-1.5em',
-    '@mobile': {
-      // gridTemplateColumns: '1fr',
-      // gridAutoRows: 'calc(25vh + 4px)',
-    },
-  },
+  padding: '0 var(--space-margin) var(--space-1)',
   '.menu': {
     nav: {
       paddingLeft: '6px',
@@ -132,6 +116,35 @@ const HeroText = styled('div', {
       color: '$orange',
     },
   },
+})
+
+const HeroText = styled('div', {
+  fontSize: '$sans4',
+  lineHeight: '$sans4',
+  height: '100vh',
+  position: 'relative',
+  top: '0',
+  '.hide': {
+    display: 'none',
+  },
+  '@mobile': {
+    fontSize: '$sans3',
+    lineHeight: '$sans3',
+    marginBottom: '$margin',
+  },
+  '.intro': {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(2, 1fr)',
+    gridColumnGap: '0',
+    gridAutoRows: 'calc(50vh + 4px)',
+    marginBottom: '2em',
+    marginTop: '-2.5rem',
+    '@mobile': {
+      // gridTemplateColumns: '1fr',
+      // gridAutoRows: 'calc(25vh + 4px)',
+    },
+  },
+
   div: {
     '&.color-block': {
       background: '$purple',
@@ -402,13 +415,6 @@ export function Landing({ page = {} }) {
   const handleClick = (event) => {
     setIsShown((isShown) => !isShown)
   }
-  const [isVisible, setIsVisible] = useState(false)
-  const menuState = (event) => {
-    setIsVisible((isVisible) => !isVisible)
-  }
-
-  const [isExpanded, setisExpanded] = useState(false)
-  const [buttonText, setbuttonText] = useState('Menu')
 
   const {
     screenOptions,
@@ -441,7 +447,7 @@ export function Landing({ page = {} }) {
         onClose={() => router.replace('/', undefined, { scroll: false })}
       />
 
-      <HeroText>
+      <Header>
         <div className="head">
           <h1>
             <span className="purple">A</span>
@@ -453,24 +459,11 @@ export function Landing({ page = {} }) {
             <span className="orange">o</span>
             <span className="green">l</span>
           </h1>
-          <div className="menu">
-            <span
-              className="nav-trigger"
-              onClick={function (event) {
-                menuState()
-                setbuttonText('Close x')
-              }}
-            >
-              {buttonText}
-            </span>
-            {isVisible && (
-              <nav>
-                <a href="#about">About</a>
-                <a href="#lab">LAB</a>
-              </nav>
-            )}
-          </div>
+          <MainNav />
         </div>
+      </Header>
+
+      <HeroText>
         <div className="intro">
           <div></div>
           <div className="color-block"></div>
@@ -481,6 +474,7 @@ export function Landing({ page = {} }) {
 
       <Main>
         <div id="about"><Markdown>{page.information}</Markdown></div>
+
         <Networked>
           <img src="/images/networked.svg" alt="" />
         </Networked>
