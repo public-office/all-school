@@ -15,6 +15,7 @@ const MainNav = styled('div', {
   },
 
   '.nav-trigger': {
+    display: 'none',
     paddingLeft: '.5rem',
     '&:hover': {
       cursor: 'pointer',

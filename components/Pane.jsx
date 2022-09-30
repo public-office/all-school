@@ -21,7 +21,7 @@ const PaneContainer = motion(
     height: '100vh',
     zIndex: PANE_LAYER,
     width: '100%',
-    maxWidth: '34vw',
+    maxWidth: '50vw',
     display: 'flex',
     flexDirection: 'column',
     borderTopLeftRadius: '1rem',

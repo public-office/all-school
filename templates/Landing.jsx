@@ -14,6 +14,7 @@ import { Markdown } from 'components/Markdown'
 import { Nav } from 'components/Nav'
 import { EventsList } from 'components/EventsList'
 import clsx from 'classnames'
+import { useEffect, useRef} from 'react'
 
 const Page = styled('div', {
   display: 'flex',
@@ -48,8 +49,8 @@ const Sticky = styled('div', {
   width: '18rem',
   right: '$margin2',
   position: 'fixed',
-  right: '1em',
-  top: '2em',
+  right: '1.5em',
+  top: '1.5em',
   zIndex: 2,
 })
 
@@ -82,6 +83,10 @@ const Header = styled('div', {
   fontSize: '$sans4',
   lineHeight: '$sans4',
   padding: '0 var(--space-margin) var(--space-1)',
+  '@mobile': {
+    fontSize: '$sans3',
+    lineHeight: '$sans3',
+  },
   '.head': {
     position: 'sticky',
     top: '.15em',
@@ -191,9 +196,27 @@ const Main = styled('div', {
       fontSize: '$sans3',
       lineHeight: '$sans3',
     },
+    a: {
+      textDecoration: 'underline',
+      textDecorationThickness: '0.3rem',
+      textUnderlineOffset: '0.5rem',
+    }
   },
   '& .padded': {
     paddingTop: '1.1em',
+    button: {
+      textDecoration: 'underline',
+      textDecorationThickness: '0.3rem',
+      textUnderlineOffset: '0.5rem',
+      '&:hover': {
+        color: '$purple',
+      },
+    },
+    a: {
+      textDecoration: 'underline',
+      textDecorationThickness: '0.3rem',
+      textUnderlineOffset: '0.5rem',
+    },
   },
   '.accordion': {
     display: 'flex',
@@ -262,6 +285,12 @@ const Footer = styled('div', {
   zIndex: '20',
   left: '0',
   bottom: '0',
+  '&.green': {
+    color: 'black',
+    a: {
+      background: 'white',
+    },
+  },
   '.desktop': {
     display: 'grid',
     gridTemplateColumns: '1fr 1fr',
@@ -397,6 +426,23 @@ export function Landing({ page = {} }) {
   const showSubscribeModal = query.slug === 'subscribe'
   const showChatbot = query.slug === 'chatbot'
 
+  const ref = useRef()
+  const [color, setColor] = useState(false)
+  ref.current = color
+
+  useEffect(() => {
+    const colorChange = () => {
+      const show = window.scrollY >= 40;
+      if (ref.current !== show) {
+        setColor(true);
+      }
+    }
+
+    window.addEventListener('scroll', colorChange)
+
+    return () => window.removeEventListener('scroll', colorChange)
+  }, []);
+
   const {
     screenOptions,
     screenOptions: { motion },
@@ -480,7 +526,7 @@ export function Landing({ page = {} }) {
         show={showChatbot}
       />
 
-      <Footer>
+      <Footer className={color ? 'green' : 'white'}>
         <div className="desktop">
           <div>
             <nav className="tools">
