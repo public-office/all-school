@@ -11,7 +11,8 @@ import { useState } from 'react'
 import { useScreenOptionsContext } from 'hooks/useScreenOptions'
 import { Template } from 'components/Template'
 import { Markdown } from 'components/Markdown'
-import { MainNav } from 'components/MainNav'
+import { Nav } from 'components/Nav'
+import { EventsList } from 'components/EventsList'
 import clsx from 'classnames'
 
 const Page = styled('div', {
@@ -74,36 +75,18 @@ const StaticMarquee = styled('div', {
 })
 
 const Header = styled('div', {
-  position: 'fixed',
+  position: 'relative',
   width: '100%',
-  top: '.25em',
+  top: '0',
   zIndex: '10',
   fontSize: '$sans4',
   lineHeight: '$sans4',
   padding: '0 var(--space-margin) var(--space-1)',
-  '.menu': {
-    nav: {
-      paddingLeft: '6px',
-      a: {
-        display: 'block',
-        textDecoration: 'none',
-        '&:hover': {
-          color: '$green',
-        },
-      },
-    },
-  },
   '.head': {
     position: 'sticky',
     top: '.15em',
     display: 'grid',
     gridTemplateColumns: '1fr 1fr',
-    '.nav-trigger': {
-      paddingLeft: '.5rem',
-      '&:hover': {
-        cursor: 'pointer',
-      },
-    },
   },
   span: {
     '&.purple': {
@@ -138,7 +121,7 @@ const HeroText = styled('div', {
     gridColumnGap: '0',
     gridAutoRows: 'calc(50vh + 4px)',
     marginBottom: '2em',
-    marginTop: '-2.5rem',
+    marginTop: '-9rem',
     '@mobile': {
       // gridTemplateColumns: '1fr',
       // gridAutoRows: 'calc(25vh + 4px)',
@@ -304,6 +287,9 @@ const Footer = styled('div', {
       maxWidth: '39em',
     },
   },
+  '.auslan': {
+    display: 'none',
+  },
   '@mobile': {
     '.desktop': {
       // display: 'none',
@@ -411,9 +397,17 @@ export function Landing({ page = {} }) {
   const showSubscribeModal = query.slug === 'subscribe'
   const showChatbot = query.slug === 'chatbot'
 
-  const [isShown, setIsShown] = useState(false)
-  const handleClick = (event) => {
-    setIsShown((isShown) => !isShown)
+  const [loadedEvents, setLoadedEvents] = useState([]);
+  const events = [];
+
+  for (const key in events) {
+    const event = {
+      id: key,
+      ...data[key]
+    };
+
+    setLoadedMeetups(events);
+    events.push(event);
   }
 
   const {
@@ -459,7 +453,7 @@ export function Landing({ page = {} }) {
             <span className="orange">o</span>
             <span className="green">l</span>
           </h1>
-          <MainNav />
+          <Nav />
         </div>
       </Header>
 
@@ -475,45 +469,7 @@ export function Landing({ page = {} }) {
       <Main>
         <div id="about"><Markdown>{page.information}</Markdown></div>
 
-        <Networked>
-          <img src="/images/networked.svg" alt="" />
-        </Networked>
-        <p id="lab">
-          <span className="purple">L</span>
-          <span className="orange">A</span>
-          <span className="green">B</span>
-          <span className="purple">,</span> <span className="orange">2</span>
-          <span className="green">8</span>
-          <span className="purple">–</span>
-          <span className="orange">2</span>
-          <span className="green">9</span> <span className="purple">O</span>
-          <span className="orange">c</span>
-          <span className="green">t</span>
-          <span className="purple">.</span>
-          <br />
-          is a two-day event Am derum re aut dolorios es dit iur aut que perisciatiis et
-          estiquam voluptur.{' '}
-          <span className="extra-content_trigger" onClick={handleClick}>
-            (read more)
-          </span>
-          {isShown && (
-            <div className="extra-content">
-              Community networks are IP-based computer networks that are operated by a
-              community as a common good. In Europe, the most well-known community
-              networks are Guifi in Catalonia, Freifunk in Berlin, Ninux in Italy,
-              Funkfeuer in Vienna and the Athens Wireless Metropolitan Network in Greece.
-              This paper deals with community networks as alternative forms of Internet
-              access and alternative infrastructures.
-            </div>
-          )}
-        </p>
-        <p className="padded">
-          Get tickets&nbsp;
-          <Link href="/subscribe" scroll={false}>
-            here
-          </Link>
-          .
-        </p>
+        <EventsList events={loadedEvents}/>
 
         <Subscribe>
           <p
