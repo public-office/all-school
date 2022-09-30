@@ -397,43 +397,18 @@ export function Landing({ page = {} }) {
   const showSubscribeModal = query.slug === 'subscribe'
   const showChatbot = query.slug === 'chatbot'
 
-  const [loadedEvents, setLoadedEvents] = useState([]);
-  const events = [];
-
-  for (const key in events) {
-    const event = {
-      id: key,
-      ...data[key]
-    };
-
-    setLoadedMeetups(events);
-    events.push(event);
-  }
-
   const {
     screenOptions,
-    screenOptions: { motion, plain },
+    screenOptions: { motion },
     setScreenOption,
   } = useScreenOptionsContext()
-
-  const marqueeText = page.marquee
 
   return (
     <Template>
       {motion ? (
-        <Marquee gradient={false}>
-          The Next Wave office is located on the land of the Wurundjeri people of the
-          Kulin nation. We pay our respects to Elders past and present, as well as to all
-          Aboriginal and Torres Strait Islander people in the wider Melbourne community
-          and beyond.
-        </Marquee>
+        <Marquee gradient={false}>{page.marquee}</Marquee>
       ) : (
-        <StaticMarquee>
-          The Next Wave office is located on the land of the Wurundjeri people of the
-          Kulin nation. We pay our respects to Elders past and present, as well as to all
-          Aboriginal and Torres Strait Islander people in the wider Melbourne community
-          and beyond.{' '}
-        </StaticMarquee>
+        <StaticMarquee>{page.marquee}</StaticMarquee>
       )}
 
       <SubscribeModal
@@ -467,9 +442,11 @@ export function Landing({ page = {} }) {
       </HeroText>
 
       <Main>
-        <div id="about"><Markdown>{page.information}</Markdown></div>
+        <div id="about">
+          <Markdown>{page.information}</Markdown>
+        </div>
 
-        <EventsList events={loadedEvents}/>
+        <EventsList events={page.events} />
 
         <Subscribe>
           <p

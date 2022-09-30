@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import Link from 'next/link';
 
-export function EventItem(props) {
+export function EventItem({ title, image, shortDesc, longDesc, eventUrl }) {
 
   const [isShown, setIsShown] = useState(false)
   const handleClick = (event) => {
@@ -10,9 +9,9 @@ export function EventItem(props) {
 
   return (
     <article>
-      <div>
-        <img src={props.image} alt="" />
-      </div>
+      {image && <div>
+        <img src={image} alt="" />
+      </div>}
       <div className="event">
         <p id="lab">
           <span className="purple">L</span>
@@ -27,21 +26,21 @@ export function EventItem(props) {
           <span className="green">t</span>
           <span className="purple">.</span>
           <br />
-          {props.shortDesc}{' '}
+          {shortDesc}{' '}
           <span className="extra-content_trigger" onClick={handleClick}>
             (read more)
           </span>
           {isShown && (
             <div className="extra-content">
-              {props.longDesc}
+              {longDesc}
             </div>
           )}
         </p>
         <p className="padded">
           Get tickets&nbsp;
-          <Link href="{props.eventUrl}" scroll={false}>
+          <a href={eventUrl} target="_blank" rel="noreferrer">
             here
-          </Link>
+          </a>
           .
         </p>
       </div>

@@ -1,19 +1,16 @@
-import EventItem from './Event';
+import { EventItem } from './Event';
 
-export function EventsList(props) {
+export function EventsList({ events }) {
   return (
     <section>
-      {props.events.map(event => (
+      {events.map(event => (
         <EventItem
           key={event.id}
-          id={event.id}
           title={event.title}
-          url={event.eventURL}
           image={event.mainImage}
-          startDate={event.startDate}
-          endDate={event.endDate}
-          descriptionShort={event.description_short}
-          descriptionLong={event.description_long}
+          shortDesc={event.description_short}
+          longDesc={event.description_long}
+          eventUrl={event.eventUrl}
         />
       ))}
     </section>

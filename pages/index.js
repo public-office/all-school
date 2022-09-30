@@ -7,10 +7,32 @@ export async function getServerSideProps() {
   const { data } = await client.query({
     query: gql`
       query {
+        events {
+          data {
+            id
+            attributes {
+              title
+              eventUrl
+              mainImage {
+                data {
+                  attributes {
+                    url
+                  }
+                }
+              }
+              startDate
+              endDate
+              description_short
+              description_long
+            }
+          }
+        }
         information {
           data {
             attributes {
               information
+              marquee
+              access
             }
           }
         }
@@ -18,11 +40,24 @@ export async function getServerSideProps() {
     `,
   })
 
+  const { information, marquee, access } = get(data, 'information.data.attributes')
+
+  const events = get(data, 'events.data').map((data) => {
+    return {
+      id: data.id,
+      ...data.attributes,
+      mainImage: get(data, 'attributes.mainImage.data.attributes.url'),
+    }
+  })
+
   return {
     props: {
       page: {
-        information: get(data, 'information.data.attributes.information')
-      }
+        access,
+        events,
+        marquee,
+        information,
+      },
     },
   }
 }
