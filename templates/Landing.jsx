@@ -544,8 +544,6 @@ export function Landing({ page = {} }) {
                   aria-controls="chatbot"
                   aria-expanded="false"
                   aria-haspopup="true"
-                  onClick={() => setExpanded(!true)}
-                  aria-expanded={true}
                 >
                   Chatbot
                 </a>
