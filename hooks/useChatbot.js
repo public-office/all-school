@@ -21,7 +21,7 @@ export const useChatbot = () => {
     } else {
       setMessages((messages) => messages.filter((m) => !m.typing))
     }
-  }, [])
+  }, [addMessage])
 
   const addMessage = useCallback(
     (from, { text = null, typing = false, initial = false }) => {
@@ -54,7 +54,7 @@ export const useChatbot = () => {
       setTyping(false)
       addMessage('bot', { text: 'Sorry, I encountered an error...' })
     }
-  }, [])
+  }, [addMessage, setTyping])
 
   return { messages, submitMessage }
 }

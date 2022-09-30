@@ -162,7 +162,7 @@ export function Chatbot({ show = true, onClose = () => {} }) {
       const bottom = overflowRef.current.scrollHeight - overflowRef.current.clientHeight
       overflowRef.current.scrollTo({ top: bottom, behavior: enableMotion ? 'smooth' : 'auto' })
     }
-  }, [overflowRef, show, messages])
+  }, [overflowRef, show, messages, enableMotion])
 
   const handleSubmit = useCallback(
     (e) => {
@@ -170,12 +170,12 @@ export function Chatbot({ show = true, onClose = () => {} }) {
       submitMessage({ text: newMessage })
       setNewMessage('')
     },
-    [newMessage]
+    [newMessage, submitMessage]
   )
 
   useEffect(() => {
     if (show && !messages.length) submitMessage({ text: 'hello', initial: true })
-  }, [show])
+  }, [show, submitMessage])
 
   return (
     <>
