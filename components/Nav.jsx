@@ -9,6 +9,9 @@ const MainNav = styled('div', {
     '&.show': {
       visibility: 'visible',
     },
+    '@mobile': {
+      // paddingLeft: '3rem',
+    },
     a: {
       display: 'block',
       textDecoration: 'none',
@@ -24,6 +27,9 @@ const MainNav = styled('div', {
     '&:hover': {
       cursor: 'pointer',
       color: '$green',
+    },
+    '@mobile': {
+      // paddingLeft: '3rem',
     },
   },
 })

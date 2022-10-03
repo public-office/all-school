@@ -58,7 +58,10 @@ const Sticky = styled('div', {
   zIndex: 2,
   '@mobile': {
     right: '.5em',
-    top: '.5em',
+    top: '3em',
+    position: 'absolute',
+    width: '165px',
+    // display:'none',
   },
 })
 
@@ -69,6 +72,10 @@ const marqueeStyle = {
   letterSpacing: '0.025rem',
   textTransform: 'uppercase',
   zIndex: '100',
+  '@mobile': {
+    fontSize: '0.8rem',
+    paddingTop: '0.5rem',
+  },
 }
 
 const Marquee = styled(FastMarquee, {

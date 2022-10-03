@@ -13,10 +13,15 @@ const DiscElement = motion(
     img: {
       width: '100%',
       height: '100%',
+      '@mobile': {
+        width: '165px',
+        height: '165px',
+      },
     },
     '@mobile': {
-      top: '4rem',
-      width: '13rem',
+      top: '0',
+      width: '165px',
+      height: '165px',
       right: '0',
     },
   })
