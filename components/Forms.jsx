@@ -15,7 +15,7 @@ export const Fieldset = styled('fieldset', {
     borderBottom: '1px solid',
   },
   display: 'grid',
-  gridTemplateColumns: '1fr 1fr',
+  gridTemplateColumns: 'repeat(3, 1fr)',
   columnGap: '$gutter',
   button: {
     width: '10rem',
@@ -24,11 +24,13 @@ export const Fieldset = styled('fieldset', {
 })
 
 export const Label = styled('label', {
+  gridColumn: 'span 1',
   padding: '1.2rem 0',
   width: '100%',
 })
 
 export const Input = styled('input', {
+  gridColumn: 'span 2',
   padding: '1rem 0',
   width: '100%',
   '&::placeholder': {
@@ -51,6 +53,7 @@ export const Input = styled('input', {
 })
 
 export const RadioGroup = styled('div', {
+  gridColumn: 'span 2',
   display: 'flex',
   margin: 'auto 0',
 })

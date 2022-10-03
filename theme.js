@@ -13,10 +13,10 @@ export const theme = {
   },
   fontSizes: {
     sans1: '1.2rem',
-    sans2: '2.1rem',
+    sans2: '2rem',
     sans3: '3rem',
     sans4: '5.4rem',
-    serif1: '1.1rem',
+    serif1: '1rem',
   },
   lineHeights: {
     sans1: 1.2,

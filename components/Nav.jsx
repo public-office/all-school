@@ -1,21 +1,25 @@
 import { styled } from 'stitches.config';
 import { useState } from 'react';
-import Link from 'next/link';
+import { Link, animateScroll as scroll } from 'react-scroll';
 
 const MainNav = styled('div', {
   nav: {
+    visibility: 'hidden',
     paddingLeft: '6px',
+    '&.show': {
+      visibility: 'visible',
+    },
     a: {
       display: 'block',
       textDecoration: 'none',
       '&:hover': {
+        cursor: 'pointer',
         color: '$green',
       },
     },
   },
 
   '.nav-trigger': {
-    display: 'none',
     paddingLeft: '.5rem',
     '&:hover': {
       cursor: 'pointer',
@@ -27,7 +31,6 @@ const MainNav = styled('div', {
 export function Nav() {
 
   const [isVisible, setIsVisible] = useState(false)
-
   const menuState = (event) => {
     setIsVisible((isVisible) => !isVisible)
   }
@@ -36,12 +39,18 @@ export function Nav() {
     <MainNav>
       <button className="nav-trigger" onClick={menuState}>{isVisible ? 'Close' : 'Menu'}</button>
 
-      {isVisible && (
-        <nav>
-          <Link href="#about">About</Link>
-          <Link href="#lab">LAB</Link>
-        </nav>
-      )}
+      <nav className={isVisible ? 'show' : ''}>
+        <Link 
+          to="about"
+          smooth={true}
+          offset={-20}
+          >About</Link>
+        <Link 
+          to="lab"
+          smooth={true}
+          offset={-20}
+        >LAB</Link>
+      </nav>
     </MainNav>
   );
 }

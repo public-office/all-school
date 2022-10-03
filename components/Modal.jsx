@@ -38,7 +38,7 @@ const ModalContainer = motion(
     right: '$margin',
     zIndex: MODAL_LAYER,
     width: '100%',
-    maxWidth: '35em',
+    maxWidth: '45em',
     display: 'grid',
     gridTemplateColumns: '1fr 10rem',
     borderRadius: '1rem',

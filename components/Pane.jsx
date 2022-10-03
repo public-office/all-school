@@ -29,6 +29,9 @@ const PaneContainer = motion(
     boxShadow: '$shadow',
     overflowY: 'auto',
     WebkitOverflowScrolling: 'touch',
+    '@mobile': {
+      maxWidth: '90vw',
+    },
   })
 )
 

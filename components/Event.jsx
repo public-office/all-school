@@ -6,6 +6,9 @@ const Event = styled('div', {
       '&-image': {
         maxWidth: '30%',
         margin: '4em auto',
+        '@mobile': {
+          maxWidth: '50%',
+        },
       }
     },
     img: {
@@ -13,8 +16,8 @@ const Event = styled('div', {
       height: '100%',
     },
     '@mobile': {
-      top: '4rem',
-      width: '13rem',
+      top: '6rem',
+      // width: '13rem',
       right: '0',
     },
   })

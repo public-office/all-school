@@ -41,6 +41,10 @@ const Subscribe = styled('div', {
       borderRadius: '2em',
       position: 'sticky',
       top: '1em',
+      '@mobile': {
+        border: '0.15rem solid',
+        letterSpacing: '-1px',
+      },
     },
   },
 })
@@ -52,6 +56,10 @@ const Sticky = styled('div', {
   right: '1.5em',
   top: '1.5em',
   zIndex: 2,
+  '@mobile': {
+    right: '.5em',
+    top: '.5em',
+  },
 })
 
 const marqueeStyle = {
@@ -84,8 +92,9 @@ const Header = styled('div', {
   lineHeight: '$sans4',
   padding: '0 var(--space-margin) var(--space-1)',
   '@mobile': {
-    fontSize: '$sans3',
-    lineHeight: '$sans3',
+    fontSize: '$sans2',
+    lineHeight: '$sans2',
+    padding: '0 8px',
   },
   '.head': {
     position: 'sticky',
@@ -126,10 +135,9 @@ const HeroText = styled('div', {
     gridColumnGap: '0',
     gridAutoRows: 'calc(50vh + 4px)',
     marginBottom: '2em',
-    marginTop: '-9rem',
+    marginTop: '-20rem',
     '@mobile': {
-      // gridTemplateColumns: '1fr',
-      // gridAutoRows: 'calc(25vh + 4px)',
+      marginTop: '-10rem',
     },
   },
 
@@ -171,12 +179,23 @@ const Main = styled('div', {
   position: 'relative',
   whiteSpace: 'nowrap',
   padding: '.25em $margin $margin',
+  marginTop: '-10em',
   zIndex: 2,
+  '@mobile': {
+    marginTop: '-8em',
+  },
+
   '.extra-content': {
     margin: '1em 8em',
     fontSize: '$sans2',
     letterSpacing: '0',
     lineHeight: '$sans2',
+    '@mobile': {
+      margin: '1em .5em 1em 4em',
+      fontSize: '$sans1',
+      letterSpacing: '0',
+      lineHeight: '$sans1',
+    },
     '&_trigger': {
       '&:hover': {
         cursor: 'pointer',
@@ -193,13 +212,18 @@ const Main = styled('div', {
     whiteSpace: 'pre-wrap',
     overflowWrap: 'break-word',
     '@mobile': {
-      fontSize: '$sans3',
-      lineHeight: '$sans3',
+      fontSize: '$sans2',
+      lineHeight: '$sans2',
+      letterSpacing: '-1px',
     },
     a: {
       textDecoration: 'underline',
       textDecorationThickness: '0.3rem',
       textUnderlineOffset: '0.5rem',
+      '@mobile': {
+        textDecorationThickness: '0.15rem',
+        textUnderlineOffset: '0.2rem',
+      },
     }
   },
   '& .padded': {
@@ -208,6 +232,10 @@ const Main = styled('div', {
       textDecoration: 'underline',
       textDecorationThickness: '0.3rem',
       textUnderlineOffset: '0.5rem',
+      '@mobile': {
+        textDecorationThickness: '0.15rem',
+        textUnderlineOffset: '0.2rem',
+      },
       '&:hover': {
         color: '$purple',
       },
@@ -285,6 +313,9 @@ const Footer = styled('div', {
   zIndex: '20',
   left: '0',
   bottom: '0',
+  '@mobile': {
+    padding: '0 8px',
+  },
   '&.green': {
     color: 'black',
     a: {
@@ -294,13 +325,22 @@ const Footer = styled('div', {
   '.desktop': {
     display: 'grid',
     gridTemplateColumns: '1fr 1fr',
+    // '@mobile': {
+    //   gridTemplateColumns: '1fr',
+    // },
   },
   '.screen-options': {
     marginTop: '6px',
+    '@mobile': {
+      display: 'none',
+    },
   },
   nav: {
     display: 'flex',
     gap: '.6em',
+    '@mobile': {
+      gap: '.3em',
+    },
     a: {
       textDecoration: 'none',
       textTransform: 'uppercase',
@@ -329,12 +369,12 @@ const Footer = styled('div', {
       gridColumn: 'span 2',
       marginBottom: '$margin',
     },
-    '.auslan, .access, .chatbot': {
+    '.auslan, .chatbot': {
       display: 'none',
     },
     nav: {
       display: 'flex',
-      flexWrap: 'wrap',
+      // flexWrap: 'wrap',
       '.chatbot': {
         width: '100%',
       },
@@ -387,6 +427,7 @@ function Popdown({ label, options, className, value, onChange }) {
   const handleClickOption = (e, option) => {
     e.preventDefault()
     onChange(option.name, !option.checked)
+    setIsExpanded(!isExpanded)
   }
 
   return (
@@ -425,6 +466,11 @@ export function Landing({ page = {} }) {
   const showAuslanPane = ['auslan', 'access'].includes(query.slug)
   const showSubscribeModal = query.slug === 'subscribe'
   const showChatbot = query.slug === 'chatbot'
+
+  const [isExpanded, setIsExpanded] = useState(false);
+  function ariaControls() {
+    setIsExpanded((isExpanded) => !isExpanded)
+  }
 
   const ref = useRef()
   const [color, setColor] = useState(false)
@@ -497,14 +543,18 @@ export function Landing({ page = {} }) {
         <Subscribe>
           <p
             className="button"
-            aria-label="open subscribe"
+            aria-label="open subscribe form"
             role="button"
-            aria-controls="subscribe"
-            aria-expanded="false"
-            aria-haspopup="true"
           >
             <Link href="/subscribe" scroll={false}>
-              Subscribe
+              <a
+                onClick={ariaControls}
+                aria-controls="subscribe"
+                aria-expanded={isExpanded ? 'true' : 'false'}
+                aria-haspopup="true"
+              >
+                Subscribe
+              </a>
             </Link>
           </p>
         </Subscribe>
@@ -550,22 +600,23 @@ export function Landing({ page = {} }) {
           </div>
           <div>
             <nav className="socials">
-              <a className="social" href="#">
+              <a className="social" href={page.facebook}>
                 FB
               </a>
-              <a className="social" href="#">
+              <a className="social" href={page.instagram}>
                 IG
               </a>
-              <a className="social" href="#">
+              <a className="social" href={page.twitter}>
                 TW
               </a>
               <Link href="/chatbot" scroll={false}>
                 <a
+                  onClick={ariaControls}
                   className="chatbot"
                   aria-label="open chatbot"
                   role="button"
                   aria-controls="chatbot"
-                  aria-expanded="false"
+                  aria-expanded={isExpanded ? 'true' : 'false'}
                   aria-haspopup="true"
                 >
                   Chatbot
