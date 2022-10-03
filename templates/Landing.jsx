@@ -144,7 +144,7 @@ const HeroText = styled('div', {
     marginBottom: '2em',
     marginTop: '-20rem',
     '@mobile': {
-      marginTop: '-10rem',
+      marginTop: '-8rem',
     },
   },
 
@@ -189,7 +189,7 @@ const Main = styled('div', {
   marginTop: '-10em',
   zIndex: 2,
   '@mobile': {
-    marginTop: '-8em',
+    marginTop: '-6em',
   },
 
   '.extra-content': {
