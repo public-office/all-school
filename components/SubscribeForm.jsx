@@ -45,8 +45,6 @@ export function SubscribeForm({ onClose, ...props }) {
       MERGE4: postcode,
       RELEVANTTYPE: relevant,
       EMAILTYPE: format,
-      b_52cce2d9ba60a58f04e3e10db_b1d3fa2f02: '',
-      submit: 'Subscribe'
     }
 
     const formData = new FormData()
