@@ -20,7 +20,7 @@ export function SubscribeForm({ onClose, ...props }) {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [postcode, setPostcode] = useState('')
-  const [relevant, setRelevant] = useState('Arts worker')
+  const [description, setDescription] = useState('Arts worker')
   const [format, setFormat] = useState('html')
 
   const resetFields = () => {
@@ -28,7 +28,7 @@ export function SubscribeForm({ onClose, ...props }) {
     setFirstName('')
     setLastName('')
     setPostcode('')
-    setRelevant('Arts worker')
+    setDescription('Arts worker')
     setFormat('html')
   }
 
@@ -39,11 +39,11 @@ export function SubscribeForm({ onClose, ...props }) {
     setSuccess(null)
 
     const fields = {
-      MERGE0: email,
-      MERGE1: firstName,
-      MERGE2: lastName,
-      MERGE4: postcode,
-      RELEVANTTYPE: relevant,
+      EMAIL: email,
+      FNAME: firstName,
+      LNAME: lastName,
+      POSTCODE: postcode,
+      MMERGE4: description,
       EMAILTYPE: format,
     }
 
@@ -53,8 +53,8 @@ export function SubscribeForm({ onClose, ...props }) {
 
     const data = await fetch('/mailchimp', {
       method: 'post',
-      body: formData
-    }).then(res => res.json())
+      body: formData,
+    }).then((res) => res.json())
 
     console.log(data)
 
@@ -67,7 +67,7 @@ export function SubscribeForm({ onClose, ...props }) {
   }
 
   function handleClose() {
-    if(typeof onClose === 'function') onClose()
+    if (typeof onClose === 'function') onClose()
 
     setError(null)
     setSuccess(null)
@@ -75,20 +75,19 @@ export function SubscribeForm({ onClose, ...props }) {
     resetFields()
   }
 
-  if (success) return <div>
-    <SuccessMessage>{success}</SuccessMessage>
-    <br /><br /><br />
-    <Button onClick={handleClose}>Close</Button>
-  </div>
+  if (success)
+    return (
+      <div>
+        <SuccessMessage>{success}</SuccessMessage>
+        <br />
+        <br />
+        <br />
+        <Button onClick={handleClose}>Close</Button>
+      </div>
+    )
 
-  return (<Form className="mc__form" onSubmit={(e) => handleSubmit(e)}>
-      <Input
-        type="text"
-        name="b_52cce2d9ba60a58f04e3e10db_b1d3fa2f02"
-        tabindex="-1"
-        value=""
-        css={{ position: 'absolute', top: '-100vh', left: '-100vw' }}
-      />
+  return (
+    <Form className="mc__form" onSubmit={(e) => handleSubmit(e)}>
       <Fieldset css={{ marginTop: '-1.5rem' }}>
         <Label>Email address</Label>
         <Input
@@ -135,18 +134,21 @@ export function SubscribeForm({ onClose, ...props }) {
       <Fieldset className="format">
         <Label>Select relevant</Label>
         <RadioGroup>
-          <RadioLabel onClick={() => setRelevant('Artist')}>
-            <Input type="radio" data-checked={relevant === 'Artist' || undefined} />
+          <RadioLabel onClick={() => setDescription('Artist')}>
+            <Input type="radio" data-checked={description === 'Artist' || undefined} />
             <span>Artist</span>
           </RadioLabel>
-          <RadioLabel onClick={() => setRelevant('Arts worker')}>
-            <Input type="radio" data-checked={relevant === 'Arts worker' || undefined} />
-            <span>Arts worker</span>
-          </RadioLabel>
-          <RadioLabel onClick={() => setRelevant('Arts interested')}>
+          <RadioLabel onClick={() => setDescription('Arts worker')}>
             <Input
               type="radio"
-              data-checked={relevant === 'Arts interested' || undefined}
+              data-checked={description === 'Arts worker' || undefined}
+            />
+            <span>Arts worker</span>
+          </RadioLabel>
+          <RadioLabel onClick={() => setDescription('Arts interested')}>
+            <Input
+              type="radio"
+              data-checked={description === 'Arts interested' || undefined}
             />
             <span>Arts interested</span>
           </RadioLabel>
@@ -166,6 +168,8 @@ export function SubscribeForm({ onClose, ...props }) {
           </RadioLabel>
         </RadioGroup>
       </Fieldset>
+
+      {error && <p>{error}</p>}
 
       <Fieldset css={{ marginTop: '$gutter', gridTemplateColumns: '1fr' }}>
         <Button label="subscribe" type="submit">
