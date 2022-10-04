@@ -21,7 +21,7 @@ const PaneContainer = motion(
     height: '100vh',
     zIndex: PANE_LAYER,
     width: '100%',
-    maxWidth: '50vw',
+    maxWidth: '33.3vw',
     display: 'flex',
     flexDirection: 'column',
     borderTopLeftRadius: '1rem',
@@ -47,6 +47,17 @@ const PaneInner = styled('div', {
   flexDirection: 'column',
   flex: 1,
   padding: '$gutter',
+  'h1': {
+    fontWeight: 'normal',
+    textTranform: 'uppercase',
+    lineHeight: '1',
+    marginBottom: '1em',
+  },
+  'ul': {
+    listStyle: 'none',
+    margin: '0 0 1em 3em',
+  },
+
 })
 
 const Blanket = styled('div', {
