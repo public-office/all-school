@@ -21,7 +21,7 @@ const PaneContainer = motion(
     height: '100vh',
     zIndex: PANE_LAYER,
     width: '100%',
-    maxWidth: '50vw',
+    maxWidth: '33.3vw',
     display: 'flex',
     flexDirection: 'column',
     borderTopLeftRadius: '1rem',
@@ -47,17 +47,15 @@ const PaneInner = styled('div', {
   flexDirection: 'column',
   flex: 1,
   padding: '$gutter',
-  // 'p, ul li': {
-  //   fontSize: 'var(--fontSizes - sans2)',
-  // },
   'h1': {
     fontSize: '$sans4',
     lineHeight: '1',
     marginBottom: '.25em',
+    marginTop: '4px',
   },
   'ul': {
     listStyle: 'none',
-    margin: '0 10em 1em 5em',
+    margin: '0 0 1em 3em',
   },
 
 })
