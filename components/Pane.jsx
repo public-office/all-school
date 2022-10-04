@@ -47,6 +47,19 @@ const PaneInner = styled('div', {
   flexDirection: 'column',
   flex: 1,
   padding: '$gutter',
+  // 'p, ul li': {
+  //   fontSize: 'var(--fontSizes - sans2)',
+  // },
+  'h1': {
+    fontSize: '$sans4',
+    lineHeight: '1',
+    marginBottom: '.25em',
+  },
+  'ul': {
+    listStyle: 'none',
+    margin: '0 10em 1em 5em',
+  },
+
 })
 
 const Blanket = styled('div', {
