@@ -48,10 +48,10 @@ const PaneInner = styled('div', {
   flex: 1,
   padding: '$gutter',
   'h1': {
-    fontSize: '$sans4',
+    fontWeight: 'normal',
+    textTranform: 'uppercase',
     lineHeight: '1',
-    marginBottom: '.25em',
-    marginTop: '4px',
+    marginBottom: '1em',
   },
   'ul': {
     listStyle: 'none',
