@@ -15,6 +15,7 @@ import { Nav } from 'components/Nav'
 import { EventsList } from 'components/EventsList'
 import clsx from 'classnames'
 import { useEffect, useRef} from 'react'
+import { SubscribeForm } from 'components/SubscribeForm'
 
 const Page = styled('div', {
   display: 'flex',

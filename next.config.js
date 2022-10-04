@@ -11,6 +11,10 @@ module.exports = {
         source: '/uploads/:path*',
         destination: process.env.NEXT_PUBLIC_STRAPI_URL+'/uploads/:path*',
       },
+      {
+        source: '/mailchimp',
+        destination: 'https://nextwave.us3.list-manage.com/subscribe/post-json?u=52cce2d9ba60a58f04e3e10db&id=b1d3fa2f02'
+      }
     ]
   },
 }

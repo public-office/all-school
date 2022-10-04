@@ -5,6 +5,9 @@ export const Button = styled('button', {
   background: '$bg',
   boxShadow: '$shadow',
   padding: '0.5rem 1.6rem',
+  '&.noshadow': {
+    boxShadow: 'none'
+  },
   '&:hover': {
     color: '$highlight',
   },
@@ -46,7 +49,7 @@ export const Input = styled('input', {
     padding: '0.5rem 1rem',
     position: 'relative',
   },
-  '&[type="radio"][checked] + span': {
+  '&[type="radio"][checked] + span, &[type="radio"][data-checked] + span': {
     boxShadow: '$shadow',
     zIndex: 2,
   },
