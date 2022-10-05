@@ -57,6 +57,9 @@ const PaneInner = styled('div', {
     listStyle: 'none',
     margin: '0 0 1em 3em',
   },
+  'p': {
+    fontSize: '$sans1',
+  }
 
 })
 

@@ -12,6 +12,7 @@ import { useScreenOptionsContext } from 'hooks/useScreenOptions'
 import { Template } from 'components/Template'
 import { Markdown } from 'components/Markdown'
 import { Nav } from 'components/Nav'
+import { Logos } from 'components/Logos'
 import { EventsList } from 'components/EventsList'
 import clsx from 'classnames'
 import { useEffect, useRef} from 'react'
@@ -548,6 +549,8 @@ export function Landing({ page = {} }) {
         </div>
 
         <EventsList events={page.events} />
+
+        <Logos></Logos>
 
         <Subscribe>
           <p

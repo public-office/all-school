@@ -36,6 +36,8 @@ export async function getServerSideProps() {
               instagram
               facebook
               twitter
+              nextwave_logo1
+              nextwave_logo2
             }
           }
         }
@@ -43,7 +45,7 @@ export async function getServerSideProps() {
     `,
   })
 
-  const { information, marquee, access, instagram, facebook, twitter } = get(data, 'information.data.attributes')
+  const { information, marquee, access, instagram, facebook, twitter, nextwave_logo1, nextwave_logo2 } = get(data, 'information.data.attributes')
 
   const events = get(data, 'events.data').map((data) => {
     return {
@@ -62,7 +64,9 @@ export async function getServerSideProps() {
         information,
         instagram, 
         facebook,
-        twitter
+        twitter,
+        nextwave_logo1,
+        nextwave_logo2
       },
     },
   }

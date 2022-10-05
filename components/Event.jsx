@@ -2,25 +2,25 @@ import { useState } from 'react'
 import { styled } from 'stitches.config'
 
 const Event = styled('div', {
-    '.event': {
-      '&-image': {
-        maxWidth: '30%',
-        margin: '4em auto',
-        '@mobile': {
-          maxWidth: '50%',
-        },
-      }
-    },
-    img: {
-      width: '100%',
-      height: '100%',
-    },
-    '@mobile': {
-      top: '6rem',
-      // width: '13rem',
-      right: '0',
-    },
-  })
+  '.event': {
+    '&-image': {
+      maxWidth: '30%',
+      margin: '4em auto',
+      '@mobile': {
+        maxWidth: '50%',
+      },
+    }
+  },
+  img: {
+    width: '100%',
+    height: '100%',
+  },
+  '@mobile': {
+    top: '6rem',
+    // width: '13rem',
+    right: '0',
+  },
+})
 
 export function EventItem({ title, image, shortDesc, longDesc, eventUrl }) {
 
