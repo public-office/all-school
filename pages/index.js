@@ -69,7 +69,7 @@ export async function getServerSideProps() {
     return {
       id: data.id,
       ...data.attributes,
-      mainImage: get(data, 'attributes.mainImage.data.attributes.url'),
+      mainImage: get(data, 'attributes.mainImage.data.attributes'),
     }
   })
 

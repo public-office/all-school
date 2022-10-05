@@ -472,7 +472,7 @@ export function Landing({ page = {} }) {
   const router = useRouter()
   const { query } = router
 
-  const { isExpanded, setIsExpanded } = useState(false);
+  // const { isExpanded, setIsExpanded } = useState(false);
 
   const showAuslanPane = ['auslan', 'access'].includes(query.slug)
   const showSubscribeModal = query.slug === 'subscribe'
@@ -482,9 +482,9 @@ export function Landing({ page = {} }) {
   const [color, setColor] = useState(false)
   ref.current = color
 
-  function ariaControls() {
-    setIsExpanded((isExpanded) => !isExpanded)
-  }
+  // function ariaControls() {
+  //   setIsExpanded((isExpanded) => !isExpanded)
+  // }
 
   useEffect(() => {
     const colorChange = () => {
@@ -506,7 +506,7 @@ export function Landing({ page = {} }) {
   } = useScreenOptionsContext()
 
   return (
-    <Template data-expanded={isExpanded ? 'true' : 'false'}>
+    <Template>
       {motion ? (
         <Marquee gradient={false}>{page.marquee}</Marquee>
       ) : (
@@ -555,24 +555,6 @@ export function Landing({ page = {} }) {
           allSchoolLogos={page.allSchoolLogos}
         ></Logos>
 
-        <Subscribe>
-          <p
-            className="button"
-            aria-label="open subscribe form"
-            role="button"
-          >
-            <Link href="/subscribe" scroll={false}>
-              <a
-                onClick={ariaControls}
-                aria-controls="subscribe"
-                aria-expanded={isExpanded ? 'true' : 'false'}
-                aria-haspopup="true"
-              >
-                Subscribe
-              </a>
-            </Link>
-          </p>
-        </Subscribe>
       </Main>
 
       <Sticky>
@@ -624,14 +606,22 @@ export function Landing({ page = {} }) {
               <a className="social" target="_blank" rel="noreferrer"  href={page.twitter}>
                 TW
               </a>
+              <Link href="/subscribe" scroll={false}>
+                <a
+                  aria-controls="subscribe"
+                  // aria-expanded={isExpanded ? 'true' : 'false'}
+                  aria-haspopup="true"
+                >
+                  Subscribe
+                </a>
+              </Link>
               <Link href="/chatbot" scroll={false}>
                 <a
-                  onClick={ariaControls}
                   className="chatbot"
                   aria-label="open chatbot"
                   role="button"
                   aria-controls="chatbot"
-                  aria-expanded={isExpanded ? 'true' : 'false'}
+                  // aria-expanded={isExpanded ? 'true' : 'false'}
                   aria-haspopup="true"
                 >
                   Chatbot

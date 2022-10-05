@@ -47,11 +47,13 @@ export function Nav() {
 
       <nav className={isVisible ? 'show' : ''}>
         <Link 
+          onClick={menuState}
           to="about"
           smooth={true}
           offset={-20}
           >About</Link>
         <Link 
+          onClick={menuState}
           to="lab"
           smooth={true}
           offset={-20}

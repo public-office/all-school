@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { styled } from 'stitches.config'
-import Image from 'next/image'
 
 const Event = styled('div', {
   '.event': {
@@ -34,11 +33,10 @@ export function EventItem({ title, image, shortDesc, longDesc, eventUrl }) {
     <Event>
       <article>
         {image && <div className="event-image">
-          <Image 
-            src={image} 
-            alt="All School logo, three lines crossing that relate to networks and knowledge"
-            width={1024}
-            height={1024}
+          <img 
+            key={image.url}
+            src={image.url} 
+            alt={image.alternativeText}
           />
         </div>}
         <div className="event">
