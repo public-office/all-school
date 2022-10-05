@@ -33,6 +33,9 @@ export async function getServerSideProps() {
               information
               marquee
               access
+              instagram
+              facebook
+              twitter
             }
           }
         }
@@ -40,7 +43,7 @@ export async function getServerSideProps() {
     `,
   })
 
-  const { information, marquee, access } = get(data, 'information.data.attributes')
+  const { information, marquee, access, instagram, facebook, twitter } = get(data, 'information.data.attributes')
 
   const events = get(data, 'events.data').map((data) => {
     return {
@@ -57,6 +60,9 @@ export async function getServerSideProps() {
         events,
         marquee,
         information,
+        instagram, 
+        facebook,
+        twitter
       },
     },
   }

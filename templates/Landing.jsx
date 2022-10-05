@@ -471,18 +471,19 @@ export function Landing({ page = {} }) {
   const router = useRouter()
   const { query } = router
 
+  const { isExpanded, setIsExpanded } = useState(false);
+
   const showAuslanPane = ['auslan', 'access'].includes(query.slug)
   const showSubscribeModal = query.slug === 'subscribe'
   const showChatbot = query.slug === 'chatbot'
 
-  const [isExpanded, setIsExpanded] = useState(false);
-  function ariaControls() {
-    setIsExpanded((isExpanded) => !isExpanded)
-  }
-
   const ref = useRef()
   const [color, setColor] = useState(false)
   ref.current = color
+
+  function ariaControls() {
+    setIsExpanded((isExpanded) => !isExpanded)
+  }
 
   useEffect(() => {
     const colorChange = () => {
@@ -504,7 +505,7 @@ export function Landing({ page = {} }) {
   } = useScreenOptionsContext()
 
   return (
-    <Template>
+    <Template data-expanded={isExpanded ? 'true' : 'false'}>
       {motion ? (
         <Marquee gradient={false}>{page.marquee}</Marquee>
       ) : (
@@ -608,13 +609,13 @@ export function Landing({ page = {} }) {
           </div>
           <div>
             <nav className="socials">
-              <a className="social" href={page.facebook}>
+              <a className="social" target="_blank" href={page.facebook}>
                 FB
               </a>
-              <a className="social" href={page.instagram}>
+              <a className="social" target="_blank" href={page.instagram}>
                 IG
               </a>
-              <a className="social" href={page.twitter}>
+              <a className="social" target="_blank" href={page.twitter}>
                 TW
               </a>
               <Link href="/chatbot" scroll={false}>
