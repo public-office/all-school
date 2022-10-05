@@ -1,14 +1,23 @@
 import { styled } from 'stitches.config'
 
 const LogoWrapper = styled('div', {
-  marginTop: '5em',
+  marginTop: '10em',
   'p': {
     fontSize: '$sans1',
     letterSpacing: '0',
   },
   '.logos': {
-    display: 'grid',
+    display: 'flex',
+    flexDirection: 'row',
     gridTemplateColumns: 'repeat(5, 1fr)',
+    padding: '1em',
+    '& + p': {
+      marginTop: '1em',
+    },
+    'img': {
+      height: '65px',
+      paddingRight: '1em',
+    },
   },
 })
 
