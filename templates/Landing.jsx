@@ -30,7 +30,7 @@ const Subscribe = styled('div', {
   position: 'absolute',
   left: '50%',
   transform: 'translateX(-50%)',
-  padding: '2.75em $margin 1em',
+  padding: '2em $margin 1em',
   p: {
     letterSpacing: '-2px',
   },

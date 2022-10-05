@@ -12,7 +12,7 @@ const LogoWrapper = styled('div', {
     gridTemplateColumns: 'repeat(5, 1fr)',
     padding: '1em',
     '& + p': {
-      marginTop: '1em',
+      // marginTop: '1em',
     },
     'img': {
       height: '65px',
