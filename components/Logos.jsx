@@ -15,8 +15,11 @@ const LogoWrapper = styled('div', {
       // marginTop: '1em',
     },
     'img': {
-      height: '65px',
+      height: '55px',
       paddingRight: '1em',
+      '@mobile': {
+        height: '30px',
+      },
     },
   },
 })
