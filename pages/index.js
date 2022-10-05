@@ -17,6 +17,8 @@ export async function getServerSideProps() {
                 data {
                   attributes {
                     url
+                    alternativeText
+                    caption
                   }
                 }
               }
@@ -36,17 +38,21 @@ export async function getServerSideProps() {
               instagram
               facebook
               twitter
-              nextwave_logo1 {
+              nextWaveLogos {
                 data {
                   attributes {
                     url
+                    alternativeText
+                    caption
                   }
                 }
               }
-              nextwave_logo2 {
+              allSchoolLogos {
                 data {
                   attributes {
                     url
+                    alternativeText
+                    caption
                   }
                 }
               }
@@ -57,7 +63,7 @@ export async function getServerSideProps() {
     `,
   })
 
-  const { information, marquee, access, instagram, facebook, twitter, nextwave_logo1, nextwave_logo2 } = get(data, 'information.data.attributes')
+  const { information, marquee, access, instagram, facebook, twitter, nextWaveLogos, allSchoolLogos} = get(data, 'information.data.attributes')
 
   const events = get(data, 'events.data').map((data) => {
     return {
@@ -74,11 +80,11 @@ export async function getServerSideProps() {
         events,
         marquee,
         information,
+        nextWaveLogos: nextWaveLogos.data.map(logo => get(logo, 'attributes.url')),
+        allSchoolLogos: allSchoolLogos.data.map(logo => get(logo, 'attributes.url')),
         instagram, 
         facebook,
         twitter,
-        nextwave_logo1,
-        nextwave_logo2
       },
     },
   }

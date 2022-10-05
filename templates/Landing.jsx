@@ -52,7 +52,7 @@ const Subscribe = styled('div', {
 })
 
 const Sticky = styled('div', {
-  width: '18rem',
+  width: '16rem',
   right: '$margin2',
   position: 'fixed',
   right: '1.5em',
@@ -550,7 +550,10 @@ export function Landing({ page = {} }) {
 
         <EventsList events={page.events} />
 
-        <Logos></Logos>
+        <Logos 
+          nextWaveLogos={page.nextWaveLogos} 
+          allSchoolLogos={page.allSchoolLogos}
+        ></Logos>
 
         <Subscribe>
           <p
