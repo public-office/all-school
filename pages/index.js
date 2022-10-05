@@ -36,8 +36,20 @@ export async function getServerSideProps() {
               instagram
               facebook
               twitter
-              nextwave_logo1
-              nextwave_logo2
+              nextwave_logo1 {
+                data {
+                  attributes {
+                    url
+                  }
+                }
+              }
+              nextwave_logo2 {
+                data {
+                  attributes {
+                    url
+                  }
+                }
+              }
             }
           }
         }
