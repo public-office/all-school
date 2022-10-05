@@ -61,7 +61,7 @@ export function EventItem({ title, image, shortDesc, longDesc, eventUrl }) {
           </p>
           <p className="padded">
             Get tickets&nbsp;
-            <a id="tickets" href={eventUrl} target="_blank">
+            <a id="tickets" href={eventUrl} target="_blank" rel="noreferrer">
               here
             </a>
             .

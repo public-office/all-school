@@ -609,13 +609,13 @@ export function Landing({ page = {} }) {
           </div>
           <div>
             <nav className="socials">
-              <a className="social" target="_blank" href={page.facebook}>
+              <a className="social" target="_blank" rel="noreferrer" href={page.facebook}>
                 FB
               </a>
-              <a className="social" target="_blank" href={page.instagram}>
+              <a className="social" target="_blank" rel="noreferrer"  href={page.instagram}>
                 IG
               </a>
-              <a className="social" target="_blank" href={page.twitter}>
+              <a className="social" target="_blank" rel="noreferrer"  href={page.twitter}>
                 TW
               </a>
               <Link href="/chatbot" scroll={false}>
