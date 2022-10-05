@@ -5,7 +5,11 @@ const LogoWrapper = styled('div', {
   'p': {
     fontSize: '$sans1',
     letterSpacing: '0',
-  }
+  },
+  '.logos': {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(5, 1fr)',
+  },
 })
 
 export function Logos({nextWaveLogos, allSchoolLogos}) {
@@ -17,7 +21,7 @@ export function Logos({nextWaveLogos, allSchoolLogos}) {
           <img
             key={logo.url}
             src={logo.url}
-            alt=""
+            alt={logo.alternativeText}
           />
         ))}
       </div>
@@ -27,7 +31,7 @@ export function Logos({nextWaveLogos, allSchoolLogos}) {
           <img
             key={logo.url}
             src={logo.url}
-            alt=""
+            alt={logo.alternativeText}
           />
         ))}
       </div>
