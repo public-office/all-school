@@ -15,14 +15,6 @@ export const useChatbot = () => {
   const [messages, setMessages] = useState([])
   const messageId = useRef(0)
 
-  const setTyping = useCallback((typing) => {
-    if (typing) {
-      addMessage('bot', { typing: true })
-    } else {
-      setMessages((messages) => messages.filter((m) => !m.typing))
-    }
-  }, [addMessage])
-
   const addMessage = useCallback(
     (from, { text = null, typing = false, initial = false }) => {
       messageId.current++
@@ -32,6 +24,15 @@ export const useChatbot = () => {
     },
     []
   )
+
+
+  const setTyping = useCallback((typing) => {
+    if (typing) {
+      addMessage('bot', { typing: true })
+    } else {
+      setMessages((messages) => messages.filter((m) => !m.typing))
+    }
+  }, [addMessage])
 
   const submitMessage = useCallback(async ({ text, initial }) => {
     addMessage('user', { text, initial })
