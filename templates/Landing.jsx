@@ -383,7 +383,6 @@ const Footer = styled('div', {
     },
     nav: {
       display: 'flex',
-      // flexWrap: 'wrap',
       '.chatbot': {
         width: '100%',
       },
@@ -515,7 +514,7 @@ export function Landing({ page = {} }) {
 
       <SubscribeModal
         show={showSubscribeModal}
-        onClose={() => router.replace('/', undefined, { scroll: false })}
+        onClose={() => router.replace('/', undefined, { scroll: false }) }
       />
 
       <Header>

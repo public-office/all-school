@@ -6,7 +6,6 @@ import { useScreenOptions } from 'hooks/useScreenOptions'
 import { usePlainStyle } from 'hooks/usePlainStyle'
 import { ApolloProvider } from '@apollo/client'
 import { client } from 'lib/strapi'
-import { useState } from 'react'
 import '../public/styles.css'
 
 export default function App({ Component, pageProps }) {
@@ -14,8 +13,6 @@ export default function App({ Component, pageProps }) {
 
   const { screenOptions, setScreenOption } = useScreenOptions()
   usePlainStyle(screenOptions.plain)
-
-  const { isExpanded, setIsExpanded } = useState(false);
 
   return (
     <ApolloProvider client={client}>
