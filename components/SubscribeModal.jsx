@@ -3,7 +3,7 @@ import { SubscribeForm } from './SubscribeForm'
 
 export function SubscribeModal({ onClose, ...props }) {
   return (
-    <Modal {...props}>
+    <Modal onClose={onClose} {...props}>
       <SubscribeForm onClose={onClose} />
     </Modal>
   )
