@@ -1,12 +1,12 @@
+import React from 'react'
 import { Pane } from 'components/Pane'
 import { SubscribeModal } from 'components/SubscribeModal'
-import { createTheme, styled } from 'stitches.config'
+import { theme, createTheme, styled } from 'stitches.config'
 import FastMarquee from 'react-fast-marquee'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Disc } from 'components/Disc'
 import { Chatbot } from 'components/Chatbot'
-import { theme } from 'stitches.config'
 import { useState } from 'react'
 import { useScreenOptionsContext } from 'hooks/useScreenOptions'
 import { Template } from 'components/Template'
@@ -15,7 +15,7 @@ import { Nav } from 'components/Nav'
 import { Logos } from 'components/Logos'
 import { EventsList } from 'components/EventsList'
 import clsx from 'classnames'
-import { useEffect, useRef} from 'react'
+// import { useEffect, useRef} from 'react'
 import { SubscribeForm } from 'components/SubscribeForm'
 
 const Page = styled('div', {
@@ -58,6 +58,13 @@ const Sticky = styled('div', {
   right: '1.5em',
   top: '1.5em',
   zIndex: 2,
+  '.disc-wrapper': {
+    borderRadius: '50%',
+    width: '16rem',
+    position: 'absolute',
+    top: '0',
+    zIndex: 2,
+  },
   '@mobile': {
     right: '.5em',
     top: '3em',
@@ -155,12 +162,10 @@ const HeroText = styled('div', {
       background: '$purple',
     },
     '&.image-one': {
-      backgroundImage: 'url("../images/as_bluesky.png")',
       backgroundSize: 'cover',
       backgroundPosition: 'top left',
     },
     '&.image-two': {
-      backgroundImage: 'url("../images/as_classes.png")',
       backgroundSize: 'cover',
       backgroundPosition: 'top left',
     },
@@ -193,7 +198,6 @@ const Main = styled('div', {
   '@mobile': {
     marginTop: '-6em',
   },
-
   '.extra-content': {
     margin: '1em 8em',
     fontSize: '$sans2',
@@ -208,7 +212,6 @@ const Main = styled('div', {
     '&_trigger': {
       '&:hover': {
         cursor: 'pointer',
-        color: '$purple',
       },
     },
   },
@@ -246,7 +249,7 @@ const Main = styled('div', {
         textUnderlineOffset: '0.2rem',
       },
       '&:hover': {
-        color: '$purple',
+        color: '${setup.color}',
       },
     },
     a: {
@@ -400,14 +403,14 @@ const PopdownOptions = styled('div', {
   bottom: 'calc(0rem - $1)',
   left: '50%',
   transform: 'translateX(-50%)',
-  background: '$bg',
+  background: '${setup.color}',
   padding: '$1 3rem',
   textAlign: 'center',
   borderRadius: '1em',
   boxShadow: '$shadow',
   button: {
     '&:hover': {
-      color: '$highlight',
+      color: '${setup.color}',
     },
     '&.selected': {
       '&:after': {
@@ -424,7 +427,7 @@ const popdownTheme = createTheme({
   },
 })
 
-function Popdown({ label, options, className, value, onChange }) {
+function Popdown({ label, options, className, value, onChange, paneTheme }) {
   const [open, setOpen] = useState(false)
 
   const handleClick = (e) => {
@@ -472,31 +475,15 @@ export function Landing({ page = {} }) {
   const { query } = router
 
   // const { isExpanded, setIsExpanded } = useState(false);
-
-  const showAuslanPane = ['auslan', 'access'].includes(query.slug)
-  const showSubscribeModal = query.slug === 'subscribe'
-  const showChatbot = query.slug === 'chatbot'
-
-  const ref = useRef()
-  const [color, setColor] = useState(false)
-  ref.current = color
-
   // function ariaControls() {
   //   setIsExpanded((isExpanded) => !isExpanded)
   // }
 
-  useEffect(() => {
-    const colorChange = () => {
-      const show = window.scrollY >= 40;
-      if (ref.current !== show) {
-        setColor(true);
-      }
-    }
+  console.log(page.setup.color);
 
-    window.addEventListener('scroll', colorChange)
-
-    return () => window.removeEventListener('scroll', colorChange)
-  }, []);
+  const showAuslanPane = ['auslan', 'access'].includes(query.slug)
+  const showSubscribeModal = query.slug === 'subscribe'
+  const showChatbot = query.slug === 'chatbot'
 
   const {
     screenOptions,
@@ -505,7 +492,7 @@ export function Landing({ page = {} }) {
   } = useScreenOptionsContext()
 
   return (
-    <Template>
+    <Template data-theme={page.setup.color}>
       {motion ? (
         <Marquee gradient={false}>{page.marquee}</Marquee>
       ) : (
@@ -536,9 +523,9 @@ export function Landing({ page = {} }) {
       <HeroText>
         <div className="intro">
           <div></div>
-          <div className="color-block"></div>
-          <div className="image-one"></div>
-          <div className="image-two"></div>
+          <div style={{background: `${page.setup.color}`}}></div>
+          <div className="image-one" style={{ backgroundImage: 'url(' + page.setup.img1 + ')' }}></div>
+          <div className="image-two" style={{ backgroundImage: 'url(' + page.setup.img2 + ')' }}></div>
         </div>
       </HeroText>
 
@@ -557,7 +544,9 @@ export function Landing({ page = {} }) {
       </Main>
 
       <Sticky>
-        <Disc />
+        <div className="disc-wrapper" style={{ background: `${page.setup.color}` }}>
+          <Disc />
+        </div>
       </Sticky>
 
       <Pane
@@ -572,7 +561,7 @@ export function Landing({ page = {} }) {
         show={showChatbot}
       />
 
-      <Footer className={color ? 'green' : 'white'}>
+      <Footer>
         <div className="desktop">
           <div>
             <nav className="tools">

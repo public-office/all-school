@@ -1,3 +1,29 @@
 body {
   scroll-behavior: smooth;
 }
+
+/* [data-theme="#d9c1fa"] a:hover,
+[data-theme="#d9c1fa"] .extra-content_trigger:hover {
+  color: #d9c1fa !important;
+}
+[data-theme="#54d16a"] a:hover,
+[data-theme="#54d16a"] .extra-content_trigger:hover {
+  color: #54d16a !important;
+}
+[data-theme="#ff8528"] a:hover, 
+[data-theme="#ff8528"] .extra-content_trigger:hover {
+  color: #ff8528 !important; 
+}*/
+
+ /* [data-theme="#d9c1fa"] .c-jjfAVZ {
+  background: #d9c1fa;
+} */
+
+[data-theme="#54d16a"] .nav-trigger:hover,
+[data-theme="#54d16a"] nav a:hover {
+  color: #d9c1fa !important;
+}
+
+/*[data-theme="#ff8528"] .c-jjfAVZ {
+  background: #ff8528;
+} */

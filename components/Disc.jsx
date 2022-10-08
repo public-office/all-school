@@ -4,12 +4,7 @@ import { styled } from 'stitches.config'
 
 const DiscElement = motion(
   styled('div', {
-    background: '$highlight',
-    borderRadius: '50%',
-    width: '16rem',
-    position: 'absolute',
-    top: '0',
-    zIndex: 2,
+    
     img: {
       width: '100%',
       height: '100%',
@@ -27,13 +22,14 @@ const DiscElement = motion(
   })
 )
 
-export function Disc() {
+export function Disc(singleColour) {
   const {
     screenOptions: { motion },
   } = useScreenOptionsContext()
 
   return (
     <DiscElement
+      className={{ singleColour }}
       animate={motion ? { rotate: 360 } : undefined}
       transition={motion ? { ease: 'linear', duration: 10, repeat: Infinity } : undefined}
     >

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { styled } from 'stitches.config'
+import ProgressiveImg from "./ProgressiveImg"
 
 const Event = styled('div', {
   '.event': {
@@ -22,7 +23,7 @@ const Event = styled('div', {
   },
 })
 
-export function EventItem({ title, image, shortDesc, longDesc, eventUrl }) {
+export function EventItem({ title, image, shortDesc, longDesc, eventUrl, setup }) {
 
   const [isShown, setIsShown] = useState(false)
   const handleClick = (event) => {
@@ -33,9 +34,10 @@ export function EventItem({ title, image, shortDesc, longDesc, eventUrl }) {
     <Event>
       <article>
         {image && <div className="event-image">
-          <img 
+          <ProgressiveImg 
             key={image.url}
-            src={image.url} 
+            src={image.url}
+            placeholderSrc={image.url}
             alt={image.alternativeText}
           />
         </div>}

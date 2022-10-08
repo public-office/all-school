@@ -2,6 +2,7 @@ import { Landing } from 'templates/Landing'
 import { client } from 'lib/strapi'
 import { gql } from '@apollo/client'
 import get from 'lodash/get'
+import { theme } from 'stitches.config'
 
 export async function getServerSideProps() {
   const { data } = await client.query({
@@ -73,6 +74,29 @@ export async function getServerSideProps() {
     }
   })
 
+  const setups = {
+    items: [
+      {
+        color: `${theme.colors.purple.value}`,
+        img1: '../images/as_bluesky.png',
+        img2: '../images/as_mercurial.png',
+      },
+      {
+        color: `${theme.colors.green.value}`,
+        img1: '../images/as_jerrycan.png',
+        img2: '../images/as_classes.png',
+      },
+      {
+        color: `${theme.colors.orange.value}`,
+        img1: '../images/as_oranges.png',
+        img2: '../images/as_phone.png',
+      }
+    ]
+  }
+
+  const items = setups.items.map((item, id) => ({ ...item, id }));
+  const setup = items[Math.floor(Math.random() * items.length)];
+
   return {
     props: {
       page: {
@@ -84,7 +108,8 @@ export async function getServerSideProps() {
         allSchoolLogos: allSchoolLogos.data.map(logo => get(logo, 'attributes')),
         instagram, 
         facebook,
-        twitter,
+        twitter, 
+        setup
       },
     },
   }
