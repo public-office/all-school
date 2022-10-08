@@ -3,6 +3,12 @@ import { styled } from 'stitches.config'
 const LogoWrapper = styled('div', {
   marginTop: '12em',
   paddingBottom: '3em',
+  display: 'grid',
+  gridTemplateColumns: '1fr 1fr',
+  gridColumnGap: '1em',
+  '@mobile': {
+    display: 'block',
+  },
   'p': {
     fontSize: '$sans1',
     letterSpacing: '0',
@@ -11,6 +17,7 @@ const LogoWrapper = styled('div', {
     display: 'flex',
     flexDirection: 'row',
     gridTemplateColumns: 'repeat(5, 1fr)',
+    marginLeft: '-1em',
     padding: '1em',
     '@mobile': {
       flexWrap: 'wrap',
@@ -32,25 +39,30 @@ const LogoWrapper = styled('div', {
 export function Logos({nextWaveLogos, allSchoolLogos}) {
   return(
     <LogoWrapper>
-      <p>Next Wave is generously supported by:</p>
-      <div className="logos">
-        {nextWaveLogos.map(logo => (
-          <img
-            key={logo.url}
-            src={logo.url}
-            alt={logo.alternativeText}
-          />
-        ))}
+      <div>
+        <p>Next Wave is generously supported by:</p>
+        <div className="logos">
+          {nextWaveLogos.map(logo => (
+            <img
+              key={logo.url}
+              src={logo.url}
+              alt={logo.alternativeText}
+            />
+          ))}
+        </div>
       </div>
-      <p>All School is supported by:</p>
-      <div className="logos">
-        {allSchoolLogos.map(logo => (
-          <img
-            key={logo.url}
-            src={logo.url}
-            alt={logo.alternativeText}
-          />
-        ))}
+      
+      <div>
+        <p>All School is supported by:</p>
+        <div className="logos">
+          {allSchoolLogos.map(logo => (
+            <img
+              key={logo.url}
+              src={logo.url}
+              alt={logo.alternativeText}
+            />
+          ))}
+        </div>
       </div>
     </LogoWrapper>
   );
