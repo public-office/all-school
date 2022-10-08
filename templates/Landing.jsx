@@ -66,6 +66,7 @@ const Sticky = styled('div', {
     zIndex: 2,
     '@mobile': {
       width: '165px',
+      display: 'none',
     },
   },
   '@mobile': {
@@ -120,6 +121,9 @@ const Header = styled('div', {
     top: '.15em',
     display: 'grid',
     gridTemplateColumns: '1fr 1fr',
+    '@mobile': {
+      top: '.25em',
+    },
   },
   span: {
     '&.purple': {
@@ -228,6 +232,7 @@ const Main = styled('div', {
       lineHeight: '$sans1',
     },
     '&_trigger': {
+      color: 'black',
       '&:hover': {
         cursor: 'pointer',
       },
@@ -272,7 +277,7 @@ const Main = styled('div', {
     },
     a: {
       textDecoration: 'underline',
-      textDecorationThickness: '0.3rem',
+      textDecorationThickness: '0.25rem',
       textUnderlineOffset: '0.5rem',
     },
   },
