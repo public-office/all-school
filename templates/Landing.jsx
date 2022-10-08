@@ -64,6 +64,9 @@ const Sticky = styled('div', {
     position: 'absolute',
     top: '0',
     zIndex: 2,
+    '@mobile': {
+      width: '165px',
+    },
   },
   '@mobile': {
     right: '.5em',
@@ -396,7 +399,7 @@ const Footer = styled('div', {
       gridColumn: 'span 2',
       marginBottom: '$margin',
     },
-    '.auslan, .chatbot': {
+    '.auslan, .chatbot, .access': {
       display: 'none',
     },
     nav: {

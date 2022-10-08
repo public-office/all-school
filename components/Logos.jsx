@@ -12,6 +12,10 @@ const LogoWrapper = styled('div', {
     flexDirection: 'row',
     gridTemplateColumns: 'repeat(5, 1fr)',
     padding: '1em',
+    '@mobile': {
+      flexWrap: 'wrap',
+      marginLeft: '-1em',
+    },
     '& + p': {
     },
     'img': {
@@ -19,6 +23,7 @@ const LogoWrapper = styled('div', {
       paddingRight: '1em',
       '@mobile': {
         height: '30px',
+        paddingBottom: '.2em',
       },
     },
   },
