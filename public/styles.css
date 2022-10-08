@@ -27,3 +27,13 @@ body {
 /*[data-theme="#ff8528"] .c-jjfAVZ {
   background: #ff8528;
 } */
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

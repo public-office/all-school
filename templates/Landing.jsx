@@ -151,23 +151,38 @@ const HeroText = styled('div', {
     gridColumnGap: '0',
     gridAutoRows: 'calc(50vh + 4px)',
     marginBottom: '2em',
-    marginTop: '-20rem',
+    marginTop: '-19.5rem',
     '@mobile': {
       marginTop: '-8rem',
     },
   },
+  '.fade-me': {
+    animation: 'fadeIn 2s linear',
+  },
+  '.fade-me.none': {
+    display: 'none',
+  },
 
   div: {
     '&.color-block': {
-      background: '$purple',
+      // background: '$purple',
+      // '&:hover': {
+      //   borderRadius: '.5em',
+      // }
     },
     '&.image-one': {
       backgroundSize: 'cover',
       backgroundPosition: 'top left',
+      // '&:hover': {
+      //   borderRadius: '.5em',
+      // }
     },
     '&.image-two': {
       backgroundSize: 'cover',
       backgroundPosition: 'top left',
+      // '&:hover': {
+      //   borderRadius: '.5em',
+      // }
     },
   },
   // padding: '0 $margin $margin',
@@ -523,9 +538,9 @@ export function Landing({ page = {} }) {
       <HeroText>
         <div className="intro">
           <div></div>
-          <div style={{background: `${page.setup.color}`}}></div>
-          <div className="image-one" style={{ backgroundImage: 'url(' + page.setup.img1 + ')' }}></div>
-          <div className="image-two" style={{ backgroundImage: 'url(' + page.setup.img2 + ')' }}></div>
+          <div className="color-block" style={{background: `${page.setup.color}`}}></div>
+          <div className="image-one fade-me" style={{ backgroundImage: 'url(' + page.setup.img1 + ')' }}></div>
+          <div className="image-two fade-me" style={{ backgroundImage: 'url(' + page.setup.img2 + ')' }}></div>
         </div>
       </HeroText>
 
