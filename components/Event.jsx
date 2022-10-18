@@ -39,6 +39,7 @@ const Event = styled('div', {
         marginBlockEnd: '0',
         '@mobile': {
           fontSize: '$sans1',
+          lineHeight: '$sans1',
         },
         a: {
           textDecoration: 'underline',
@@ -57,12 +58,21 @@ const Event = styled('div', {
       '.extra-content': {
         display: 'block',
         margin: '1em 2em 1em 4em',
+        '@mobile': {
+          margin: '1em 1em 1em 2em',
+        },
         p: {
           fontSize: '$sans1',
           lineHeight: '$sans1',
           letterSpacing: '-0.04rem',
+          '@mobile': {
+            fontSize: '0.9rem',
+          },
           '& + p': {
             marginTop: '-.5em',
+            '@mobile': {
+              paddingTop: '0',
+            },
           },
         },
       },
