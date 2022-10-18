@@ -1,16 +1,81 @@
 import { useState } from 'react'
 import { styled } from 'stitches.config'
-import ProgressiveImg from "./ProgressiveImg"
+import ProgressiveImg from './ProgressiveImg'
+import { Markdown } from 'components/Markdown'
+import smartypants from 'smartypants';
 
 const Event = styled('div', {
   '.event': {
+    p: {
+      display: 'block',
+      '& + p': {
+        paddingTop: '1em',
+      },
+    },
     '&-image': {
       maxWidth: '30%',
+      minHeight: '20rem',
       margin: '4em auto',
       '@mobile': {
         maxWidth: '50%',
       },
-    }
+    },
+    '&-title': {
+      display: 'block',
+      textAlign: 'center',
+      maxWidth: '85%',
+      margin: '0 auto',
+      // marginBottom: '1em',
+    },
+  },
+  '&.event-single': {
+    '&:not(:first-of-type)': {
+      p: {
+        fontSize: '$sans2',
+        lineHeight: '$sans2',
+        letterSpacing: '-0.06rem',
+        marginBlockStart: '0',
+        marginBlockEnd: '0',
+        a: {
+          textDecoration: 'underline',
+          textDecorationThickness: '0.2rem',
+          textUnderlineOffset: '0.35rem',
+        },
+      },
+      '.event-image': {
+        maxWidth: '100%',
+        margin: '0 auto',
+        paddingBottom: '1em',
+        img: {
+          borderRadius: '.5em',
+        }
+      },
+      '.extra-content': {
+        display: 'block',
+        margin: '1em 2em 1em 4em',
+        p: {
+          fontSize: '$sans1',
+          lineHeight: '$sans1',
+          letterSpacing: '-0.04rem',
+          '& + p': {
+            marginTop: '-.5em',
+          },
+        },
+      },
+    },
+    '&:first-of-type': {
+      '&:after': {
+        content: 'Single events',
+        display: 'block',
+        textAlign: 'center',
+        fontSize: '$sans4',
+        margin: '2em 0 .5em 0',
+      },
+      '.event-title': {
+        display: 'none',
+      },
+    },
+    
   },
   img: {
     width: '100%',
@@ -31,7 +96,7 @@ export function EventItem({ title, image, shortDesc, longDesc, eventUrl, setup }
   }
 
   return (
-    <Event>
+    <Event className="event-single">
       <article>
         {image && <div className="event-image">
           <ProgressiveImg 
@@ -55,14 +120,15 @@ export function EventItem({ title, image, shortDesc, longDesc, eventUrl, setup }
             <span className="green">t</span>
             <span className="purple">.</span>
             <br />
+            <span className="event-title"><Markdown>{title}</Markdown></span>
             {shortDesc}{' '}
             <span className="extra-content_trigger" onClick={handleClick}>
               (read more)
             </span>
             {isShown && (
-              <div className="extra-content">
-                {longDesc}
-              </div>
+              <span className="extra-content" >
+                <Markdown>{smartypants(longDesc)}</Markdown>
+              </span>
             )}
           </p>
           <p className="padded">

@@ -37,3 +37,35 @@ body {
     opacity: 1;
   }
 }
+
+.events {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 1em;
+  grid-row-gap: 2em;
+}
+
+.event-single:first-of-type {
+  grid-column: span 2;
+}
+
+blockquote {
+  margin: 1em 0 0 2em;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+}
+
+blockquote p {
+  white-space: normal !important;
+  overflow-wrap: normal !important;
+}
+
+blockquote + blockquote {
+  margin-block-start: -2.5em;
+}
+
+.extra-content blockquote + p {
+  margin-block-start: -2.5em;
+}

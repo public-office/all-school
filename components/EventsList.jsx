@@ -1,8 +1,8 @@
-import { EventItem } from './Event';
+import { EventItem } from './Event'
 
 export function EventsList({ events }) {
   return (
-    <section>
+    <section className='events'>
       {events.map(event => (
         <EventItem
           key={event.id}
