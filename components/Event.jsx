@@ -18,6 +18,7 @@ const Event = styled('div', {
       margin: '4em auto',
       '@mobile': {
         maxWidth: '50%',
+        minHeight: '0',
       },
     },
     '&-title': {

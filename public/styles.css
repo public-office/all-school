@@ -49,6 +49,15 @@ body {
   grid-column: span 2;
 }
 
+@media(max-width: 670px) {
+  .events {
+    grid-template-columns: 1fr;
+  }
+  .event-single:first-of-type {
+    grid-column: span 1;
+  }
+}
+
 blockquote {
   margin: 1em 0 0 2em;
   margin-block-start: 0;
