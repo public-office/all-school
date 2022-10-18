@@ -34,7 +34,7 @@ const Event = styled('div', {
       p: {
         fontSize: '$sans2',
         lineHeight: '$sans2',
-        letterSpacing: '-0.06rem',
+        letterSpacing: '-0.04rem',
         marginBlockStart: '0',
         marginBlockEnd: '0',
         '@mobile': {
@@ -79,7 +79,7 @@ const Event = styled('div', {
     },
     '&:first-of-type': {
       '&:after': {
-        content: 'Single events',
+        content: 'Program',
         display: 'block',
         textAlign: 'center',
         fontSize: '$sans4',

@@ -78,3 +78,11 @@ blockquote + blockquote {
 .extra-content blockquote + p {
   margin-block-start: -2.5em;
 }
+
+.extra-content p {
+  padding-top: 0 !important;
+}
+
+#tickets {
+  padding-top: 1em;
+}
