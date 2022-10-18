@@ -36,6 +36,9 @@ const Event = styled('div', {
         letterSpacing: '-0.06rem',
         marginBlockStart: '0',
         marginBlockEnd: '0',
+        '@mobile': {
+          fontSize: '$sans1',
+        },
         a: {
           textDecoration: 'underline',
           textDecorationThickness: '0.2rem',
@@ -70,6 +73,9 @@ const Event = styled('div', {
         textAlign: 'center',
         fontSize: '$sans4',
         margin: '2em 0 .5em 0',
+        '@mobile': {
+          fontSize: '$sans2',
+        },
       },
       '.event-title': {
         display: 'none',
