@@ -31,6 +31,9 @@ const Event = styled('div', {
   },
   '&.event-single': {
     '&:not(:first-of-type)': {
+      '.download': {
+        display: 'none',
+      },
       p: {
         fontSize: '$sans2',
         lineHeight: '$sans2',
@@ -102,10 +105,10 @@ const Event = styled('div', {
     top: '6rem',
     // width: '13rem',
     right: '0',
-  },
+  }, 
 })
 
-export function EventItem({ title, image, shortDesc, longDesc, eventUrl, setup }) {
+export function EventItem({ title, image, shortDesc, longDesc, eventUrl, eventPdf }) {
 
   const [isShown, setIsShown] = useState(false)
   const handleClick = (event) => {
@@ -153,7 +156,9 @@ export function EventItem({ title, image, shortDesc, longDesc, eventUrl, setup }
             <a id="tickets" href={eventUrl} target="_blank" rel="noreferrer">
               here
             </a>
-            .
+            .<br/>
+            <span className="download">Download <a href={eventPdf} download={eventPdf} target="_blank" rel="noreferrer">program</a>.</span>
+            
           </p>
         </div>
       </article>

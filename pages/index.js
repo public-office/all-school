@@ -25,6 +25,8 @@ export async function getServerSideProps() {
               }
               startDate
               endDate
+              location
+              eventPdf
               description_short
               description_long
             }

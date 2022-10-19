@@ -8,9 +8,11 @@ export function EventsList({ events }) {
           key={event.id}
           title={event.title}
           image={event.mainImage}
+          location={event.location}
           shortDesc={event.description_short}
           longDesc={event.description_long}
           eventUrl={event.eventUrl}
+          eventPdf={event.eventPdf}
         />
       ))}
     </section>
