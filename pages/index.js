@@ -8,7 +8,7 @@ export async function getServerSideProps() {
   const { data } = await client.query({
     query: gql`
       query {
-        events {
+        events (pagination: { limit: 100 }) {
           data {
             id
             attributes {
@@ -25,6 +25,9 @@ export async function getServerSideProps() {
               }
               startDate
               endDate
+              startTime
+              endTime
+              eventCost
               location
               eventPdf
               description_short
@@ -65,8 +68,7 @@ export async function getServerSideProps() {
       }
     `,
   })
-
-  const { information, marquee, access, instagram, facebook, twitter, nextWaveLogos, allSchoolLogos} = get(data, 'information.data.attributes')
+  const { information, marquee, access, instagram, facebook, twitter, nextWaveLogos, allSchoolLogos } = get(data, 'information.data.attributes')
 
   const events = get(data, 'events.data').map((data) => {
     return {
@@ -111,7 +113,7 @@ export async function getServerSideProps() {
         instagram, 
         facebook,
         twitter, 
-        setup
+        setup,
       },
     },
   }

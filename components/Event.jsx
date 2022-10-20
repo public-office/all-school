@@ -16,6 +16,13 @@ const Event = styled('div', {
       maxWidth: '30%',
       minHeight: '20rem',
       margin: '4em auto',
+      // background: '$green',
+      '&:hover': {
+        'img': {
+          filter: 'grayscale(1)',
+          mixBlendMode: 'multiply',
+        },
+      },
       '@mobile': {
         maxWidth: '50%',
         minHeight: '0',
@@ -53,7 +60,8 @@ const Event = styled('div', {
       '.event-image': {
         maxWidth: '100%',
         margin: '0 auto',
-        paddingBottom: '1em',
+        marginBottom: '1em',
+        borderRadius: '.5em',
         img: {
           borderRadius: '.5em',
         }
@@ -108,7 +116,7 @@ const Event = styled('div', {
   }, 
 })
 
-export function EventItem({ title, image, shortDesc, longDesc, eventUrl, eventPdf }) {
+export function EventItem({ title, image, shortDesc, longDesc, eventUrl, eventPdf, startDate, endDate, startTime, endTime, location, setup }) {
 
   const [isShown, setIsShown] = useState(false)
   const handleClick = (event) => {
@@ -158,7 +166,7 @@ export function EventItem({ title, image, shortDesc, longDesc, eventUrl, eventPd
             </a>
             .<br/>
             <span className="download">Download <a href={eventPdf} download={eventPdf} target="_blank" rel="noreferrer">program</a>.</span>
-            
+            <span>{location}</span>
           </p>
         </div>
       </article>
