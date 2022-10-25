@@ -35,6 +35,27 @@ export async function getServerSideProps() {
             }
           }
         }
+        artists (pagination: {limit: 100}) {
+          data {
+            id
+            attributes {
+              firstName
+              lastName
+              website
+              biography
+            }
+          }
+        }
+        venues {
+          data {
+            id
+            attributes {
+              venueName
+              venueAddress
+              venueDetails
+            }
+          }
+        }
         information {
           data {
             attributes {
@@ -78,6 +99,20 @@ export async function getServerSideProps() {
     }
   })
 
+  const artists = get(data, 'artists.data').map((data) => {
+    return {
+      id: data.id,
+      ...data.attributes,
+    }
+  })
+
+  const venues = get(data, 'venues.data').map((data) => {
+    return {
+      id: data.id,
+      ...data.attributes,
+    }
+  })
+
   const setups = {
     items: [
       {
@@ -106,6 +141,8 @@ export async function getServerSideProps() {
       page: {
         access,
         events,
+        artists,
+        venues,
         marquee,
         information,
         nextWaveLogos: nextWaveLogos.data.map(logo => get(logo, 'attributes')),

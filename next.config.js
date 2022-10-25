@@ -1,9 +1,13 @@
 const assert = require('assert')
+const path = require('path')
 
 assert(process.env.NEXT_PUBLIC_STRAPI_TOKEN, 'NEXT_PUBLIC_STRAPI_TOKEN env var not found')
 assert(process.env.NEXT_PUBLIC_STRAPI_URL, 'NEXT_PUBLIC_STRAPI_URL env var not found')
 
 module.exports = {
+  sassOptions: {
+    includePaths: [path.join(__dirname, 'styles')],
+  },
   reactStrictMode: true,
   async rewrites() {
     return [

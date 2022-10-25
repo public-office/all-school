@@ -14,6 +14,7 @@ import { Markdown } from 'components/Markdown'
 import { Nav } from 'components/Nav'
 import { Logos } from 'components/Logos'
 import { EventsList } from 'components/EventsList'
+import { VenueList } from 'components/VenueList'
 import clsx from 'classnames'
 import { SubscribeForm } from 'components/SubscribeForm'
 
@@ -557,12 +558,12 @@ export function Landing({ page = {} }) {
         </div>
 
         <EventsList events={page.events} />
+        <VenueList events={page.venues} />
 
         <Logos 
           nextWaveLogos={page.nextWaveLogos} 
           allSchoolLogos={page.allSchoolLogos}
         ></Logos>
-
       </Main>
 
       <Sticky>

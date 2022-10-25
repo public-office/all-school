@@ -33,6 +33,7 @@
     "remark-breaks": "^3.0.2",
     "remark-gfm": "^3.0.1",
     "rooks": "^5.7.3",
+    "sass": "^1.55.0",
     "smartypants": "^0.1.6"
   },
   "devDependencies": {

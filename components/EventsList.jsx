@@ -2,11 +2,9 @@ import { EventItem } from './Event'
 
 export function EventsList({ events }) {
 
-  console.log(events.length)
-
   return (
     <section className='events'>
-      {events.map(event => (
+      {events && events.map(event => (
         <EventItem
           key={event.id}
           title={event.title}
@@ -14,7 +12,7 @@ export function EventsList({ events }) {
           location={event.location}
           startDate={event.startDate}
           endDate={event.endDate}
-          startTime={event.starTime}
+          startTime={event.startTime}
           endTime={event.endTime}
           shortDesc={event.description_short}
           longDesc={event.description_long}

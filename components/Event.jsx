@@ -16,7 +16,6 @@ const Event = styled('div', {
       maxWidth: '30%',
       minHeight: '20rem',
       margin: '4em auto',
-      // background: '$green',
       '&:hover': {
         'img': {
           filter: 'grayscale(1)',
@@ -155,7 +154,7 @@ export function EventItem({ title, image, shortDesc, longDesc, eventUrl, eventPd
             </span>
             {isShown && (
               <span className="extra-content" >
-                <Markdown>{smartypants(longDesc)}</Markdown>
+                <Markdown>{longDesc}</Markdown>
               </span>
             )}
           </p>
