@@ -221,10 +221,16 @@ const Main = styled('div', {
     marginTop: '-6em',
   },
   '.extra-content': {
-    margin: '1em 8em',
+    margin: '1.5em 8em',
     fontSize: '$sans2',
     letterSpacing: '0',
     lineHeight: '$sans2',
+    display: 'block',
+    p: {
+      fontSize: '$sans2',
+      letterSpacing: '0',
+      lineHeight: '$sans2',
+    },
     '@mobile': {
       margin: '1em .5em 1em 4em',
       fontSize: '$sans1',
@@ -357,12 +363,14 @@ const Footer = styled('div', {
       background: 'white',
     },
   },
+  'div': {
+    p: {
+      fontSize: '$sans2',
+    },
+  },
   '.desktop': {
     display: 'grid',
     gridTemplateColumns: '1fr 1fr',
-    // '@mobile': {
-    //   gridTemplateColumns: '1fr',
-    // },
   },
   '.screen-options': {
     marginTop: '6px',
@@ -558,7 +566,7 @@ export function Landing({ page = {} }) {
         </div>
 
         <EventsList events={page.events} />
-        <VenueList events={page.venues} />
+        <VenueList events={page.venues} className="venues"/>
 
         <Logos 
           nextWaveLogos={page.nextWaveLogos} 

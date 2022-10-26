@@ -1,7 +1,8 @@
 import { EventItem } from './Event'
 
 export function EventsList({ events }) {
-
+  
+  console.log(events.length);
   return (
     <section className='events'>
       {events && events.map(event => (

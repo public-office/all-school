@@ -1,7 +1,7 @@
 import { styled } from 'stitches.config'
 
 const LogoWrapper = styled('div', {
-  marginTop: '12em',
+  marginTop: '20em',
   paddingBottom: '3em',
   display: 'grid',
   gridTemplateColumns: '1fr 1fr',
