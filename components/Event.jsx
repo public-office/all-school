@@ -166,13 +166,13 @@ export function EventItem({ title, image, shortDesc, longDesc, eventUrl, eventPd
   }
 
   const ref = useRef(null);
-  useEffect(() => {
-    const triggers = ref.current.className
+  // useEffect(() => {
+  //   const triggers = ref.current.className
     
-    if (triggers) {
-      console.log(triggers.length);
-    }
-  }, []);
+  //   if (triggers) {
+  //     console.log(triggers.length);
+  //   }
+  // }, []);
 
   return (
     <Event className="event-single">
@@ -201,14 +201,14 @@ export function EventItem({ title, image, shortDesc, longDesc, eventUrl, eventPd
             <br />
             <span className="event-title"><Markdown>{title}</Markdown></span>
             <Markdown>{shortDesc}</Markdown>
-            <span ref={ref} className="extra-content_trigger" onClick={handleClick}>
+            {/* <span ref={ref} className="extra-content_trigger" onClick={handleClick}>
               (read more)
             </span>
             {isShown && (
               <span className="extra-content" >
                 <Markdown>{longDesc}</Markdown>
               </span>
-            )}
+            )} */}
           </div>
           {/* <p className="padded">
             Get tickets&nbsp;
