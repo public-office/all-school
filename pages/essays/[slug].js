@@ -102,7 +102,7 @@ const Essay = styled('div', {
   },
 })
 
-function essaySingle({ title, url, author, pdf, text, tagline, image }) {
+function EssaySingle({ title, url, author, pdf, text, tagline, image }) {
   const [isVisible, setIsVisible] = useState(false)
   const router = useRouter()
   const essayState = (event) => {
@@ -149,4 +149,4 @@ function essaySingle({ title, url, author, pdf, text, tagline, image }) {
   )
 }
 
-export default essaySingle
+export default EssaySingle
