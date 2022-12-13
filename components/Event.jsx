@@ -9,12 +9,18 @@ const Event = styled('div', {
     '#lab': {
       '.color': {
         fontSize: '$sans4',
+        '@mobile': {
+          fontSize: '$sans2',
+        },
       },
     },
     '.extra-content': {
       margin: '1em 2.5em',
       '&_trigger': {
         fontSize: '$sans4',
+        '@mobile': {
+          fontSize: '$sans2',
+        },
       },
       p: {
         fontSize: '$sans2',
@@ -28,6 +34,9 @@ const Event = styled('div', {
     p: {
       display: 'block',
       fontSize: '$sans4',
+      '@mobile': {
+        fontSize: '$sans2',
+      },
       '& + p': {
         paddingTop: '1em',
       },
@@ -97,6 +106,10 @@ const Event = styled('div', {
           fontSize: '$sans2',
           lineHeight: '$sans2',
           display: 'inline',
+          '@mobile': {
+            fontSize: '$sans1',
+            letterSpacing: '-0.02rem',
+          },
         },
         '@mobile': {
           margin: '1em 1em 1em 2em',
@@ -104,7 +117,7 @@ const Event = styled('div', {
         p: {
           fontSize: '$sans1',
           lineHeight: '$sans1',
-          letterSpacing: '-0.04rem',
+          letterSpacing: '-0.02rem',
           '@mobile': {
             fontSize: '0.9rem',
           },

@@ -26,6 +26,9 @@ const Essay = styled('div', {
     gridTemplateColumns: '1fr 1fr',
     borderRadius: '1em',
     overflow: 'hidden',
+    '@mobile': {
+      gridTemplateColumns: '1fr',
+    },
     '&:hover': {
       cursor: 'pointer',
       '.event-image': {
@@ -45,6 +48,10 @@ const Essay = styled('div', {
       margin: '0 !important',
       letterSpacing: '0',
       padding: '.5em',
+      '@mobile': {
+        fontSize: '$sans2',
+        letterSpacing: '-0.02rem',
+      },
       // background: '$orange',
     },
   },

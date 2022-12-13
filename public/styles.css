@@ -3,7 +3,8 @@ body {
 }
 
 body.content {
-  overflow-y: hidden;
+  /* overflow-y: hidden; */
+  
 }
 
 .markdown>* {
@@ -57,12 +58,18 @@ body.content {
   grid-column: span 2;
 }
 
+
+
 @media(max-width: 670px) {
   .events {
     grid-template-columns: 1fr;
+    padding: .5em;
   }
   .event-single:first-of-type {
     grid-column: span 1;
+  }
+  section {
+    padding: .5em !important;
   }
 }
 
