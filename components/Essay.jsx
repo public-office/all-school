@@ -51,6 +51,7 @@ const Essay = styled('div', {
       '@mobile': {
         fontSize: '$sans2',
         letterSpacing: '-0.02rem',
+        padding: '.5em 0',
       },
       // background: '$orange',
     },

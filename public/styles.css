@@ -33,6 +33,10 @@ body.content {
   color: #d9c1fa !important;
 }
 
+a {
+  color: black;
+}
+
 /*[data-theme="#ff8528"] .c-jjfAVZ {
   background: #ff8528;
 } */
