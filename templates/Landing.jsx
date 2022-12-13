@@ -36,6 +36,7 @@ const Subscribe = styled('div', {
     letterSpacing: '-2px',
   },
   '& .button': {
+    color: 'black',
     a: {
       letterSpacing: '-2px',
       padding: '2px .4em',
@@ -161,7 +162,7 @@ const HeroText = styled('div', {
     marginBottom: '2em',
     marginTop: '-19.5rem',
     '@mobile': {
-      marginTop: '-8rem',
+      marginTop: '-8.5rem',
     },
   },
   '.fade-me': {
@@ -219,6 +220,12 @@ const Main = styled('div', {
   marginTop: '-10em',
   zIndex: 20,
   '@mobile': {
+    minHeight: '80vh',
+  },
+  a: {
+    color: 'black',
+  },
+  '@mobile': {
     marginTop: '-6em',
   },
   '.extra-content': {
@@ -274,6 +281,7 @@ const Main = styled('div', {
       textDecoration: 'underline',
       textDecorationThickness: '0.3rem',
       textUnderlineOffset: '0.5rem',
+      color: 'black',
       '@mobile': {
         textDecorationThickness: '0.15rem',
         textUnderlineOffset: '0.2rem',
@@ -383,6 +391,7 @@ const Footer = styled('div', {
       'div': {
         padding: '0',
         button: {
+          color: 'black',
           '&:hover': {
             color: 'var(--colors-purple)',
           },
@@ -461,6 +470,7 @@ const PopdownOptions = styled('div', {
   borderRadius: '1em',
   boxShadow: '$shadow',
   button: {
+    color: 'black',
     '&:hover': {
       color: '${setup.color}',
     },
@@ -533,6 +543,7 @@ const Program = styled('div', {
   '& .padded': {
     paddingTop: '1.1em',
     button: {
+      color: 'black',
       textDecoration: 'underline',
       textDecorationThickness: '0.3rem',
       textUnderlineOffset: '0.5rem',

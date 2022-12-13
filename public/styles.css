@@ -33,7 +33,7 @@ body.content {
   color: #d9c1fa !important;
 }
 
-a {
+a, button {
   color: black;
 }
 

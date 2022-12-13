@@ -23,6 +23,7 @@ const MainNav = styled('div', {
   },
 
   '.nav-trigger': {
+    color: 'black',
     paddingLeft: '.5rem',
     '&:hover': {
       cursor: 'pointer',

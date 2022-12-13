@@ -1,12 +1,11 @@
 import { styled } from 'stitches.config'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
-import ProgressiveImg from './ProgressiveImg'
+import ProgressiveImg from '../../components/ProgressiveImg'
 import { useEffect } from 'react';
 
 const Essay = styled('div', {
   button: {
-    color: 'black',
     textAlign: 'left',
     textDecoration: 'none',
     span: {
@@ -14,9 +13,6 @@ const Essay = styled('div', {
       fontSize: '$sans2',
       lineHeight: '$sans2',
       marginTop: '1em',
-      '@mobile': {
-        fontSize: '$sans1',
-      },
     },
   },
   '.essays': {
@@ -106,8 +102,7 @@ const Essay = styled('div', {
   },
 })
 
-export function EssayItem({ title, url, author, pdf, text, tagline, image }) {
-
+function essaySingle({ title, url, author, pdf, text, tagline, image }) {
   const [isVisible, setIsVisible] = useState(false)
   const router = useRouter()
   const essayState = (event) => {
@@ -134,7 +129,6 @@ export function EssayItem({ title, url, author, pdf, text, tagline, image }) {
   }, []);
 
   return (
-
     <Essay className='essays'>
       <div className="essay-single" onClick={essayState}>
         {image && <div className="event-image">
@@ -152,6 +146,7 @@ export function EssayItem({ title, url, author, pdf, text, tagline, image }) {
         <iframe src={url}></iframe>
       </div>
     </Essay>
-  
   )
 }
+
+export default essaySingle
