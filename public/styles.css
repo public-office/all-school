@@ -2,6 +2,14 @@ body {
   scroll-behavior: smooth;
 }
 
+body.content {
+  overflow-y: hidden;
+}
+
+.markdown>* {
+  all: revert;
+}
+
 /* [data-theme="#d9c1fa"] a:hover,
 [data-theme="#d9c1fa"] .extra-content_trigger:hover {
   color: #d9c1fa !important;
@@ -59,11 +67,11 @@ body {
 }
 
 blockquote {
-  margin: 1em 0 0 2em;
-  margin-block-start: 0;
+  margin: .75em 2.5em .75em 2em;
+  /* margin-block-start: 0;
   margin-block-end: 0;
   margin-inline-start: 0;
-  margin-inline-end: 0;
+  margin-inline-end: 0; */
 }
 
 blockquote p {
@@ -71,17 +79,17 @@ blockquote p {
   overflow-wrap: normal !important;
 }
 
-blockquote + blockquote {
+/* blockquote + blockquote {
   margin-block-start: -2.5em;
 }
 
 .extra-content blockquote + p {
   margin-block-start: -2.5em;
-}
+} */
 
-.extra-content p {
+/* .extra-content p {
   padding-top: 0 !important;
-}
+} */
 
 #tickets {
   padding-top: 1em;

@@ -1,5 +1,5 @@
-import { styled } from 'stitches.config';
-import { useState } from 'react';
+import { styled } from 'stitches.config'
+import { useState } from 'react'
 import { Link, animateScroll as scroll } from 'react-scroll';
 
 const MainNav = styled('div', {
@@ -46,13 +46,13 @@ export function Nav() {
       <button className="nav-trigger" onClick={menuState}>{isVisible ? 'Close' : 'Menu'}</button>
 
       <nav className={isVisible ? 'show' : ''}>
-        <Link 
+        <Link
           onClick={menuState}
           to="about"
           smooth={true}
           offset={-20}
-          >About</Link>
-        <Link 
+        >About</Link>
+        <Link
           onClick={menuState}
           to="lab"
           smooth={true}

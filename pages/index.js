@@ -46,7 +46,28 @@ export async function getServerSideProps() {
             }
           }
         }
-        venues {
+        essays {
+          data {
+            id
+            attributes {
+              essayTitle
+              essayURL
+              essayAuthor
+              essayTagline
+              essayText
+              mainImage {
+                data {
+                  attributes {
+                    url
+                    alternativeText
+                    caption
+                  }
+                }
+              }
+            }
+          }
+        }
+        venues (pagination: {limit: 10}) {
           data {
             id
             attributes {
@@ -106,6 +127,14 @@ export async function getServerSideProps() {
     }
   })
 
+  const essays = get(data, 'essays.data').map((data) => {
+    return {
+      id: data.id,
+      ...data.attributes,
+      mainImage: get(data, 'attributes.mainImage.data.attributes'),
+    }
+  })
+
   const venues = get(data, 'venues.data').map((data) => {
     return {
       id: data.id,
@@ -136,11 +165,14 @@ export async function getServerSideProps() {
   const items = setups.items.map((item, id) => ({ ...item, id }));
   const setup = items[Math.floor(Math.random() * items.length)];
 
+  console.log(setup, access)
+
   return {
     props: {
       page: {
         access,
         events,
+        essays,
         artists,
         venues,
         marquee,

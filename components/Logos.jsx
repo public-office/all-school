@@ -2,6 +2,7 @@ import { styled } from 'stitches.config'
 
 const LogoWrapper = styled('div', {
   marginTop: '20em',
+  padding: '0 1.5em',
   paddingBottom: '3em',
   display: 'grid',
   gridTemplateColumns: '1fr 1fr',
@@ -12,6 +13,9 @@ const LogoWrapper = styled('div', {
   'p': {
     fontSize: '$sans1',
     letterSpacing: '0',
+  },
+  '.logo-wrapper': {
+    padding: '0 1.5em',
   },
   '.logos': {
     display: 'flex',
@@ -38,7 +42,7 @@ const LogoWrapper = styled('div', {
 
 export function Logos({nextWaveLogos, allSchoolLogos}) {
   return(
-    <LogoWrapper>
+    <LogoWrapper className="logo-wrapper">
       <div>
         <p>Next Wave is generously supported by:</p>
         <div className="logos">

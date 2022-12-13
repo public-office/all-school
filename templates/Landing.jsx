@@ -14,6 +14,7 @@ import { Markdown } from 'components/Markdown'
 import { Nav } from 'components/Nav'
 import { Logos } from 'components/Logos'
 import { EventsList } from 'components/EventsList'
+import { EssayList } from 'components/EssayList'
 import { VenueList } from 'components/VenueList'
 import clsx from 'classnames'
 import { SubscribeForm } from 'components/SubscribeForm'
@@ -57,7 +58,7 @@ const Sticky = styled('div', {
   position: 'fixed',
   right: '1.5em',
   top: '1.5em',
-  zIndex: 2,
+  zIndex: 20,
   '.disc-wrapper': {
     borderRadius: '50%',
     width: '16rem',
@@ -211,12 +212,12 @@ const HeroText = styled('div', {
 
 const Main = styled('div', {
   width: '100vw',
-  minHeight: '110vh',
+  minHeight: '90vh',
   position: 'relative',
   whiteSpace: 'nowrap',
   padding: '.25em $margin $margin',
   marginTop: '-10em',
-  zIndex: 2,
+  zIndex: 20,
   '@mobile': {
     marginTop: '-6em',
   },
@@ -374,6 +375,26 @@ const Footer = styled('div', {
   },
   '.screen-options': {
     marginTop: '6px',
+    'div': {
+      background: 'white',
+      padding: '0',
+      paddingBottom: '1em',
+      borderRadius: '1em',
+      'div': {
+        padding: '0',
+        button: {
+          '&:hover': {
+            color: 'var(--colors-purple)',
+          },
+        },
+      },
+      a: {
+        background: 'white',
+        '&:hover': {
+          color: 'var(--colors-purple)',
+        },
+      },
+    },
     '@mobile': {
       display: 'none',
     },
@@ -388,7 +409,7 @@ const Footer = styled('div', {
       textDecoration: 'none',
       textTransform: 'uppercase',
       fontSize: '$sans1',
-      background: 'white',
+      background: '#f7f7f7',
       padding: '6px 16px',
       borderRadius: '1em',
     },
@@ -455,6 +476,101 @@ const popdownTheme = createTheme({
   colors: {
     bg: theme.colors.highlight.value,
     highlight: theme.colors.bg.value,
+  },
+})
+
+const Program = styled('div', {
+  section: {
+    padding: '1.5em',
+  },
+  '.extra-content': {
+    margin: '1.5em 8em',
+    fontSize: '$sans2',
+    letterSpacing: '0',
+    lineHeight: '$sans2',
+    display: 'block',
+    p: {
+      fontSize: '$sans2',
+      letterSpacing: '0',
+      lineHeight: '$sans2',
+    },
+    '@mobile': {
+      margin: '1em .5em 1em 4em',
+      fontSize: '$sans1',
+      letterSpacing: '0',
+      lineHeight: '$sans1',
+    },
+    '&_trigger': {
+      color: 'black',
+      '&:hover': {
+        cursor: 'pointer',
+      },
+    },
+  },
+  p: {
+    letterSpacing: '-2px',
+    fontSize: '$sans4',
+    lineHeight: '$sans4',
+    margin: '0',
+    maxWidth: '100%',
+    whiteSpace: 'pre-wrap',
+    overflowWrap: 'break-word',
+    '@mobile': {
+      fontSize: '$sans2',
+      lineHeight: '$sans2',
+      letterSpacing: '-1px',
+    },
+    a: {
+      textDecoration: 'underline',
+      textDecorationThickness: '0.3rem',
+      textUnderlineOffset: '0.5rem',
+      '@mobile': {
+        textDecorationThickness: '0.15rem',
+        textUnderlineOffset: '0.2rem',
+      },
+    }
+  },
+  '& .padded': {
+    paddingTop: '1.1em',
+    button: {
+      textDecoration: 'underline',
+      textDecorationThickness: '0.3rem',
+      textUnderlineOffset: '0.5rem',
+      '@mobile': {
+        textDecorationThickness: '0.15rem',
+        textUnderlineOffset: '0.2rem',
+      },
+      '&:hover': {
+        color: '${setup.color}',
+      },
+    },
+    a: {
+      textDecoration: 'underline',
+      textDecorationThickness: '0.25rem',
+      textUnderlineOffset: '0.5rem',
+    },
+  },
+  '.accordion': {
+    display: 'flex',
+    '&__panel': {
+      padding: '1em 2em',
+      maxWidth: '60%',
+      p: {
+        fontSize: '$sans2',
+        letterSpacing: '0',
+      },
+    },
+  },
+  span: {
+    '&.purple': {
+      color: '$highlight',
+    },
+    '&.green': {
+      color: '$green',
+    },
+    '&.orange': {
+      color: '$orange',
+    },
   },
 })
 
@@ -532,7 +648,7 @@ export function Landing({ page = {} }) {
 
       <SubscribeModal
         show={showSubscribeModal}
-        onClose={() => router.replace('/', undefined, { scroll: false }) }
+        onClose={() => router.replace('/', undefined, { scroll: false })}
       />
 
       <Header>
@@ -554,7 +670,7 @@ export function Landing({ page = {} }) {
       <HeroText>
         <div className="intro">
           <div></div>
-          <div className="color-block" style={{background: `${page.setup.color}`}}></div>
+          <div className="color-block" style={{ background: `${page.setup.color}` }}></div>
           <div className="image-one fade-me" style={{ backgroundImage: 'url(' + page.setup.img1 + ')' }}></div>
           <div className="image-two fade-me" style={{ backgroundImage: 'url(' + page.setup.img2 + ')' }}></div>
         </div>
@@ -565,14 +681,18 @@ export function Landing({ page = {} }) {
           <Markdown>{page.information}</Markdown>
         </div>
 
-        <EventsList events={page.events} />
-        <VenueList events={page.venues} className="venues"/>
+      </Main>
 
-        <Logos 
-          nextWaveLogos={page.nextWaveLogos} 
+      <Program>
+        <EssayList essays={page.essays} />
+        <EventsList events={page.events} />
+
+        <Logos
+          nextWaveLogos={page.nextWaveLogos}
           allSchoolLogos={page.allSchoolLogos}
         ></Logos>
-      </Main>
+      </Program>
+      
 
       <Sticky>
         <div className="disc-wrapper" style={{ background: `${page.setup.color}` }}>
@@ -599,9 +719,6 @@ export function Landing({ page = {} }) {
               <Link href="/access" scroll={false}>
                 <a className="access">Access</a>
               </Link>
-              <Link href="/auslan" scroll={false}>
-                <a className="auslan">Auslan</a>
-              </Link>
               <Popdown
                 className="screen-options"
                 label="Screen options"
@@ -619,10 +736,10 @@ export function Landing({ page = {} }) {
               <a className="social" target="_blank" rel="noreferrer" href={page.facebook}>
                 FB
               </a>
-              <a className="social" target="_blank" rel="noreferrer"  href={page.instagram}>
+              <a className="social" target="_blank" rel="noreferrer" href={page.instagram}>
                 IG
               </a>
-              <a className="social" target="_blank" rel="noreferrer"  href={page.twitter}>
+              <a className="social" target="_blank" rel="noreferrer" href={page.twitter}>
                 TW
               </a>
               <Link href="/subscribe" scroll={false}>

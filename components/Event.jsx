@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { styled } from 'stitches.config'
 import ProgressiveImg from './ProgressiveImg'
 import { Markdown } from 'components/Markdown'
@@ -6,8 +6,28 @@ import smartypants from 'smartypants';
 
 const Event = styled('div', {
   '.event': {
+    '#lab': {
+      '.color': {
+        fontSize: '$sans4',
+      },
+    },
+    '.extra-content': {
+      margin: '1em 2.5em',
+      '&_trigger': {
+        fontSize: '$sans4',
+      },
+      p: {
+        fontSize: '$sans2',
+        lineHeight: '$sans2',
+        letterSpacing: '-0.04rem',
+        '& + p': {
+          paddingTop: '1em',
+        },
+      },
+    },
     p: {
       display: 'block',
+      fontSize: '$sans4',
       '& + p': {
         paddingTop: '1em',
       },
@@ -56,6 +76,11 @@ const Event = styled('div', {
           textUnderlineOffset: '0.35rem',
         },
       },
+      '#lab': {
+        '.color': {
+          fontSize: '$sans2',
+        },
+      },
       '.event-image': {
         maxWidth: '100%',
         margin: '0 auto',
@@ -68,6 +93,11 @@ const Event = styled('div', {
       '.extra-content': {
         display: 'block',
         margin: '1em 2em 1em 4em',
+        '&_trigger': {
+          fontSize: '$sans2',
+          lineHeight: '$sans2',
+          display: 'inline',
+        },
         '@mobile': {
           margin: '1em 1em 1em 2em',
         },
@@ -79,7 +109,7 @@ const Event = styled('div', {
             fontSize: '0.9rem',
           },
           '& + p': {
-            marginTop: '-.5em',
+            // marginTop: '-.5em',
             '@mobile': {
               paddingTop: '0',
             },
@@ -89,7 +119,7 @@ const Event = styled('div', {
     },
     '&:first-of-type': {
       '&:after': {
-        content: 'Program',
+        content: 'Past events',
         display: 'block',
         textAlign: 'center',
         fontSize: '$sans4',
@@ -122,6 +152,15 @@ export function EventItem({ title, image, shortDesc, longDesc, eventUrl, eventPd
     setIsShown((isShown) => !isShown)
   }
 
+  const ref = useRef(null);
+  useEffect(() => {
+    const triggers = ref.current.className
+    
+    if (triggers) {
+      console.log(triggers.length);
+    }
+  }, []);
+
   return (
     <Event className="event-single">
       <article>
@@ -134,22 +173,22 @@ export function EventItem({ title, image, shortDesc, longDesc, eventUrl, eventPd
           />
         </div>}
         <div className="event">
-          <p id="lab">
-            <span className="purple">L</span>
-            <span className="orange">A</span>
-            <span className="green">B</span>
-            <span className="purple">,</span> <span className="orange">2</span>
-            <span className="green">8</span>
-            <span className="purple">–</span>
-            <span className="orange">2</span>
-            <span className="green">9</span> <span className="purple">O</span>
-            <span className="orange">c</span>
-            <span className="green">t</span>
-            <span className="purple">.</span>
+          <div id="lab">
+            <span className="color purple">L</span>
+            <span className="color orange">A</span>
+            <span className="color green">B</span>
+            <span className="color purple">,</span> <span className="color orange">2</span>
+            <span className="color green">8</span>
+            <span className="color purple">–</span>
+            <span className="color orange">2</span>
+            <span className="color green">9</span> <span className="color purple">O</span>
+            <span className="color orange">c</span>
+            <span className="color green">t</span>
+            <span className="color purple">.</span>
             <br />
             <span className="event-title"><Markdown>{title}</Markdown></span>
-            {shortDesc}{' '}
-            <span className="extra-content_trigger" onClick={handleClick}>
+            <Markdown>{shortDesc}</Markdown>
+            <span ref={ref} className="extra-content_trigger" onClick={handleClick}>
               (read more)
             </span>
             {isShown && (
@@ -157,8 +196,8 @@ export function EventItem({ title, image, shortDesc, longDesc, eventUrl, eventPd
                 <Markdown>{longDesc}</Markdown>
               </span>
             )}
-          </p>
-          <p className="padded">
+          </div>
+          {/* <p className="padded">
             Get tickets&nbsp;
             <a id="tickets" href={eventUrl} target="_blank" rel="noreferrer">
               here
@@ -166,7 +205,7 @@ export function EventItem({ title, image, shortDesc, longDesc, eventUrl, eventPd
             .<br/>
             <span className="download">Download <a href={eventPdf} download={eventPdf} target="_blank" rel="noreferrer">program</a>.</span>
             <span>{location}</span>
-          </p>
+          </p> */}
         </div>
       </article>
     </Event>
