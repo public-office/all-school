@@ -55,15 +55,6 @@ export async function getServerSideProps() {
               essayAuthor
               essayTagline
               essayText
-              mainImage {
-                data {
-                  attributes {
-                    url
-                    alternativeText
-                    caption
-                  }
-                }
-              }
             }
           }
         }
@@ -131,7 +122,6 @@ export async function getServerSideProps() {
     return {
       id: data.id,
       ...data.attributes,
-      mainImage: get(data, 'attributes.mainImage.data.attributes'),
     }
   })
 
