@@ -6,6 +6,7 @@ import { useScreenOptions } from 'hooks/useScreenOptions'
 import { usePlainStyle } from 'hooks/usePlainStyle'
 import { ApolloProvider } from '@apollo/client'
 import { client } from 'lib/strapi'
+import { Analytics } from '@vercel/analytics/react';
 import '../public/styles.css'
 
 export default function App({ Component, pageProps }) {
@@ -19,6 +20,7 @@ export default function App({ Component, pageProps }) {
     <ScreenOptionsContext.Provider value={{ screenOptions, setScreenOption }}>
       <Layout>
         <Component {...pageProps} />
+        <Analytics />
       </Layout>
     </ScreenOptionsContext.Provider>
 </ApolloProvider>
