@@ -17,12 +17,12 @@ export default function App({ Component, pageProps }) {
 
   return (
     <ApolloProvider client={client}>
-    <ScreenOptionsContext.Provider value={{ screenOptions, setScreenOption }}>
-      <Layout>
-        <Component {...pageProps} />
-        <Analytics />
-      </Layout>
-    </ScreenOptionsContext.Provider>
-</ApolloProvider>
+      <ScreenOptionsContext.Provider value={{ screenOptions, setScreenOption }}>
+        <Layout>
+          <Component {...pageProps} />
+          <Analytics />
+        </Layout>
+      </ScreenOptionsContext.Provider>
+    </ApolloProvider>
   )
 }

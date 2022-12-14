@@ -1,23 +1,22 @@
 import { EssayItem } from './Essay'
 
-
-
 export function EssayList({ essays }) {
-
   return (
     <section>
-      {essays && essays.map(essay => (
-        <EssayItem
-          key={essay.id}
-          title={essay.essayTitle}
-          url={essay.essayURL}
-          image={essay.mainImage}
-          author={essay.essayAuthor}
-          tagline={essay.essayTagline}
-          pdf={essay.essayPDF}
-          text={essay.essayText}
-        />
-      ))}
+      {essays &&
+        essays.map((essay) => (
+          <EssayItem
+            key={essay.id}
+            id={essay.id}
+            title={essay.essayTitle}
+            url={essay.essayURL}
+            image={essay.mainImage}
+            author={essay.essayAuthor}
+            tagline={essay.essayTagline}
+            pdf={essay.essayPDF}
+            text={essay.essayText}
+          />
+        ))}
     </section>
-  );
+  )
 }

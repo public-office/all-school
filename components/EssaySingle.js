@@ -1,7 +1,7 @@
 import { styled } from 'stitches.config'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
-import ProgressiveImg from '../../components/ProgressiveImg'
+import ProgressiveImg from 'components/ProgressiveImg'
 import { useEffect } from 'react';
 
 const Essay = styled('div', {
@@ -62,11 +62,13 @@ const Essay = styled('div', {
     top: '0',
     right: '0',
     width: '80%',
-    height: '100vh',
+    height: '100%',
     padding: '1em',
     overflowY: 'auto',
+    display: 'flex',
+    flexDirection: 'column',
     boxShadow: '5px 5px 15px 5px rgba(0, 0, 0, 0.25)',
-    zIndex: '30',
+    zIndex: '300',
     transition: 'transform .5s ease-in-out',
     '@mobile': {
       width: '100%',
@@ -92,7 +94,7 @@ const Essay = styled('div', {
     },
     iframe: {
       width: '100%',
-      height: '100vh',
+      height: '100%',
       position: 'relative',
       zIndex: '40',
     },
@@ -102,35 +104,10 @@ const Essay = styled('div', {
   },
 })
 
-function EssaySingle({ title, url, author, pdf, text, tagline, image }) {
-  const [isVisible, setIsVisible] = useState(false)
-  const router = useRouter()
-  const essayState = (event) => {
-    setIsVisible((isVisible) => !isVisible)
-    window.history.pushState('data', 'Title', 'essays/tidal');
-  }
-
-  const removeState = (event) => {
-    setIsVisible((isVisible) => !isVisible)
-    window.history.pushState('data', 'Title', '/');
-  }
-
-  useEffect(() => {
-    const handleEsc = (event) => {
-      if (event.keyCode === 27) {
-        setIsVisible((isVisible) => !isVisible)
-      }
-    };
-    window.addEventListener('keydown', handleEsc);
-
-    return () => {
-      window.removeEventListener('keydown', handleEsc);
-    };
-  }, []);
-
-  return (
+export function EssaySingle({ title, url, author, pdf, text, tagline, image, onClose, show }) {
+  return show ? (
     <Essay className='essays'>
-      <div className="essay-single" onClick={essayState}>
+      <div className="essay-single">
         {image && <div className="event-image">
           <ProgressiveImg
             key={image.url}
@@ -141,12 +118,10 @@ function EssaySingle({ title, url, author, pdf, text, tagline, image }) {
         </div>}
         <p style={{ marginTop: '1em' }}><button>{title}. <span>{tagline}</span></button></p>
       </div>
-      <div className={'essay' + (isVisible ? ' visible' : '')}>
-        <h2><span>{title}</span><span>{tagline}</span></h2> <span className="essay_close" onClick={removeState}>(close)</span>
+      <div className="essay visible">
+        <h2><span>{title}</span><span>{tagline}</span></h2> <span className="essay_close" onClick={onClose}>(close)</span>
         <iframe src={url}></iframe>
       </div>
     </Essay>
-  )
+  ) : null
 }
-
-export default EssaySingle

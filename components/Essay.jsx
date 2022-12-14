@@ -1,8 +1,7 @@
 import { styled } from 'stitches.config'
-import { useState } from 'react'
-import { useRouter } from 'next/router'
 import ProgressiveImg from './ProgressiveImg'
-import { useEffect } from 'react';
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 const Essay = styled('div', {
   button: {
@@ -40,7 +39,7 @@ const Essay = styled('div', {
         img: {
           filter: 'grayscale(1)',
           mixBlendMode: 'multiply',
-        }
+        },
       },
       '& p': {
         background: '$purple',
@@ -105,52 +104,40 @@ const Essay = styled('div', {
   },
 })
 
-export function EssayItem({ title, url, author, pdf, text, tagline, image }) {
-
-  const [isVisible, setIsVisible] = useState(false)
+export function EssayItem({ id, title, url, author, pdf, text, tagline, image }) {
   const router = useRouter()
-  const essayState = (event) => {
-    setIsVisible((isVisible) => !isVisible)
-    window.history.pushState('data', 'Title', 'essays/tidal');
-  }
-
-  const removeState = (event) => {
-    setIsVisible((isVisible) => !isVisible)
-    window.history.pushState('data', 'Title', '/');
-  }
-
-  useEffect(() => {
-    const handleEsc = (event) => {
-      if (event.keyCode === 27) {
-        setIsVisible((isVisible) => !isVisible)
-      }
-    };
-    window.addEventListener('keydown', handleEsc);
-
-    return () => {
-      window.removeEventListener('keydown', handleEsc);
-    };
-  }, []);
-
+  const isVisible = router.query.slug === id
   return (
-
-    <Essay className='essays'>
-      <div className="essay-single" onClick={essayState}>
-        {image && <div className="event-image">
-          <ProgressiveImg
-            key={image.url}
-            src={image.url}
-            placeholderSrc={image.url}
-            alt={image.alternativeText}
-          />
-        </div>}
-        <p style={{ marginTop: '1em' }}><button>{title}. <span>{tagline}</span></button></p>
-      </div>
-      <div className={'essay' + (isVisible ? ' visible' : '')}>
-        <h2><span>{title}</span><span>{tagline}</span></h2> <span className="essay_close" onClick={removeState}>(close)</span>
-        <iframe src={url}></iframe>
-      </div>
-    </Essay>
-  
+    <Link href={`/essays/${id}`} scroll={false}>
+      <Essay className="essays">
+        <div className="essay-single">
+          {image && (
+            <div className="event-image">
+              <ProgressiveImg
+                key={image.url}
+                src={image.url}
+                placeholderSrc={image.url}
+                alt={image.alternativeText}
+              />
+            </div>
+          )}
+          <p style={{ marginTop: '1em' }}>
+            <button>
+              {title}. <span>{tagline}</span>
+            </button>
+          </p>
+        </div>
+        <div className={'essay' + (isVisible ? ' visible' : '')}>
+          <h2>
+            <span>{title}</span>
+            <span>{tagline}</span>
+          </h2>{' '}
+          <span className="essay_close" onClick={() => router.replace('/')}>
+            (close)
+          </span>
+          <iframe src={url}></iframe>
+        </div>
+      </Essay>
+    </Link>
   )
 }

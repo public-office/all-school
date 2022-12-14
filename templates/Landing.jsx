@@ -18,6 +18,7 @@ import { EssayList } from 'components/EssayList'
 import { VenueList } from 'components/VenueList'
 import clsx from 'classnames'
 import { SubscribeForm } from 'components/SubscribeForm'
+import { EssaySingle } from 'components/EssaySingle'
 
 const Page = styled('div', {
   display: 'flex',
@@ -273,7 +274,7 @@ const Main = styled('div', {
         textDecorationThickness: '0.15rem',
         textUnderlineOffset: '0.2rem',
       },
-    }
+    },
   },
   '& .padded': {
     paddingTop: '1.1em',
@@ -372,7 +373,7 @@ const Footer = styled('div', {
       background: 'white',
     },
   },
-  'div': {
+  div: {
     p: {
       fontSize: '$sans2',
     },
@@ -383,12 +384,12 @@ const Footer = styled('div', {
   },
   '.screen-options': {
     marginTop: '6px',
-    'div': {
+    div: {
       background: 'white',
       padding: '0',
       paddingBottom: '1em',
       borderRadius: '1em',
-      'div': {
+      div: {
         padding: '0',
         button: {
           color: 'black',
@@ -538,7 +539,7 @@ const Program = styled('div', {
         textDecorationThickness: '0.15rem',
         textUnderlineOffset: '0.2rem',
       },
-    }
+    },
   },
   '& .padded': {
     paddingTop: '1.1em',
@@ -637,7 +638,7 @@ export function Landing({ page = {} }) {
   //   setIsExpanded((isExpanded) => !isExpanded)
   // }
 
-  console.log(page.setup.color);
+  console.log(page.setup.color)
 
   const showAuslanPane = ['auslan', 'access'].includes(query.slug)
   const showSubscribeModal = query.slug === 'subscribe'
@@ -681,9 +682,18 @@ export function Landing({ page = {} }) {
       <HeroText>
         <div className="intro">
           <div></div>
-          <div className="color-block" style={{ background: `${page.setup.color}` }}></div>
-          <div className="image-one fade-me" style={{ backgroundImage: 'url(' + page.setup.img1 + ')' }}></div>
-          <div className="image-two fade-me" style={{ backgroundImage: 'url(' + page.setup.img2 + ')' }}></div>
+          <div
+            className="color-block"
+            style={{ background: `${page.setup.color}` }}
+          ></div>
+          <div
+            className="image-one fade-me"
+            style={{ backgroundImage: 'url(' + page.setup.img1 + ')' }}
+          ></div>
+          <div
+            className="image-two fade-me"
+            style={{ backgroundImage: 'url(' + page.setup.img2 + ')' }}
+          ></div>
         </div>
       </HeroText>
 
@@ -691,7 +701,6 @@ export function Landing({ page = {} }) {
         <div id="about">
           <Markdown>{page.information}</Markdown>
         </div>
-
       </Main>
 
       <Program>
@@ -703,7 +712,6 @@ export function Landing({ page = {} }) {
           allSchoolLogos={page.allSchoolLogos}
         ></Logos>
       </Program>
-      
 
       <Sticky>
         <div className="disc-wrapper" style={{ background: `${page.setup.color}` }}>
@@ -717,6 +725,22 @@ export function Landing({ page = {} }) {
       >
         <Markdown>{page.access}</Markdown>
       </Pane>
+
+      {page.essays.map((essay) => (
+        <EssaySingle
+          show={router.asPath === `/essays/${essay.id}`}
+          key={essay.id}
+          id={essay.id}
+          title={essay.essayTitle}
+          url={essay.essayURL}
+          image={essay.mainImage}
+          author={essay.essayAuthor}
+          tagline={essay.essayTagline}
+          pdf={essay.essayPDF}
+          text={essay.essayText}
+          onClose={() => router.replace('/', undefined, { scroll: false })}
+        />
+      ))}
 
       <Chatbot
         onClose={() => router.replace('/', undefined, { scroll: false })}
@@ -747,7 +771,12 @@ export function Landing({ page = {} }) {
               <a className="social" target="_blank" rel="noreferrer" href={page.facebook}>
                 FB
               </a>
-              <a className="social" target="_blank" rel="noreferrer" href={page.instagram}>
+              <a
+                className="social"
+                target="_blank"
+                rel="noreferrer"
+                href={page.instagram}
+              >
                 IG
               </a>
               <a className="social" target="_blank" rel="noreferrer" href={page.twitter}>
