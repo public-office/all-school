@@ -1,93 +1,33 @@
-import React from 'react'
-import { Pane } from 'components/Pane'
-import { SubscribeModal } from 'components/SubscribeModal'
-import { theme, createTheme, styled } from 'stitches.config'
-import FastMarquee from 'react-fast-marquee'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { Chatbot } from 'components/Chatbot'
-import { useState } from 'react'
-import { useScreenOptionsContext } from 'hooks/useScreenOptions'
 import { Template } from 'components/Template'
-import { Markdown } from 'components/Markdown'
-import { Nav } from 'components/Nav'
-import { Logos } from 'components/Logos'
 import { SiteHeader } from 'components/Header'
-import { Tickets } from 'components/Tickets'
+import { Pane } from 'components/Pane'
+import { Logos } from 'components/Logos'
+import { SubscribeModal } from 'components/SubscribeModal'
+import { EssaySingle } from 'components/EssaySingle'
 import { EssayList } from 'components/EssayList'
 import { VideoList } from 'components/VideoList'
-import { ResourceList } from 'components/ResourceList'
+import { Markdown } from 'components/Markdown'
+import { Chatbot } from 'components/Chatbot'
 import { FloatingNav } from 'components/FloatingNav'
-import { VideoHead } from 'components/VideoHead'
-import clsx from 'classnames'
-import { EssaySingle } from 'components/EssaySingle'
+import { useState } from 'react'
+import Link from 'next/link'
+import { useScreenOptionsContext } from 'hooks/useScreenOptions'
+import { useRouter } from 'next/router'
+import { theme, createTheme, styled } from 'stitches.config'
+import FastMarquee from 'react-fast-marquee'
+import { client } from 'lib/strapi'
+import { gql } from '@apollo/client'
+import get from 'lodash/get'
 
-const Page = styled('div', {
-  display: 'flex',
-  flexDirection: 'column',
-  minHeight: '100vh',
-  position: 'relative',
-})
 
-const Subscribe = styled('div', {
-  fontSize: '$sans5',
-  position: 'absolute',
-  left: '50%',
-  transform: 'translateX(-50%)',
-  padding: '2em $margin 1em',
-  p: {
-    letterSpacing: '-2px',
-  },
-  '& .button': {
-    color: 'black',
-    a: {
-      letterSpacing: '-2px',
-      padding: '2px .4em',
-      textDecoration: 'none',
-      border: '3px solid',
-      borderRadius: '2em',
-      position: 'sticky',
-      top: '1em',
-      '@mobile': {
-        border: '0.15rem solid',
-        letterSpacing: '-1px',
-      },
-    },
-  },
-})
-
-const marqueeStyle = {
-  fontFamily: '$serif',
-  fontSize: '$serif1',
-  paddingTop: '$1',
-  letterSpacing: '0.025rem',
-  textTransform: 'uppercase',
-  zIndex: '100',
-  '@mobile': {
-    fontSize: '$serif2',
-    paddingTop: '2rem',
-  },
-}
-
-const Marquee = styled(FastMarquee, {
-  ...marqueeStyle,
-  whiteSpace: 'nowrap',
-  overflow: 'hidden',
-})
-
-const StaticMarquee = styled('div', {
-  ...marqueeStyle,
-  paddingLeft: '$margin',
-  marginBottom: '$1',
-})
 
 const Main = styled('div', {
   width: '100vw',
-  minHeight: '80vh',
+  minHeight: '90vh',
   position: 'relative',
   whiteSpace: 'nowrap',
   padding: '.25em $margin $margin',
-  // marginTop: '-10em',
+  marginTop: '-10em',
   zIndex: 20,
   '@mobile': {
     minHeight: '80vh',
@@ -124,8 +64,8 @@ const Main = styled('div', {
   },
   p: {
     letterSpacing: '-2px',
-    fontSize: '$sans5',
-    lineHeight: 1,
+    fontSize: '$sans4',
+    lineHeight: '$sans4',
     margin: '0',
     maxWidth: '100%',
     whiteSpace: 'pre-wrap',
@@ -144,22 +84,6 @@ const Main = styled('div', {
         textUnderlineOffset: '0.2rem',
       },
     },
-  },
-  '.about': {
-    p: {
-      a: {
-        textDecoration: 'underline',
-        textDecorationThickness: '0.3rem',
-        textUnderlineOffset: '0.5rem',
-        '@mobile': {
-          textDecorationThickness: '0.15rem',
-          textUnderlineOffset: '0.2rem',
-        },
-      },
-    },
-  },
-  '#about': {
-    paddingTop: '3em',
   },
   '& .padded': {
     paddingTop: '1.1em',
@@ -206,11 +130,109 @@ const Main = styled('div', {
   },
 })
 
-const Networked = styled('figure', {
-  maxWidth: '25%',
-  margin: '0 auto',
-  paddingTop: '8em',
-  paddingBottom: '8em',
+const Program = styled('div', {
+  paddingTop: '2.5em',
+  section: {
+    padding: '1em',
+  },
+  h2: {
+    fontSize: '$sans5',
+    textAlign: 'center',
+    position: 'relative',
+    '.breadcrumb': {
+      display: 'none',
+    },
+  },
+  '.extra-content': {
+    margin: '1.5em 8em',
+    fontSize: '$sans2',
+    letterSpacing: '0',
+    lineHeight: '$sans2',
+    display: 'block',
+    p: {
+      fontSize: '$sans2',
+      letterSpacing: '0',
+      lineHeight: '$sans2',
+    },
+    '@mobile': {
+      margin: '1em .5em 1em 4em',
+      fontSize: '$sans1',
+      letterSpacing: '0',
+      lineHeight: '$sans1',
+    },
+    '&_trigger': {
+      color: 'black',
+      '&:hover': {
+        cursor: 'pointer',
+      },
+    },
+  },
+  p: {
+    letterSpacing: '-2px',
+    fontSize: '$sans4',
+    lineHeight: '$sans4',
+    margin: '0',
+    maxWidth: '100%',
+    whiteSpace: 'pre-wrap',
+    overflowWrap: 'break-word',
+    '@mobile': {
+      fontSize: '$sans2',
+      lineHeight: '$sans2',
+      letterSpacing: '-1px',
+    },
+    a: {
+      textDecoration: 'underline',
+      textDecorationThickness: '0.3rem',
+      textUnderlineOffset: '0.5rem',
+      '@mobile': {
+        textDecorationThickness: '0.15rem',
+        textUnderlineOffset: '0.2rem',
+      },
+    },
+  },
+  '& .padded': {
+    paddingTop: '1.1em',
+    button: {
+      color: 'black',
+      textDecoration: 'underline',
+      textDecorationThickness: '0.3rem',
+      textUnderlineOffset: '0.5rem',
+      '@mobile': {
+        textDecorationThickness: '0.15rem',
+        textUnderlineOffset: '0.2rem',
+      },
+      '&:hover': {
+        color: '${setup.color}',
+      },
+    },
+    a: {
+      textDecoration: 'underline',
+      textDecorationThickness: '0.25rem',
+      textUnderlineOffset: '0.5rem',
+    },
+  },
+  '.accordion': {
+    display: 'flex',
+    '&__panel': {
+      padding: '1em 2em',
+      maxWidth: '60%',
+      p: {
+        fontSize: '$sans2',
+        letterSpacing: '0',
+      },
+    },
+  },
+  span: {
+    '&.purple': {
+      color: '$highlight',
+    },
+    '&.green': {
+      color: '$green',
+    },
+    '&.orange': {
+      color: '$orange',
+    },
+  },
 })
 
 const Footer = styled('div', {
@@ -276,11 +298,10 @@ const Footer = styled('div', {
     },
     a: {
       textDecoration: 'none',
-      // textTransform: 'uppercase',
+      textTransform: 'uppercase',
       fontSize: '$sans1',
       background: '#f7f7f7',
       padding: '6px 16px',
-      letterSpacing: '-0.01em',
       borderRadius: '1em',
     },
     '&.socials a:last-child': {
@@ -325,7 +346,7 @@ const PopdownOptions = styled('div', {
   bottom: 'calc(0rem - $1)',
   left: '50%',
   transform: 'translateX(-50%)',
-  background: '$yellow',
+  background: '${setup.color}',
   padding: '$1 3rem',
   textAlign: 'center',
   borderRadius: '1em',
@@ -333,7 +354,7 @@ const PopdownOptions = styled('div', {
   button: {
     color: 'black',
     '&:hover': {
-      color: '$yellow',
+      color: '${setup.color}',
     },
     '&.selected': {
       '&:after': {
@@ -345,115 +366,8 @@ const PopdownOptions = styled('div', {
 
 const popdownTheme = createTheme({
   colors: {
-    bg: '$yellow',
-    highlight: '$yellow',
-  },
-})
-
-const Program = styled('div', {
-  position: 'relative',
-  marginTop: '-5em',
-  '@mobile': {
-    marginTop: '-22.5em',
-  },
-  section: {
-    padding: '1.5em',
-  },
-  h2: {
-    fontSize: '$sans5',
-    textAlign: 'center',
-    padding: '1.5em 0 0',
-    position: 'relative',
-  },
-  '.extra-content': {
-    margin: '1.5em 8em',
-    fontSize: '$sans2',
-    letterSpacing: '0',
-    lineHeight: '$sans2',
-    display: 'block',
-    p: {
-      fontSize: '$sans2',
-      letterSpacing: '0',
-      lineHeight: '$sans2',
-    },
-    '@mobile': {
-      margin: '1em .5em 1em 4em',
-      fontSize: '$sans1',
-      letterSpacing: '0',
-      lineHeight: '$sans1',
-    },
-    '&_trigger': {
-      color: 'black',
-      '&:hover': {
-        cursor: 'pointer',
-      },
-    },
-  },
-  p: {
-    letterSpacing: '-2px',
-    fontSize: '$sans5',
-    lineHeight: '$sans5',
-    margin: '0',
-    maxWidth: '100%',
-    whiteSpace: 'pre-wrap',
-    overflowWrap: 'break-word',
-    '@mobile': {
-      fontSize: '$sans2',
-      lineHeight: '$sans2',
-      letterSpacing: '-1px',
-    },
-    a: {
-      textDecoration: 'underline',
-      textDecorationThickness: '0.3rem',
-      textUnderlineOffset: '0.5rem',
-      '@mobile': {
-        textDecorationThickness: '0.15rem',
-        textUnderlineOffset: '0.2rem',
-      },
-    },
-  },
-  '& .padded': {
-    paddingTop: '1.1em',
-    button: {
-      color: 'black',
-      textDecoration: 'underline',
-      textDecorationThickness: '0.3rem',
-      textUnderlineOffset: '0.5rem',
-      '@mobile': {
-        textDecorationThickness: '0.15rem',
-        textUnderlineOffset: '0.2rem',
-      },
-      '&:hover': {
-        color: '${setup.color}',
-      },
-    },
-    a: {
-      textDecoration: 'underline',
-      textDecorationThickness: '0.25rem',
-      textUnderlineOffset: '0.5rem',
-    },
-  },
-  '.accordion': {
-    display: 'flex',
-    '&__panel': {
-      padding: '1em 2em',
-      maxWidth: '60%',
-      p: {
-        fontSize: '$sans2',
-        letterSpacing: '0',
-      },
-    },
-  },
-  span: {
-    '&.purple': {
-      color: '$highlight',
-    },
-    '&.green': {
-      color: '$green',
-    },
-    '&.orange': {
-      color: '$orange',
-    },
+    bg: theme.colors.highlight.value,
+    highlight: theme.colors.bg.value,
   },
 })
 
@@ -500,13 +414,41 @@ function Popdown({ label, options, className, value, onChange, paneTheme }) {
   )
 }
 
-export function Landing({ page = {} }) {
+const marqueeStyle = {
+  fontFamily: '$serif',
+  fontSize: '$serif1',
+  paddingTop: '$1',
+  letterSpacing: '0.025rem',
+  textTransform: 'uppercase',
+  zIndex: '100',
+  '@mobile': {
+    fontSize: '0.8rem',
+    paddingTop: '0.5rem',
+  },
+}
+
+const Marquee = styled(FastMarquee, {
+  ...marqueeStyle,
+  whiteSpace: 'nowrap',
+  overflow: 'hidden',
+})
+
+const StaticMarquee = styled('div', {
+  ...marqueeStyle,
+  paddingLeft: '$margin',
+  marginBottom: '$1',
+})
+
+export default function Commissions({ page = {} }) {
+
   const router = useRouter()
   const { query } = router
 
-  const showAuslanPane = ['auslan', 'access'].includes(query.slug?.toString())
-  const showSubscribeModal = query.slug?.toString() === 'subscribe'
-  const showChatbot = query.slug?.toString() === 'chatbot'
+  const showAuslanPane = ['auslan', 'access'].includes(query.slug)
+  const showSubscribeModal = query.slug === 'subscribe'
+  const showChatbot = query.slug === 'chatbot'
+
+  console.log(page.essays)
 
   const {
     screenOptions,
@@ -515,43 +457,20 @@ export function Landing({ page = {} }) {
   } = useScreenOptionsContext()
 
   return (
-    <Template data-theme="rgb(255,255,0)">
+    <Template>
       {motion ? (
         <Marquee gradient={false}>{page.marquee}</Marquee>
       ) : (
         <StaticMarquee>{page.marquee}</StaticMarquee>
       )}
 
-      <SubscribeModal
-        show={showSubscribeModal}
-        onClose={() => router.replace('/', undefined, { scroll: false })}
-      />
-
       <FloatingNav />
-      <SiteHeader />
-      <VideoHead />
-    
-      <Main>
-        <div id="about">
-          <Markdown>{page.information}</Markdown>
-        </div>
-      </Main>
-
-      <Tickets />
+      <SiteHeader />      
 
       <Program>
-        <VideoList videos={page.videos} />
+        
         <EssayList essays={page.essays} />
-        <ResourceList resources={page.resources} />
-
-        {page.image && <div className="event-image">
-          <ProgressiveImg
-            key={page.image.url}
-            src={page.image.url}
-            placeholderSrc={page.image.url}
-            alt={page.image.alternativeText}
-          />
-        </div>}
+        <VideoList videos={page.videos} />
 
         <Logos
           nextWaveLogos={page.nextWaveLogos}
@@ -649,4 +568,150 @@ export function Landing({ page = {} }) {
       </Footer>
     </Template>
   )
+}
+
+export async function getServerSideProps() {
+  const { data } = await client.query({
+    query: gql`
+      query {
+        artists (pagination: {limit: 100}) {
+          data {
+            id
+            attributes {
+              firstName
+              lastName
+              website
+              biography
+            }
+          }
+        }
+        essays {
+          data {
+            id
+            attributes {
+              essayTitle
+              essayURL
+              essayAuthor
+              essayTagline
+              essayText
+              mainImage {
+                data {
+                  attributes {
+                    url
+                    alternativeText
+                    caption
+                  }
+                }
+              }
+            }
+          }
+        }
+        videos (pagination: {limit: 100}) {
+          data {
+            id
+            attributes {
+              title
+              homepage
+              context
+              artists {
+                data {
+                  attributes {
+                    firstName
+              			lastName
+                  }
+                }
+              }
+              video {
+                data {
+                  attributes {
+                    url
+                  }
+                }
+              }
+              placeholder {
+                data {
+                  attributes {
+                    url
+                  }
+                }
+              }
+            }
+          }
+        }
+        information {
+          data {
+            attributes {
+              information
+              marquee
+              access
+              instagram
+              facebook
+              twitter
+              nextWaveLogos {
+                data {
+                  attributes {
+                    url
+                    alternativeText
+                    caption
+                  }
+                }
+              }
+              allSchoolLogos {
+                data {
+                  attributes {
+                    url
+                    alternativeText
+                    caption
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    `,
+  })
+  const { information, marquee, access, instagram, facebook, twitter, nextWaveLogos, allSchoolLogos } = get(data, 'information.data.attributes')
+
+  const artists = get(data, 'artists.data').map((data) => {
+    return {
+      id: data.id,
+      ...data.attributes,
+    }
+  })
+
+  const videos = get(data, 'videos.data').map((data) => {
+    return {
+      id: data.id,
+      ...data.attributes,
+      video: get(data, 'attributes.video.data.attributes'),
+      placeholder: get(data, 'attributes.placeholder.data.attributes'),
+    }
+  })
+
+  const essays = get(data, 'essays.data').map((data) => {
+    return {
+      id: data.id,
+      ...data.attributes,
+      mainImage: get(data, 'attributes.mainImage.data.attributes'),
+    }
+  })
+
+  return {
+    props: {
+      page: {
+        access,
+        essays,
+        artists,
+        marquee,
+        information,
+        nextWaveLogos: nextWaveLogos.data.map(logo => get(logo, 'attributes')),
+        allSchoolLogos: allSchoolLogos.data.map(logo => get(logo, 'attributes')),
+        instagram,
+        facebook,
+        twitter,
+        videos,
+      },
+    },
+  }
 }

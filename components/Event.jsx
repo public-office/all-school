@@ -65,7 +65,6 @@ const Event = styled('div', {
     },
   },
   '&.event-single': {
-    '&:not(:first-of-type)': {
       '.download': {
         display: 'none',
       },
@@ -129,22 +128,21 @@ const Event = styled('div', {
           },
         },
       },
-    },
-    '&:first-of-type': {
-      '&:after': {
-        content: 'Past events',
-        display: 'block',
-        textAlign: 'center',
-        fontSize: '$sans4',
-        margin: '2em 0 .5em 0',
-        '@mobile': {
-          fontSize: '$sans2',
-        },
-      },
-      '.event-title': {
-        display: 'none',
-      },
-    },
+    // '&:first-of-type': {
+    //   '&:after': {
+    //     content: 'Past events',
+    //     display: 'block',
+    //     textAlign: 'center',
+    //     fontSize: '$sans4',
+    //     margin: '2em 0 .5em 0',
+    //     '@mobile': {
+    //       fontSize: '$sans2',
+    //     },
+    //   },
+    //   '.event-title': {
+    //     display: 'none',
+    //   },
+    // },
     
   },
   img: {
@@ -187,28 +185,8 @@ export function EventItem({ title, image, shortDesc, longDesc, eventUrl, eventPd
         </div>}
         <div className="event">
           <div id="lab">
-            <span className="color purple">L</span>
-            <span className="color orange">A</span>
-            <span className="color green">B</span>
-            <span className="color purple">,</span> <span className="color orange">2</span>
-            <span className="color green">8</span>
-            <span className="color purple">–</span>
-            <span className="color orange">2</span>
-            <span className="color green">9</span> <span className="color purple">O</span>
-            <span className="color orange">c</span>
-            <span className="color green">t</span>
-            <span className="color purple">.</span>
-            <br />
             <span className="event-title"><Markdown>{title}</Markdown></span>
             <Markdown>{shortDesc}</Markdown>
-            {/* <span ref={ref} className="extra-content_trigger" onClick={handleClick}>
-              (read more)
-            </span>
-            {isShown && (
-              <span className="extra-content" >
-                <Markdown>{longDesc}</Markdown>
-              </span>
-            )} */}
           </div>
           {/* <p className="padded">
             Get tickets&nbsp;

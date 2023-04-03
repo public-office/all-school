@@ -1,5 +1,10 @@
+
+html {
+  font-size: 1.05vw;
+}
 body {
   scroll-behavior: smooth;
+  font-size: 1.6rem;
 }
 
 body.content {
@@ -37,6 +42,19 @@ a, button {
   color: black;
 }
 
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  color: rgb(200,200,200) !important;
+}
+
+.logo-wrapper p {
+  font-size: 1.3rem;
+  letter-spacing: 0;
+}
+
 /*[data-theme="#ff8528"] .c-jjfAVZ {
   background: #ff8528;
 } */
@@ -53,28 +71,18 @@ a, button {
 
 .events {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   grid-column-gap: 1em;
   grid-row-gap: 2em;
 }
 
-.event-single:first-of-type {
+/* .event-single:first-of-type {
   grid-column: span 2;
-}
+} */
 
 
-
-@media(max-width: 670px) {
-  .events {
-    grid-template-columns: 1fr;
-    padding: .5em;
-  }
-  .event-single:first-of-type {
-    grid-column: span 1;
-  }
-  section {
-    padding: .5em !important;
-  }
+section {
+  padding: 1em !important;
 }
 
 blockquote {
@@ -104,4 +112,19 @@ blockquote p {
 
 #tickets {
   padding-top: 1em;
+}
+
+@media(max-width: 670px) {
+  .events {
+    grid-template-columns: 1fr;
+    padding: .5em;
+  }
+
+  .event-single:first-of-type {
+    grid-column: span 1;
+  }
+
+  section {
+    padding: 2em !important;
+  }
 }

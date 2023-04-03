@@ -14,14 +14,14 @@ const PANE_LAYER = 10000
 
 const PaneContainer = motion(
   styled('div', {
-    background: '$bg',
+    background: 'white',
     position: 'fixed',
     top: 0,
     right: 0,
     height: '100vh',
     zIndex: PANE_LAYER,
     width: '100%',
-    maxWidth: '33.3vw',
+    maxWidth: '50vw',
     display: 'flex',
     flexDirection: 'column',
     borderTopLeftRadius: '1rem',

@@ -3,8 +3,19 @@ import { useState } from 'react'
 import { Link, animateScroll as scroll } from 'react-scroll';
 
 const MainNav = styled('div', {
+  display: 'grid',
+  gridTemplateColumns: '1fr 1fr',
+  
+  '.intro': {
+    fontSize: 'var(--fontSizes-sans1)',
+    lineHeight: '1.1',
+    paddingTop: '.5em',
+    '@mobile': {
+      display: 'none',
+    },
+  },
   nav: {
-    visibility: 'hidden',
+    paddingTop: '.1em',
     paddingLeft: '6px',
     '&.show': {
       visibility: 'visible',
@@ -15,13 +26,25 @@ const MainNav = styled('div', {
     a: {
       display: 'block',
       textDecoration: 'none',
+      fontSize: 'var(--fontSizes-sans1)',
+      letterSpacing: '-0.025rem',
+      lineHeight: '1.1',
+      '@mobile': {
+        fontSize: 'var(--fontSizes-sans6)',
+        letterSpacing: '-0.05rem',
+        lineHeight: '1',
+      },
       '&:hover': {
         cursor: 'pointer',
-        color: '$green',
+        color: 'white !important',
       },
     },
   },
-
+  '.no-link': {
+    // textDecoration: 'line-through',
+    opacity: '0.25',
+    pointerEvents: 'none',
+  },
   '.nav-trigger': {
     color: 'black',
     paddingLeft: '.5rem',
@@ -44,21 +67,19 @@ export function Nav() {
 
   return (
     <MainNav>
-      <button className="nav-trigger" onClick={menuState}>{isVisible ? 'Close' : 'Menu'}</button>
+      <div className="intro">
+        A project by Next Wave<br></br> exploring artist-led learning experiences
+      </div>
 
-      <nav className={isVisible ? 'show' : ''}>
-        <Link
+      <nav>
+        <Link 
           onClick={menuState}
           to="about"
           smooth={true}
           offset={-20}
         >About</Link>
-        <Link
-          onClick={menuState}
-          to="lab"
-          smooth={true}
-          offset={-20}
-        >LAB</Link>
+        <Link className="no-link" href="/commissions">Commissions</Link>
+        <Link className="no-link" href="/events">Events</Link>
       </nav>
     </MainNav>
   );

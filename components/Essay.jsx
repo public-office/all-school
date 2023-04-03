@@ -4,17 +4,43 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 const Essay = styled('div', {
+  width: '100%',
+  marginTop: '0',
+  background: '$lightgrey',
+  borderRadius: '.5em',
+  overflow: 'hidden',
+  
+  '&:hover': {
+    background: '$yellow',
+  },
+  '&:nth-of-type(even)': {
+    background: '$yellow',
+    '&:hover': {
+      background: '$lightgrey',
+    },
+  },
+
   button: {
     color: 'black',
     textAlign: 'left',
     textDecoration: 'none',
+    padding: '.5em .5em' ,
+    letterSpacing: '-0.02em',
+    lineHeight: '1',
+    fontSize: '$sans5',
+    '@mobile': {
+      padding: '.75em .75em 1em',
+      lineHeight: '1.1',
+    },
     span: {
       display: 'block',
       fontSize: '$sans2',
       lineHeight: '$sans2',
-      marginTop: '1em',
+      letterSpacing: '0',
+      textAlign: 'center',
+      paddingBottom: '.25em',
       '@mobile': {
-        fontSize: '$sans1',
+        fontSize: '$sans4',
       },
     },
   },
@@ -23,53 +49,51 @@ const Essay = styled('div', {
     gridTemplateColumns: '1fr 1fr',
   },
   '.essay-single': {
-    width: '100%',
-    marginTop: '0',
-    display: 'grid',
-    gridTemplateColumns: '1fr 1fr',
-    borderRadius: '1em',
-    overflow: 'hidden',
+    
     '@mobile': {
       gridTemplateColumns: '1fr',
     },
     '&:hover': {
       cursor: 'pointer',
       '.event-image': {
-        background: '$purple',
+        
         img: {
           filter: 'grayscale(1)',
           mixBlendMode: 'multiply',
         },
       },
       '& p': {
-        background: '$purple',
+        background: '$yellow',
       },
     },
     p: {
-      fontSize: '$sans4',
-      lineHeight: '$sans4',
+      fontSize: '$sans5',
+      lineHeight: '$sans5',
       margin: '0 !important',
-      letterSpacing: '0',
-      padding: '.5em',
+      letterSpacing: '-0.02em',
+      padding: '0',
+      button: {
+        letterSpacing: '-0.02em',
+        width: '100%',
+      },
       '@mobile': {
         fontSize: '$sans2',
         letterSpacing: '-0.02rem',
       },
-      // background: '$orange',
     },
   },
   '.essay': {
     background: 'white',
     position: 'fixed',
-    top: '0',
+    top: '2em',
     right: '0',
-    width: '80%',
-    height: '100vh',
+    width: '100%',
+    height: 'calc(100vh - 2em)',
     padding: '1em',
     overflowY: 'auto',
     boxShadow: '5px 5px 15px 5px rgba(0, 0, 0, 0.25)',
     zIndex: '30',
-    transition: 'transform .5s ease-in-out',
+    transition: 'all .5s ease-in-out',
     '@mobile': {
       width: '100%',
     },
@@ -104,29 +128,24 @@ const Essay = styled('div', {
   },
 })
 
-export function EssayItem({ id, title, url, author, pdf, text, tagline, image }) {
+export function EssayItem({ id, title, url, author, pdf, text, tagline, image, iframe }) {
   const router = useRouter()
+  const slugify = str =>
+    str
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, '')
+      .replace(/[\s_-]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+
   const isVisible = router.query.slug === id
   return (
     <Link href={`/essays/${id}`} scroll={false}>
-      <Essay className="essays">
-        <div className="essay-single">
-          {image && (
-            <div className="event-image">
-              <ProgressiveImg
-                key={image.url}
-                src={image.url}
-                placeholderSrc={image.url}
-                alt={image.alternativeText}
-              />
-            </div>
-          )}
-          <p style={{ marginTop: '1em' }}>
-            <button>
-              {title}. <span>{tagline}</span>
-            </button>
-          </p>
-        </div>
+      <Essay>
+        <button>
+          <span>An essay by {author}</span>{title}
+        </button>
+          
         <div className={'essay' + (isVisible ? ' visible' : '')}>
           <h2>
             <span>{title}</span>

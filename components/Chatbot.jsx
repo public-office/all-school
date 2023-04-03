@@ -18,7 +18,7 @@ const MODAL_LAYER = 10000
 
 const Container = motion(
   styled('div', {
-    background: '$bg',
+    background: '$yellow',
     color: '$fg',
     position: 'fixed',
     bottom: '$1',
@@ -45,7 +45,7 @@ const Heading = styled('header', {
   position: 'sticky',
   top: 0,
   left: 0,
-  background: '$bg',
+  background: '$yellow',
   maskImage: 'linear-gradient(black 70%, transparent)',
   padding: '$gutter',
   paddingBottom: '3.2rem',
@@ -132,7 +132,7 @@ const Footer = styled('footer', {
   left: 0,
   width: '100%',
   padding: '$gutter',
-  background: '$bg',
+  background: '$yellow',
   boxShadow: '0 0 0.3rem rgba(0, 0, 0, 0.2)',
 })
 
@@ -140,7 +140,7 @@ const MessageInput = styled(Input, {
   boxShadow: '$shadow',
   padding: '1rem 1.6rem',
   borderRadius: '2em',
-  background: '$bg',
+  background: '$yellow',
 })
 
 export function Chatbot({ show = true, onClose = () => {} }) {
