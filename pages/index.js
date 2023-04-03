@@ -172,7 +172,7 @@ export async function getServerSideProps() {
       page: {
         access,
         events,
-        essays,
+        essays: JSON.parse(JSON.stringify(essays)),
         artists,
         venues,
         marquee,

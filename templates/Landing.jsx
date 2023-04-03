@@ -640,9 +640,9 @@ export function Landing({ page = {} }) {
 
   console.log(page.setup.color)
 
-  const showAuslanPane = ['auslan', 'access'].includes(query.slug)
-  const showSubscribeModal = query.slug === 'subscribe'
-  const showChatbot = query.slug === 'chatbot'
+  const showAuslanPane = ['auslan', 'access'].includes(query.slug?.toString())
+  const showSubscribeModal = query.slug?.toString() === 'subscribe'
+  const showChatbot = query.slug?.toString() === 'chatbot'
 
   const {
     screenOptions,
