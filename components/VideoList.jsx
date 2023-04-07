@@ -61,7 +61,7 @@ export function VideoList({ videos }) {
       <section>
         <h2>
           <span className="breadcrumb">
-            <a href="/commissions">Commissions</a><br />
+            <Link href="/commissions">Commissions</Link><br />
             {videos &&
               videos.map((video, id) => (
                 <ArtistNameList key={id} artists={video.artists} />

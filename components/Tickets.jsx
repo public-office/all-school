@@ -79,9 +79,9 @@ export function Tickets() {
     <TicketRow>
       <h2> Tickets</h2>
       <div className="buttons">
-        <button id="ticket1"><a target="_blank" href="https://tix.nextwave.org.au/Events/All-School-Crit-Club-Online-"><span>Crit Club</span><span className="num">A</span><span>Canberra</span></a></button>
-        <button id="ticket2"><a target="_blank" href="https://tix.nextwave.org.au/Events/All-School-Crit-Club-VIC-"><span>Crit Club</span><span className="num">B</span><span>Melbourne</span></a></button>
-        <button id="ticket3"><a target="_blank" href="https://tix.nextwave.org.au/Events/All-School-Crit-Club-ACT-"><span>Crit Club</span><span className="num">C</span><span>Online</span></a></button>
+        <button id="ticket1"><a target="_blank" rel="noreferrer" href="https://tix.nextwave.org.au/Events/All-School-Crit-Club-Online-"><span>Crit Club</span><span className="num">A</span><span>Canberra</span></a></button>
+        <button id="ticket2"><a target="_blank" rel="noreferrer" href="https://tix.nextwave.org.au/Events/All-School-Crit-Club-VIC-"><span>Crit Club</span><span className="num">B</span><span>Melbourne</span></a></button>
+        <button id="ticket3"><a target="_blank" rel="noreferrer" href="https://tix.nextwave.org.au/Events/All-School-Crit-Club-ACT-"><span>Crit Club</span><span className="num">C</span><span>Online</span></a></button>
       </div>
     </TicketRow>
   )

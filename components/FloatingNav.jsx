@@ -73,8 +73,8 @@ export function FloatingNav() {
           smooth={true}
           offset={-20}
         >About</Link>
-        <a className="no-link" href="/commissions">Commissions</a>
-        <a className="no-link" href="/events">Events</a>
+        <Link className="no-link" href="/commissions">Commissions</Link>
+        <Link className="no-link" href="/events">Events</Link>
       </nav>
     </StickyNav>
   )

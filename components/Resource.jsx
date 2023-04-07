@@ -60,10 +60,10 @@ export function ResourceItem({ id, title, acknowledgement, url, resource, tags, 
         </div>
         <div className="resource-tags">
           {resource && 
-            <a className="tag" href={resource.url} target="_blank">Download</a>
+            <a className="tag" href={resource.url} target="_blank" rel="noreferrer">Download</a>
           }
           {url &&
-            <a className="tag" href={url} target="_blank">Download</a>
+            <a className="tag" href={url} target="_blank" rel="noreferrer">Download</a>
           }
         </div>
       </div>
