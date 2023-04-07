@@ -43,10 +43,18 @@ const ModalContainer = motion(
     gridTemplateColumns: '1fr 10rem',
     borderRadius: '1rem',
     boxShadow: '$shadow',
+    button: {
+      '@mobile': {
+        width: 'auto !important',
+        padding: '.35em 1em .25em'
+      },
+    },
     '@mobile': {
       display: 'block',
       width: 'auto',
       left: '$margin',
+      maxWidth: '100%',
+      fontSize: '$sans4',
     },
   })
 )

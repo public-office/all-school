@@ -35,6 +35,40 @@ export async function getServerSideProps() {
             }
           }
         }
+        videos (pagination: {limit: 100}) {
+          data {
+            id
+            attributes {
+              title
+              homepage
+              context
+              description
+              artists {
+                data {
+                  attributes {
+                    firstName
+              			lastName
+                  }
+                }
+              }
+              youtube_embed
+              video {
+                data {
+                  attributes {
+                    url
+                  }
+                }
+              }
+              placeholder {
+                data {
+                  attributes {
+                    url
+                  }
+                }
+              }
+            }
+          }
+        }
         artists (pagination: {limit: 100}) {
           data {
             id
@@ -46,6 +80,7 @@ export async function getServerSideProps() {
             }
           }
         }
+        
         essays {
           data {
             id
@@ -55,6 +90,15 @@ export async function getServerSideProps() {
               essayAuthor
               essayTagline
               essayText
+              intro
+              iframe
+              tags {
+                data {
+                  attributes {
+                    title
+                  }
+                }
+              }
               mainImage {
                 data {
                   attributes {
@@ -67,6 +111,31 @@ export async function getServerSideProps() {
             }
           }
         }
+        resources (pagination: {limit: 100}) {
+    			data {
+            id
+            attributes {
+              title
+              acknowledgement
+              url
+              myKey
+              resource {
+                data {
+                  attributes {
+                    url
+                  }
+                }
+              }
+              tags {
+                data {
+                  attributes {
+                    title
+                  }
+                }
+              }
+            }
+          }	
+  			}
         venues (pagination: {limit: 10}) {
           data {
             id
@@ -86,6 +155,13 @@ export async function getServerSideProps() {
               instagram
               facebook
               twitter
+              logo {
+                data {
+                  attributes {
+                    url
+                  }
+                }
+              }
               nextWaveLogos {
                 data {
                   attributes {
@@ -110,7 +186,7 @@ export async function getServerSideProps() {
       }
     `,
   })
-  const { information, marquee, access, instagram, facebook, twitter, nextWaveLogos, allSchoolLogos } = get(data, 'information.data.attributes')
+  const { information, marquee, access, instagram, logo, facebook, twitter, nextWaveLogos, allSchoolLogos } = get(data, 'information.data.attributes')
 
   const events = get(data, 'events.data').map((data) => {
     return {
@@ -127,11 +203,30 @@ export async function getServerSideProps() {
     }
   })
 
+  const resources = get(data, 'resources.data').map((data) => {
+    return {
+      id: data.id,
+      ...data.attributes,
+      resource: get(data, 'attributes.resource.data.attributes'),
+      tags: get(data, 'attributes.tags.data.attributes'),
+    }
+  })
+
+  const videos = get(data, 'videos.data').map((data) => {
+    return {
+      id: data.id,
+      ...data.attributes,
+      video: get(data, 'attributes.video.data.attributes'),
+      placeholder: get(data, 'attributes.placeholder.data.attributes'),
+    }
+  })
+
   const essays = get(data, 'essays.data').map((data) => {
     return {
       id: data.id,
       ...data.attributes,
       mainImage: get(data, 'attributes.mainImage.data.attributes'),
+      tags: get(data, 'attributes.tags.data.attributes'),
     }
   })
 
@@ -145,19 +240,7 @@ export async function getServerSideProps() {
   const setups = {
     items: [
       {
-        color: `${theme.colors.purple.value}`,
-        img1: '../images/as_bluesky.png',
-        img2: '../images/as_mercurial.png',
-      },
-      {
-        color: `${theme.colors.green.value}`,
-        img1: '../images/as_jerrycan.png',
-        img2: '../images/as_classes.png',
-      },
-      {
-        color: `${theme.colors.orange.value}`,
-        img1: '../images/as_oranges.png',
-        img2: '../images/as_phone.png',
+        color: `${theme.colors.yellow.value}`,
       }
     ]
   }
@@ -165,21 +248,22 @@ export async function getServerSideProps() {
   const items = setups.items.map((item, id) => ({ ...item, id }));
   const setup = items[Math.floor(Math.random() * items.length)];
 
-  console.log(setup, access)
-
   return {
     props: {
       page: {
         access,
         events,
         essays: JSON.parse(JSON.stringify(essays)),
-        artists,
+        artists: JSON.parse(JSON.stringify(artists)),
+        resources: JSON.parse(JSON.stringify(resources)),
+        videos: JSON.parse(JSON.stringify(videos)),
         venues,
         marquee,
         information,
         nextWaveLogos: nextWaveLogos.data.map(logo => get(logo, 'attributes')),
         allSchoolLogos: allSchoolLogos.data.map(logo => get(logo, 'attributes')),
-        instagram, 
+        instagram,
+        logo,
         facebook,
         twitter, 
         setup,

@@ -7,9 +7,8 @@ const Header = styled('div', {
   width: '100%',
   top: '0',
   zIndex: '10',
-  fontSize: '$sans4',
-  lineHeight: '$sans4',
-  padding: '0 var(--space-margin) var(--space-1)',
+  fontSize: '$sans5',
+  lineHeight: '$sans5',
   '&:hover': {
     cursor: 'pointer',
   },
@@ -19,19 +18,44 @@ const Header = styled('div', {
         color: 'black',
       },
     },
+    a: {
+      '&:hover': {
+        color: 'white !important',
+        textDecoration: 'none',
+      },
+    },
   },
   '@mobile': {
-    fontSize: '$sans2',
-    lineHeight: '$sans2',
     padding: '0 8px',
+    letterSpacing: '0',
   },
   '.head': {
     position: 'sticky',
     top: '.15em',
     display: 'grid',
     gridTemplateColumns: '1fr 1fr',
+    padding: '0 var(--space-margin) var(--space-1)',
+    h1: {
+      letterSpacing: '-2px',
+      '@mobile': {
+        fontSize: '$sans6',
+        letterSpacing: '-0.05rem',
+      },
+      a: {
+        TextDecoration: 'none !important',
+        span: {
+          '&.secondary': {
+            display: 'none',
+          },
+
+        },
+        '&:hover': {
+          color: 'white',
+        },
+      },
+    },
     '@mobile': {
-      top: '.25em',
+      paddingTop: '0.2em',
     },
   },
   span: {
@@ -51,19 +75,10 @@ export function SiteHeader() {
 
   return (
     <Header>
-      <div className="head">
+      <div className="head" id="top">
         <h1>
           <Link href="/">
-            <span>
-              <span className="purple">A</span>
-              <span className="orange">l</span>
-              <span className="green">l</span> <span className="purple">S</span>
-              <span className="orange">c</span>
-              <span className="green">h</span>
-              <span className="purple">o</span>
-              <span className="orange">o</span>
-              <span className="green">l</span>
-            </span>
+            <span>All School</span>
           </Link>
         </h1>
         <Nav />
