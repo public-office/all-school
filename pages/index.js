@@ -42,6 +42,7 @@ export async function getServerSideProps() {
               title
               homepage
               context
+              description
               artists {
                 data {
                   attributes {
@@ -89,6 +90,7 @@ export async function getServerSideProps() {
               essayAuthor
               essayTagline
               essayText
+              intro
               iframe
               tags {
                 data {
@@ -116,6 +118,7 @@ export async function getServerSideProps() {
               title
               acknowledgement
               url
+              myKey
               resource {
                 data {
                   attributes {
@@ -152,6 +155,13 @@ export async function getServerSideProps() {
               instagram
               facebook
               twitter
+              logo {
+                data {
+                  attributes {
+                    url
+                  }
+                }
+              }
               nextWaveLogos {
                 data {
                   attributes {
@@ -176,7 +186,7 @@ export async function getServerSideProps() {
       }
     `,
   })
-  const { information, marquee, access, instagram, facebook, twitter, nextWaveLogos, allSchoolLogos } = get(data, 'information.data.attributes')
+  const { information, marquee, access, instagram, logo, facebook, twitter, nextWaveLogos, allSchoolLogos } = get(data, 'information.data.attributes')
 
   const events = get(data, 'events.data').map((data) => {
     return {
@@ -238,15 +248,13 @@ export async function getServerSideProps() {
   const items = setups.items.map((item, id) => ({ ...item, id }));
   const setup = items[Math.floor(Math.random() * items.length)];
 
-  console.log(resources)
-
   return {
     props: {
       page: {
         access,
         events,
         essays: JSON.parse(JSON.stringify(essays)),
-        artists,
+        artists: JSON.parse(JSON.stringify(artists)),
         resources: JSON.parse(JSON.stringify(resources)),
         videos: JSON.parse(JSON.stringify(videos)),
         venues,
@@ -254,7 +262,8 @@ export async function getServerSideProps() {
         information,
         nextWaveLogos: nextWaveLogos.data.map(logo => get(logo, 'attributes')),
         allSchoolLogos: allSchoolLogos.data.map(logo => get(logo, 'attributes')),
-        instagram, 
+        instagram,
+        logo,
         facebook,
         twitter, 
         setup,

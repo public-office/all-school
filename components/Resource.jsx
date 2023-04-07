@@ -46,15 +46,15 @@ const Resource = styled('div', {
   },
 })
 
-export function ResourceItem({ id, title, acknowledgement, url, resource, tags }) {
+export function ResourceItem({ id, title, acknowledgement, url, resource, tags, myKey }) {
  
   return (
     <Resource>
       <div className="resource-header">
         <div className="resource-tags">
           {tags &&
-            tags.data.map((tag) => (
-              <span className="tag" key={tag.id}>{tag.attributes.title}</span>
+            tags.map((tags) => (
+              <TagsList key={myKey} tags={tags} />
             ))
           }
         </div>

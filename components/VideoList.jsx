@@ -55,6 +55,7 @@ const Section = styled('div', {
 
 
 export function VideoList({ videos }) {
+
   return (
     <Section>
       <section>
@@ -80,6 +81,7 @@ export function VideoList({ videos }) {
                 artists={video.artists}
                 placeholder={video.placeholder}
                 context={video.context}
+                description={video.description}
                 embed={video.youtube_embed}
               />
             ))

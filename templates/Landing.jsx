@@ -83,20 +83,17 @@ const StaticMarquee = styled('div', {
 
 const Main = styled('div', {
   width: '100vw',
-  minHeight: '80vh',
+  minHeight: '50vh',
   position: 'relative',
   whiteSpace: 'nowrap',
   padding: '.25em $margin $margin',
-  // marginTop: '-10em',
   zIndex: 20,
-  '@mobile': {
-    minHeight: '80vh',
-  },
   a: {
     color: 'black',
   },
   '@mobile': {
     marginTop: '-6em',
+    minHeight: '20vh',
   },
   '.extra-content': {
     margin: '1.5em 8em',
@@ -131,9 +128,9 @@ const Main = styled('div', {
     whiteSpace: 'pre-wrap',
     overflowWrap: 'break-word',
     '@mobile': {
-      fontSize: '$sans2',
-      lineHeight: '$sans2',
-      letterSpacing: '-1px',
+      fontSize: '$sans5',
+      lineHeight: '$sans5',
+      letterSpacing: '-0.02em',
     },
     a: {
       textDecoration: 'underline',
@@ -146,6 +143,7 @@ const Main = styled('div', {
     },
   },
   '.about': {
+    
     p: {
       a: {
         textDecoration: 'underline',
@@ -160,6 +158,10 @@ const Main = styled('div', {
   },
   '#about': {
     paddingTop: '3em',
+    '@mobile': {
+      padding: '1.5em',
+      paddingTop: '7em',
+    },
   },
   '& .padded': {
     paddingTop: '1.1em',
@@ -235,11 +237,30 @@ const Footer = styled('div', {
   div: {
     p: {
       fontSize: '$sans2',
+      '@mobile': {
+        fontSize: '$sans5',
+      },
     },
   },
   '.desktop': {
     display: 'grid',
     gridTemplateColumns: '1fr 1fr',
+    '@mobile': {
+      gridTemplateColumns: '1fr',
+      padding: '1em',
+    },
+    div: {
+      '&:first-of-type': {
+        '@mobile':{
+          display: 'none',
+        },
+      },
+      '&:last-of-type': {
+        '@mobile': {
+          width: '100%',
+        },
+      },
+    },
   },
   '.screen-options': {
     marginTop: '2px',
@@ -272,19 +293,26 @@ const Footer = styled('div', {
     display: 'flex',
     gap: '.6em',
     '@mobile': {
-      gap: '.3em',
+      gap: '.6em',
     },
     a: {
       textDecoration: 'none',
-      // textTransform: 'uppercase',
       fontSize: '$sans1',
       background: '#f7f7f7',
       padding: '6px 16px',
       letterSpacing: '-0.01em',
       borderRadius: '1em',
+      '@mobile': {
+        fontSize: '$sans4',
+      },
     },
     '&.socials a:last-child': {
       marginLeft: 'auto',
+    },
+    '&.socials': {
+      '@mobile': {
+        width: '100%',
+      },
     },
     figcaption: {
       maxWidth: '39em',
@@ -354,7 +382,7 @@ const Program = styled('div', {
   position: 'relative',
   marginTop: '-5em',
   '@mobile': {
-    marginTop: '-22.5em',
+    marginTop: '0',
   },
   section: {
     padding: '1.5em',
@@ -542,7 +570,10 @@ export function Landing({ page = {} }) {
       <Program>
         <VideoList videos={page.videos} />
         <EssayList essays={page.essays} />
-        <ResourceList resources={page.resources} />
+        {page.resources != " " &&
+          <ResourceList resources={page.resources} />
+        }
+        
 
         {page.image && <div className="event-image">
           <ProgressiveImg
@@ -575,6 +606,7 @@ export function Landing({ page = {} }) {
           url={essay.essayURL}
           image={essay.mainImage}
           author={essay.essayAuthor}
+          intro={essay.intro}
           tagline={essay.essayTagline}
           pdf={essay.essayPDF}
           text={essay.essayText}

@@ -2,10 +2,11 @@ import { ResourceItem } from './Resource'
 
 export function ResourceList({ resources }) {
 
-  console.log(resources);
   return (
     <section className='resources'>
-      <h2>Resources</h2>
+      {resources != "" &&
+        <h2>Resources</h2>
+      }
       {resources && resources.map(resource => (
         <ResourceItem
           key={resource.id}
@@ -14,7 +15,7 @@ export function ResourceList({ resources }) {
           acknowledgement={resource.acknowledgement}
           url={resource.url}
           resource={resource.resource}
-          tags={resource.tags}
+          resource_tags={resource.tags}
         />
       ))}
     </section>

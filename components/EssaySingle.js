@@ -1,6 +1,7 @@
 import { styled } from 'stitches.config'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
+import Image from 'next/image'
 import ProgressiveImg from 'components/ProgressiveImg'
 import { useEffect } from 'react'
 import { Markdown } from 'components/Markdown'
@@ -79,11 +80,19 @@ const Essay =
       zIndex: '300',
       transition: 'transform .5s ease-in-out',
       '&-image': {
-        maxWidth: '95%',
+        maxWidth: '90%',
         overflow: 'hidden',
-        margin: '0 auto 4em',
+        margin: '0 auto 2em',
+        '@mobile': {
+          maxWidth: '100%',
+        },
         img: {
-          borderRadius: '1em',
+          borderRadius: '.5em',
+        },
+        figcaption: {
+          '@mobile': {
+            fontSize: '$sans3',
+          },
         },
       },
       '@mobile': {
@@ -102,10 +111,13 @@ const Essay =
           cursor: 'pointer',
           color: '$grey',
         },
+        '@mobile': {
+          fontSize: '$sans4',
+        },
       },
       h2: {
         fontSize: '$sans5',
-        lineHeight: '1.1',
+        lineHeight: '1.05',
         paddingBottom: '1em',
         textAlign: 'center',
         position: 'relative',
@@ -117,7 +129,8 @@ const Essay =
           },
         },
         '@mobile': {
-          display: 'none',
+          paddingTop: '.5em',
+          fontSize: '$sans6',
         },
         '.breadcrumb': {
           textAlign: 'left',
@@ -125,7 +138,10 @@ const Essay =
           left: '0',
           paddingTop: '.6em',
           fontSize: '$sans1',
-          letterSpacing: '0.02rem',
+          letterSpacing: '-0.02rem',
+          '@mobile': {
+            display: 'none',
+          },
           a: {
             '&:first-child': {
               '&:before': {
@@ -143,14 +159,46 @@ const Essay =
         },
       },
       '.text': {
-        maxWidth: '80%',
+        maxWidth: '100%',
         margin: '0 auto',
+        '@mobile': {
+          maxWidth: '95%',
+        },
         p: {
-          fontSize: '$sans2',
-          lineHeight: '1.1',
+          fontSize: '$sans3',
+          lineHeight: '1.2',
+          letterSpacing: '-0.02rem',
+          '@mobile': {
+            fontSize: '$serif3',
+          },
+          img: {
+            maxWidth: '90%',
+            borderRadius: '.5em',
+            margin: '2em auto 0 auto',
+          },
+          em: {
+            fontSize: '$serif1',
+            display: 'block',
+            maxWidth: '90%',
+            margin: '.5em auto 5em auto',
+          },
+        },
+        sup: {
+          fontSize: '$sans1',
+          lineHeight: '1',
+          '@mobile': {
+            fontSize: '$sans3',
+          },
         },
         blockquote: {
-          marginLeft: '40%',
+          margin: '2em 1em 2em 25%',
+          boxShadow: '6px 2px 20px 0px rgba(0, 0, 0, 0.25)',
+          padding: '1em',
+          borderRadius: '1em',
+          '@mobile': {
+            margin: '1.2em 1em 3.6em 10%',
+            padding: '2em',
+          },
         },
       },
       iframe: {
@@ -163,9 +211,61 @@ const Essay =
         transform: 'translateX(110%)',
       },
     },
+    '.dingus': {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '3em',
+    },
+    '.intro': {
+      p: {
+        fontSize: '$sans3 !important',
+        lineHeight: '$sans3 !important',
+        '@mobile': {
+          fontSize: '$serif3 !important',
+        },
+      },
+    },
+    '.footnotes': {
+      marginTop: '4em',
+      maxWidth: '50%',
+      marginLeft: '50%',
+      '@mobile': {
+        marginLeft: '0',
+        maxWidth: '100%',
+        marginTop: '8em',
+      },
+      h2: {
+        fontSize: '$sans1',
+        '@mobile': {
+          fontSize: '$sans4 !important',
+        },
+      },
+      p: {
+        fontSize: '$sans1 !important',
+        '@mobile': {
+          fontSize: '$sans4 !important',
+        },
+      },
+      ol: {
+        li: {
+          '&::marker': {
+            fontSize: '$sans1 !important',
+            '@mobile': {
+              fontSize: '$sans4 !important',
+            },
+          },
+        },
+      },
+    },
   })
 
-export function EssaySingle({ id, title, url, author, pdf, text, tags, tagline, image, onClose, show, iframe }) {
+const TextBlock =
+  styled('div', {
+
+  })
+
+export function EssaySingle({ id, title, url, logo, author, pdf, text, intro, tags, tagline, image, onClose, show, iframe }) {
 
   return show ? (
     <AnimatePresence>
@@ -181,7 +281,7 @@ export function EssaySingle({ id, title, url, author, pdf, text, tags, tagline, 
               }
             </span>
 
-            <span>{tagline}</span>
+            <span>{author}</span>
             <span>{title}</span>
           </h2>
           <span className="essay_close" onClick={onClose}>close</span>
@@ -199,7 +299,22 @@ export function EssaySingle({ id, title, url, author, pdf, text, tags, tagline, 
             <figcaption>{image.caption}</figcaption>
           </div>}
           {text != "" &&
-            <div className="text"><Markdown>{text}</Markdown></div>
+            <TextBlock>
+              {intro !="" &&
+                <div>
+                    <div className="intro"><Markdown>{intro}</Markdown></div>
+                    <div className="dingus">
+                      <Image
+                        src="/images/networked.svg"
+                        alt="me"
+                        width="150"
+                        height="150"
+                      />
+                    </div>
+                </div>
+              }
+              <div className="text"><Markdown>{text}</Markdown></div>
+            </TextBlock>
           }
         </div>
       </Essay>

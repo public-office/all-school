@@ -2,7 +2,7 @@ import { styled } from 'stitches.config'
 
 const LogoWrapper = styled('div', {
   marginTop: '10em',
-  padding: '1em 1em',
+  padding: '1em',
   paddingBottom: '5em',
   display: 'grid',
   gridTemplateColumns: '1fr 1fr',
@@ -10,13 +10,20 @@ const LogoWrapper = styled('div', {
   background: '#e1e1e1',
   '@mobile': {
     display: 'block',
+    padding: '2em',
+    paddingBottom: '10em',
   },
   'p': {
     fontSize: '$sans1',
     letterSpacing: '0',
+    '@mobile': {
+      fontSize: '$sans4',
+      paddingBottom: '.5em',
+    },
   },
   '.logo-wrapper': {
     padding: '0 1.5em',
+    
     p: {
       fontSize: '$sans2 !important',
     },
@@ -30,6 +37,7 @@ const LogoWrapper = styled('div', {
     '@mobile': {
       flexWrap: 'wrap',
       marginLeft: '-1em',
+      paddingBottom: '3em',
     },
     '& + p': {
     },
@@ -38,7 +46,7 @@ const LogoWrapper = styled('div', {
       paddingRight: '1em',
       mixBlendMode: 'multiply',
       '@mobile': {
-        height: '30px',
+        height: '38px',
         paddingBottom: '.2em',
       },
     },

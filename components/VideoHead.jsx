@@ -20,8 +20,8 @@ const Head = styled('div', {
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     '@mobile': {
-      height: '85vh',
-      top: '-120px',
+      height: '90vh',
+      top: '-145px',
       left: '0',
       background: 'url(/images/header_mob.svg)',
       backgroundRepeat: 'no-repeat',

@@ -8,13 +8,16 @@ const StickyNav = styled('div', {
   transform: 'translateX(-50%)',
   top: '1em',
   padding: '.15em 1em',
-  fontSize: 'var(--fontSizes-sans2)',
+  fontSize: '$sans2',
   letterSpacing: '-0.025rem',
   lineHeight: '1.1',
   background: '#f7f7f7',
   borderRadius: '1em',
   transition: 'top .5s ease-in-out',
   zIndex: '200',
+  '@mobile': {
+    fontSize: '$sans5',
+  },
   '&.visible': {
     top: '1em',
   },
@@ -34,6 +37,9 @@ const StickyNav = styled('div', {
     // textDecoration: 'line-through',
     opacity: '0.25',
     pointerEvents: 'none',
+    '@mobile': {
+      display: 'none',
+    },
   },
 })
 

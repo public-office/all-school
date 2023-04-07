@@ -2,6 +2,7 @@ import { styled } from 'stitches.config'
 import ProgressiveImg from './ProgressiveImg'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { Markdown } from 'components/Markdown'
 
 const Essay = styled('div', {
   width: '100%',
@@ -9,11 +10,15 @@ const Essay = styled('div', {
   background: '$lightgrey',
   borderRadius: '.5em',
   overflow: 'hidden',
+  '@mobile': {
+    marginBottom: '1.5em',
+    borderRadius: '1em',
+  },
   
   '&:hover': {
     background: '$yellow',
   },
-  '&:nth-of-type(even)': {
+  '&:nth-of-type(odd)': {
     background: '$yellow',
     '&:hover': {
       background: '$lightgrey',
@@ -24,13 +29,13 @@ const Essay = styled('div', {
     color: 'black',
     textAlign: 'left',
     textDecoration: 'none',
-    padding: '.5em .5em' ,
+    padding: '.5em .5em .65em .5em' ,
     letterSpacing: '-0.02em',
     lineHeight: '1',
     fontSize: '$sans5',
     '@mobile': {
       padding: '.75em .75em 1em',
-      lineHeight: '1.1',
+      lineHeight: '1.15',
     },
     span: {
       display: 'block',
@@ -38,7 +43,7 @@ const Essay = styled('div', {
       lineHeight: '$sans2',
       letterSpacing: '0',
       textAlign: 'center',
-      paddingBottom: '.25em',
+      paddingBottom: '.5em',
       '@mobile': {
         fontSize: '$sans4',
       },
@@ -47,6 +52,7 @@ const Essay = styled('div', {
   '.essays': {
     display: 'grid',
     gridTemplateColumns: '1fr 1fr',
+    gridColumnGap: '1em',
   },
   '.essay-single': {
     
@@ -119,6 +125,7 @@ const Essay = styled('div', {
     iframe: {
       width: '100%',
       height: '100vh',
+      top: '-60px',
       position: 'relative',
       zIndex: '40',
     },
@@ -128,7 +135,8 @@ const Essay = styled('div', {
   },
 })
 
-export function EssayItem({ id, title, url, author, pdf, text, tagline, image, iframe }) {
+export function EssayItem({ id, title, url, author, pdf, text, intro, tagline, image, iframe }) {
+  
   const router = useRouter()
   const slugify = str =>
     str
@@ -148,12 +156,13 @@ export function EssayItem({ id, title, url, author, pdf, text, tagline, image, i
           
         <div className={'essay' + (isVisible ? ' visible' : '')}>
           <h2>
+            <span>{author}</span>
             <span>{title}</span>
-            <span>{tagline}</span>
           </h2>{' '}
           <span className="essay_close" onClick={() => router.replace('/')}>
             (close)
           </span>
+          <div className="intro"><Markdown>{intro}</Markdown></div>
           <iframe src={url}></iframe>
         </div>
       </Essay>

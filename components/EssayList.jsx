@@ -5,8 +5,9 @@ import Link from 'next/link'
 const Essays = styled('div', {
   '.essays': {
     display: 'grid',
-    gridTemplateColumns: '1fr 1fr',
+    gridTemplateColumns: '1fr',
     gridColumnGap: '1em',
+    gridRowGap: '1em',
     
     '@mobile': {
       padding: '0',
@@ -66,7 +67,7 @@ export function EssayList({ essays }) {
             {essays &&
               essays.map((essay, key) => (
                 <Link key={key} href={`/essays/${essay.id}`}>{essay.essayAuthor}</Link>
-              ))
+              )).reverse()
             }
           </span>
           Reading Room
@@ -84,10 +85,11 @@ export function EssayList({ essays }) {
                 tagline={essay.essayTagline}
                 pdf={essay.essayPDF}
                 text={essay.essayText}
+                intro={essay.intro}
                 iframe={essay.iframe}
                 tags={essay.tags}
               />
-            ))}
+            )).reverse() }
         </div>
       </section>
     </Essays>

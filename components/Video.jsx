@@ -1,6 +1,7 @@
 import { NodeNextRequest } from 'next/dist/server/base-http/node'
 import Link from 'next/link'
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react'
+import { Markdown } from 'components/Markdown'
 import { useRouter } from 'next/router'
 import { styled } from 'stitches.config'
 
@@ -14,6 +15,7 @@ const Video = styled('div', {
       height: '48rem',
       '@mobile': {
         paddingBottom: '1em',
+        height: '64rem',
       },
       '&:hover': {
         figcaption: {
@@ -48,6 +50,9 @@ const Video = styled('div', {
           fontSize: '$sans3',
           color: 'white',
           zIndex: '100',
+          '@mobile': {
+            fontSize: '$sans5',
+          },
           '&:hover': {
             cursor: 'pointer',
           },
@@ -66,17 +71,36 @@ const Video = styled('div', {
           '&:hover': {
             cursor: 'pointer',
           },
+          '@mobile': {
+            fontSize: '$sans5',
+          },
         },
-        '.timecode': {
+        '.controls_extra': {
           display: 'block',
           position: 'absolute',
           top: '.5em', left: '1.5em',
           fontSize: '$sans3',
           color: 'white',
-          fontVariantNumeric: 'tabular-nums',
+          '@mobile': {
+            fontSize: '$sans5',
+            top: '.5em', left: '.75em',
+          },
+          
+          span: {
+            display: 'inline-block',
+          },
+          '.info': {
+            marginLeft: '1em',
+            '&:hover': {
+              cursor: 'pointer',
+            },
+          },
+          '.timecode': {
+            fontVariantNumeric: 'tabular-nums',
+          },
         },
         '&:hover': {
-          '.controls, .video_close, .timecode': {
+          '.controls, .video_close, .controls_extra': {
             opacity: '1',
           },
         },
@@ -92,7 +116,7 @@ const Video = styled('div', {
       },
     },
   },
-  '.controls, .video_close, .timecode': {
+  '.controls, .video_close, .controls_extra': {
     opacity: '0',
     transition: 'opacity .35s ease-in-out',
     position: 'absolute',
@@ -104,6 +128,9 @@ const Video = styled('div', {
     position: 'relative',
     objectFit: 'cover',
     flex: '1',
+    '@mobile': {
+      borderRadius: '1em',
+    },
     '&:hover': {
       filter: 'blur(10px)',
       cursor: 'pointer',
@@ -134,9 +161,26 @@ const Video = styled('div', {
       bottom: '1em',
     },
     span: {
-      display: 'block',
+      // display: 'block',
+      '&.artist': {
+        '&:first-of-type:after': {
+          content: ', ',
+        },
+      },
       '&.video-single-title': {
         textAlign: 'center',
+        maxWidth: '60%',
+        margin: '0 auto',
+        '@mobile': {
+          maxWidth: '80%',
+        },
+        p: {
+          fontSize: '$sans3',
+          letterSpacing: '0',
+          '@mobile': {
+            fontSize: '$sans4',
+          },
+        },
       },
       '&.video-single-footer': {
         display: 'grid',
@@ -152,17 +196,102 @@ const Video = styled('div', {
     zIndex: '40',
     display: 'none',
   },
+  '.info-pane': {
+    position: 'fixed',
+    width: '50%',
+    height: '100vh',
+    overflowY: 'auto',
+    padding: '1em',
+    top: '0',
+    right: '0',
+    background: 'white',
+    zIndex: '1000',
+    transition: 'transform .5s ease-in-out',
+    '@mobile': {
+      width: '100%',
+      padding: '2em',
+    },
+    '&:not(.visible)': {
+      transform: 'translateX(100%)',
+    },
+    '.title': {
+      fontSize: '$sans2',
+      lineHeight: '$sans2',
+      letterSpacing: '-0.02em',
+      display: 'block',
+      textAlign: 'center',
+      '@mobile': {
+        fontSize: '$sans5',
+        lineHeight: '$sans5',
+        maxWidth: '100%',
+        paddingTop: '0',
+      },
+    },
+    '.close': {
+      fontSize: '$sans2',
+      lineHeight: '$sans2',
+      letterSpacing: '-0.02em',
+      position: 'absolute',
+      marginTop: '-1.2em',
+      '@mobile': {
+        fontSize: '$sans5',
+        lineHeight: '$sans5',
+        maxWidth: '100%',
+        marginTop: '-1.1em',
+      },
+      '&:hover': {
+        color: '$lightgrey',
+        cursor: 'pointer',
+      },
+    },
+    p: {
+      fontSize: '$sans2',
+      lineHeight: '$sans2',
+      letterSpacing: '-0.02em',
+      '@mobile': {
+        fontSize: '$sans5',
+        lineHeight: '$sans5',
+      },
+    },
+    h2: {
+      fontSize: '$sans2',
+      lineHeight: '$sans2',
+      letterSpacing: '-0.02em',
+      padding: '1.2em 0 1.2em 0',
+      maxWidth: '80%',
+      margin: '0 auto',
+      '@mobile': {
+        fontSize: '$sans5',
+        lineHeight: '$sans5',
+        maxWidth: '100%',
+      },
+    },
+    ul: {
+      margin: '1.2em 1em 1.2em 4em',
+      li: {
+        fontSize: '$sans2',
+        letterSpacing: '-0.02em',
+        '@mobile': {
+          fontSize: '$sans5',
+          lineHeight: '$sans5',
+        },
+      },
+    },
+  },
   // '&:not(.visible)': {
   //   transform: 'translateX(110%)',
   // },
 })
 
-export function VideoItem({ id, mykey, title, video, artists, placeholder, context, embed }) {
+export function VideoItem({ id, mykey, title, video, artists, placeholder, context, description, embed }) {
   const router = useRouter()
   const people = artists.data
   const isVisible = router.query.slug === id
   const [isActive, setIsActive] = useState(false);
+  const [isShown, setIsShown] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+
+  console.log(description)
 
   function toggleVideo() {
     setIsActive(current => !current);
@@ -176,6 +305,11 @@ export function VideoItem({ id, mykey, title, video, artists, placeholder, conte
     if (video) {
       video.pause();
     }
+  }
+
+  function toggleInfo() {
+    setIsShown(current => !current);
+
   }
 
   function timeStr(time) {
@@ -213,21 +347,33 @@ export function VideoItem({ id, mykey, title, video, artists, placeholder, conte
         <figure onClick={() => toggleVideo()} style={{ backgroundImage: `url(${placeholder.url})`, backgroundSize: 'cover', }}>
         </figure>
         <figcaption>
-          <span className="video-single-title">{title}</span>
+          <span className="video-single-title"><Markdown>{title}</Markdown></span>
           <span className="video-single-footer">
-            <span>{people[0].attributes.firstName} {people[0].attributes.lastName}</span>
+            <span>
+              {artists &&
+                artists.data.map((artist) => (
+                  <span key={artist.attributes.firstName} className="artist">{artist.attributes.firstName} {artist.attributes.lastName}</span>
+                ))
+              }
+            </span>
             <span>{context}</span>
           </span>
         </figcaption>
         {video &&
           <video className="video" src={video.url}></video>
         }
-        {embed != " " &&
-          <iframe id="ytplayer" type="text/html" src={embed + '?modestbranding=1'} playsinline allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"allowfullscreen frameborder="0"></iframe>
-        }
-        <span className="timecode">00:00/00:00</span>
+        <span className="controls_extra">
+          <span className="timecode">00:00/00:00</span> <span className="info" onClick={() => toggleInfo()}>Info</span>
+        </span>
+        
         <span className="controls playButton" onClick={() => videoControls()}>{isPlaying ? 'Pause' : 'Play'}</span>
         <span className="video_close" onClick={() => toggleVideo()}>Close</span>
+
+        <div className={isShown ? 'info-pane visible' : 'info-pane'}>
+          <span className="title">Video</span> <span className="close" onClick={() => toggleInfo()}>Close</span>
+          <h2>{title}</h2>
+          <Markdown>{description}</Markdown>
+        </div>
       </div>
     </Video>
     
