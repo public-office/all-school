@@ -175,13 +175,16 @@ const Essay =
             maxWidth: '90%',
             borderRadius: '.5em',
             margin: '2em auto 0 auto',
+            '& + em': {
+              fontStyle: 'normal',
+              fontSize: '$serif1',
+              display: 'block',
+              maxWidth: '90%',
+              margin: '.5em auto 5em auto',
+            },
           },
           em: {
             fontStyle: 'italic',
-            // fontSize: '$serif1',
-            // display: 'block',
-            // maxWidth: '90%',
-            // margin: '.5em auto 5em auto',
           },
         },
         sup: {
