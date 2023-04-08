@@ -177,10 +177,11 @@ const Essay =
             margin: '2em auto 0 auto',
           },
           em: {
-            fontSize: '$serif1',
-            display: 'block',
-            maxWidth: '90%',
-            margin: '.5em auto 5em auto',
+            fontStyle: 'italic',
+            // fontSize: '$serif1',
+            // display: 'block',
+            // maxWidth: '90%',
+            // margin: '.5em auto 5em auto',
           },
         },
         sup: {
