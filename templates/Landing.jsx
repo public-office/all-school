@@ -615,6 +615,7 @@ export function Landing({ page = {} }) {
           author={essay.essayAuthor}
           intro={essay.intro}
           tagline={essay.essayTagline}
+          notes={essay.notes}
           pdf={essay.essayPDF}
           text={essay.essayText}
           onClose={() => router.replace('/', undefined, { scroll: false })}

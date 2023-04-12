@@ -85,6 +85,7 @@ export function EssayList({ essays }) {
                 tagline={essay.essayTagline}
                 pdf={essay.essayPDF}
                 text={essay.essayText}
+                notes={essay.notes}
                 intro={essay.intro}
                 iframe={essay.iframe}
                 tags={essay.tags}

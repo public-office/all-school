@@ -135,7 +135,7 @@ const Essay = styled('div', {
   },
 })
 
-export function EssayItem({ id, title, url, author, pdf, text, intro, tagline, image, iframe }) {
+export function EssayItem({ id, title, url, author, notes, pdf, text, intro, tagline, image, iframe }) {
   
   const router = useRouter()
   const slugify = str =>

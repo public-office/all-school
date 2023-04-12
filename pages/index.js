@@ -80,7 +80,6 @@ export async function getServerSideProps() {
             }
           }
         }
-        
         essays {
           data {
             id
@@ -89,8 +88,9 @@ export async function getServerSideProps() {
               essayURL
               essayAuthor
               essayTagline
-              essayText
               intro
+              essayText
+              notes
               iframe
               tags {
                 data {

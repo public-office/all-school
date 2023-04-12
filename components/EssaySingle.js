@@ -5,6 +5,7 @@ import Image from 'next/image'
 import ProgressiveImg from 'components/ProgressiveImg'
 import { useEffect } from 'react'
 import { Markdown } from 'components/Markdown'
+import { EssayItem } from 'components/Essay'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 
@@ -164,6 +165,12 @@ const Essay =
         '@mobile': {
           maxWidth: '95%',
         },
+        '.notes': {
+          maxWidth: 'calc(50% - 1em)',
+          p: {
+            fontSize: '$sans1',
+          },
+        },
         p: {
           fontSize: '$sans3',
           lineHeight: '1.2',
@@ -269,8 +276,9 @@ const TextBlock =
 
   })
 
-export function EssaySingle({ id, title, url, logo, author, pdf, text, intro, tags, tagline, image, onClose, show, iframe }) {
+export function EssaySingle({ id, title, url, logo, author, notes, pdf, text, intro, tags, tagline, image, onClose, show, iframe }) {
 
+  console.log(text)
   return show ? (
     <AnimatePresence>
       <Essay>
@@ -317,7 +325,12 @@ export function EssaySingle({ id, title, url, logo, author, pdf, text, intro, ta
                     </div>
                 </div>
               }
-              <div className="text"><Markdown>{text}</Markdown></div>
+              <div className="text">
+                <Markdown>{text}</Markdown>
+                <div className="notes">
+                  <Markdown>{notes}</Markdown>
+                </div>
+              </div>
             </TextBlock>
           }
         </div>
