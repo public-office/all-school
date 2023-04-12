@@ -176,9 +176,9 @@ const Essay =
           lineHeight: '1.2',
           letterSpacing: '-0.02rem',
           a: {
-            textDecoration: 'underline',
-            textDecorationThickness: '0.2rem',
-            textUnderlineOffset: '0.2rem',
+            textDecoration: 'underline !important',
+            textDecorationThickness: '0.2rem !important',
+            textUnderlineOffset: '0.2rem !important',
           },
           '@mobile': {
             fontSize: '$serif3',
@@ -264,6 +264,11 @@ const Essay =
         fontSize: '$sans1 !important',
         '@mobile': {
           fontSize: '$sans4 !important',
+        },
+        a: {
+          '&.data-footnote-backref': {
+            textDecoration: 'none !important',
+          },
         },
         em: {
           fontStyle: 'italic',
