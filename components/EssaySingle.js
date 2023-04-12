@@ -175,6 +175,11 @@ const Essay =
           fontSize: '$sans3',
           lineHeight: '1.2',
           letterSpacing: '-0.02rem',
+          a: {
+            textDecoration: 'underline',
+            textDecorationThickness: '0.2rem',
+            textUnderlineOffset: '0.2rem',
+          },
           '@mobile': {
             fontSize: '$serif3',
           },
@@ -235,6 +240,9 @@ const Essay =
         '@mobile': {
           fontSize: '$serif3 !important',
         },
+        em: {
+          fontStyle: 'italic',
+        },
       },
     },
     '.footnotes': {
@@ -257,9 +265,15 @@ const Essay =
         '@mobile': {
           fontSize: '$sans4 !important',
         },
+        em: {
+          fontStyle: 'italic',
+        },
       },
       ol: {
         li: {
+          em: {
+            fontStyle: 'italic',
+          },
           '&::marker': {
             fontSize: '$sans1 !important',
             '@mobile': {
