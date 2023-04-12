@@ -198,7 +198,7 @@ const Video = styled('div', {
   },
   '.info-pane': {
     position: 'fixed',
-    width: '50%',
+    width: '35%',
     height: '100vh',
     overflowY: 'auto',
     padding: '1em',
@@ -215,8 +215,8 @@ const Video = styled('div', {
       transform: 'translateX(100%)',
     },
     '.title': {
-      fontSize: '$sans2',
-      lineHeight: '$sans2',
+      fontSize: '$sans1',
+      lineHeight: '$sans1',
       letterSpacing: '-0.02em',
       display: 'block',
       textAlign: 'center',
@@ -228,8 +228,8 @@ const Video = styled('div', {
       },
     },
     '.close': {
-      fontSize: '$sans2',
-      lineHeight: '$sans2',
+      fontSize: '$sans1',
+      lineHeight: '$sans1',
       letterSpacing: '-0.02em',
       position: 'absolute',
       marginTop: '-1.2em',
@@ -245,8 +245,8 @@ const Video = styled('div', {
       },
     },
     p: {
-      fontSize: '$sans2',
-      lineHeight: '$sans2',
+      fontSize: '$sans1',
+      lineHeight: '$sans1',
       letterSpacing: '-0.02em',
       '@mobile': {
         fontSize: '$sans5',
@@ -254,8 +254,8 @@ const Video = styled('div', {
       },
     },
     h2: {
-      fontSize: '$sans2',
-      lineHeight: '$sans2',
+      fontSize: '$sans1',
+      lineHeight: '$sans1',
       letterSpacing: '-0.02em',
       padding: '1.2em 0 1.2em 0',
       maxWidth: '80%',
@@ -269,7 +269,7 @@ const Video = styled('div', {
     ul: {
       margin: '1.2em 1em 1.2em 4em',
       li: {
-        fontSize: '$sans2',
+        fontSize: '$sans1',
         letterSpacing: '-0.02em',
         '@mobile': {
           fontSize: '$sans5',
