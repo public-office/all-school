@@ -240,6 +240,11 @@ const Essay =
         '@mobile': {
           fontSize: '$serif3 !important',
         },
+        a: {
+          textDecoration: 'underline !important',
+          textDecorationThickness: '0.2rem !important',
+          textUnderlineOffset: '0.2rem !important',
+        },
         em: {
           fontStyle: 'italic',
         },
