@@ -606,7 +606,7 @@ export function Landing({ page = {} }) {
 
       {page.essays.map((essay) => (
         <EssaySingle
-          show={router.asPath === `/essays/${essay.id}`}
+          show={router.asPath === `/essays/${essay.slug}`}
           key={essay.id}
           id={essay.id}
           title={essay.essayTitle}
@@ -618,6 +618,7 @@ export function Landing({ page = {} }) {
           notes={essay.notes}
           pdf={essay.essayPDF}
           text={essay.essayText}
+          slug={essay.slug}
           onClose={() => router.replace('/', undefined, { scroll: false })}
         />
       ))}

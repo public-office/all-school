@@ -92,6 +92,7 @@ export async function getServerSideProps() {
               essayText
               notes
               iframe
+              slug
               tags {
                 data {
                   attributes {

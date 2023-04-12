@@ -291,8 +291,6 @@ export function VideoItem({ id, mykey, title, video, artists, placeholder, conte
   const [isShown, setIsShown] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
 
-  console.log(description)
-
   function toggleVideo() {
     setIsActive(current => !current);
 

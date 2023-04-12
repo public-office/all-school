@@ -276,9 +276,8 @@ const TextBlock =
 
   })
 
-export function EssaySingle({ id, title, url, logo, author, notes, pdf, text, intro, tags, tagline, image, onClose, show, iframe }) {
+export function EssaySingle({ id, title, url, logo, author, notes, pdf, text, intro, tags, tagline, image, onClose, show, iframe, slug }) {
 
-  console.log(text)
   return show ? (
     <AnimatePresence>
       <Essay>

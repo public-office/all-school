@@ -58,6 +58,7 @@ const Author = styled('div', {
 
 export function EssayList({ essays }) {
 
+  console.log(essays)
   return (
     <Essays>
       <section>
@@ -66,7 +67,7 @@ export function EssayList({ essays }) {
             <Link href="/commissions">Commissions</Link><br />
             {essays &&
               essays.map((essay, key) => (
-                <Link key={key} href={`/essays/${essay.id}`}>{essay.essayAuthor}</Link>
+                <Link key={key} href={`/essays/${essay.slug}`}>{essay.essayAuthor}</Link>
               )).reverse()
             }
           </span>
@@ -89,6 +90,7 @@ export function EssayList({ essays }) {
                 intro={essay.intro}
                 iframe={essay.iframe}
                 tags={essay.tags}
+                slug={essay.slug}
               />
             )).reverse() }
         </div>

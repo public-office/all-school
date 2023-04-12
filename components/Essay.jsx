@@ -135,7 +135,7 @@ const Essay = styled('div', {
   },
 })
 
-export function EssayItem({ id, title, url, author, notes, pdf, text, intro, tagline, image, iframe }) {
+export function EssayItem({ id, title, url, author, notes, pdf, text, intro, tagline, image, iframe, slug }) {
   
   const router = useRouter()
   const slugify = str =>
@@ -146,9 +146,9 @@ export function EssayItem({ id, title, url, author, notes, pdf, text, intro, tag
       .replace(/[\s_-]+/g, '-')
       .replace(/^-+|-+$/g, '');
 
-  const isVisible = router.query.slug === id
+  const isVisible = router.query.slug === slug
   return (
-    <Link href={`/essays/${id}`} scroll={false}>
+    <Link href={`/essays/${slug}`} scroll={false}>
       <Essay>
         <button>
           <span>An essay by {author}</span>{title}
