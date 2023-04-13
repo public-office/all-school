@@ -307,7 +307,6 @@ export function VideoItem({ id, mykey, title, video, artists, placeholder, conte
 
   function toggleInfo() {
     setIsShown(current => !current);
-
   }
 
   function timeStr(time) {
