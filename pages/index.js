@@ -43,6 +43,7 @@ export async function getServerSideProps() {
               homepage
               context
               description
+              slug
               artists {
                 data {
                   attributes {

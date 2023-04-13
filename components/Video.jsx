@@ -283,7 +283,7 @@ const Video = styled('div', {
   // },
 })
 
-export function VideoItem({ id, mykey, title, video, artists, placeholder, context, description, embed }) {
+export function VideoItem({ id, mykey, title, video, artists, placeholder, context, description, embed, slug }) {
   const router = useRouter()
   const people = artists.data
   const isVisible = router.query.slug === id
@@ -293,6 +293,21 @@ export function VideoItem({ id, mykey, title, video, artists, placeholder, conte
 
   function toggleVideo() {
     setIsActive(current => !current);
+
+    if (isActive) {
+      router.replace(
+        { pathname: '/' },
+        undefined,
+        { scroll: false }
+      );
+    } else {
+      router.push(
+        { pathname: `/videos/${slug}` },
+        undefined,
+        { scroll: false }
+      );
+    };
+
 
     const iframe = document.querySelector('iframe');
     const video = document.querySelector('video');
