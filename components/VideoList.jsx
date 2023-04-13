@@ -83,7 +83,6 @@ export function VideoList({ videos }) {
                 context={video.context}
                 description={video.description}
                 embed={video.youtube_embed}
-                slug={video.slug}
               />
             ))
           }

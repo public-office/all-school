@@ -283,7 +283,7 @@ const Video = styled('div', {
   // },
 })
 
-export function VideoItem({ id, mykey, title, video, artists, placeholder, context, description, embed, slug }) {
+export function VideoItem({ id, mykey, title, video, artists, placeholder, context, description, embed}) {
   const router = useRouter()
   const people = artists.data
   const isVisible = router.query.slug === id
