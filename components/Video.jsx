@@ -294,6 +294,18 @@ export function VideoItem({ id, mykey, title, video, artists, placeholder, conte
   function toggleVideo() {
     setIsActive(current => !current);
 
+    const slugify = str =>
+      str
+        .toLowerCase()
+        .trim()
+        .replace(/[^\w\s-]/g, '')
+        .replace(/[\s_-]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+
+    const slug = slugify(title);
+
+    isActive ? router.replace({ pathname: '/' }, undefined, { scroll: false }) : router.push({ pathname: `/videos/${slug}` }, undefined, { scroll: false });
+
     const iframe = document.querySelector('iframe');
     const video = document.querySelector('video');
     if (iframe) {
