@@ -294,21 +294,6 @@ export function VideoItem({ id, mykey, title, video, artists, placeholder, conte
   function toggleVideo() {
     setIsActive(current => !current);
 
-    if (isActive) {
-      router.replace(
-        { pathname: '/' },
-        undefined,
-        { scroll: false }
-      );
-    } else {
-      router.push(
-        { pathname: `/videos/${slug}` },
-        undefined,
-        { scroll: false }
-      );
-    };
-
-
     const iframe = document.querySelector('iframe');
     const video = document.querySelector('video');
     if (iframe) {
