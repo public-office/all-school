@@ -53,7 +53,7 @@ const Footer = styled('div', {
   },
   nav: {
     display: 'flex',
-    gap: '.6em',
+    gap: '.5em',
     '@mobile': {
       gap: '.3em',
     },
@@ -206,7 +206,7 @@ export function SiteFooter({ page = {} }) {
         show={showAuslanPane}
         onClose={() => router.replace('/', undefined, { scroll: false })}
       >
-        <Markdown>{page.access}</Markdown>
+        <Markdown>Here’s some text</Markdown>
       </Pane>
 
       <Chatbot

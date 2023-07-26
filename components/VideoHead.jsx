@@ -1,21 +1,20 @@
-import { styled } from 'stitches.config'
-import FastMarquee from 'react-fast-marquee'
-import { VideoItem } from './Video'
-import { BackgroundImage } from 'react-image-and-background-image-fade'
-import Image from 'next/image'
+import { styled } from 'stitches.config';
+import { VideoItem } from './Video';
+import { BackgroundImage } from 'react-image-and-background-image-fade';
+import Image from 'next/image';
 
 const Head = styled('div', {
-  maxHeight: '90vh',
   position: 'relative',
+  height: 'calc(100vh - 100px)',
   '.head-outer': {
     position: 'relative',
     width: '100%',
-    height: '100vh',
+    height: 'calc(100vh + 50px)',
     top: '-150px',
     zIndex: '0',
     fontSize: '$sans4',
     lineHeight: '$sans4',
-    background: 'url(/images/header_alt.svg)',
+    background: 'url(/images/as_2023_3.png)',
     backgroundPosition: 'center',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
@@ -42,7 +41,6 @@ const Head = styled('div', {
   },
   '.video-head': {
     position: 'relative',
-    height: '100vh',
     '@mobile': {
       height: '75vh',
     },
@@ -109,50 +107,12 @@ const Head = styled('div', {
   },
 })
 
-const marqueeStyle = {
-  fontFamily: '$sans',
-  fontSize: '$sans2',
-  padding: '.5em 0',
-  letterSpacing: '0.025rem',
-  letterSpacing: '-0.025rem',
-  zIndex: '100',
-  background: 'white',
-  color: 'black',
-  position: 'relative',
-  top: '-5.25em',
-  '&:hover': {
-    background: '$yellow',
-    color: 'black',
-  },
-  '@mobile': {
-    fontSize: '$sans4',
-    position: 'absolute',
-    top: '-130px',
-  },
-}
-
-const Marquee = styled(FastMarquee, {
-  ...marqueeStyle,
-  whiteSpace: 'nowrap',
-  overflow: 'hidden',
-})
-
-const StaticMarquee = styled('div', {
-  ...marqueeStyle,
-  paddingLeft: '$margin',
-  marginBottom: '$1',
-})
-
 export function VideoHead({ videos }) {
   return (
     <Head >
       <div className="head-outer">
         <div className="video-head">
-          <div className="title">
-            <span>02</span>
-            <span><span>Crit</span><span>Club</span></span>
-            <span>19. Apr, 2023</span>
-          </div>
+        
         </div>
       </div>
     </Head>

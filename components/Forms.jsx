@@ -2,7 +2,7 @@ import { styled } from 'stitches.config'
 
 export const Button = styled('button', {
   borderRadius: '2em',
-  background: '$bg',
+  background: '#ccc',
   boxShadow: '$shadow',
   padding: '0.5rem 1.6rem',
   '&.noshadow': {
@@ -21,7 +21,7 @@ export const Fieldset = styled('fieldset', {
   gridTemplateColumns: 'repeat(3, 1fr)',
   columnGap: '$gutter',
   button: {
-    width: '10rem',
+    width: 'auto',
     margin: '0 auto',
   },
 })
@@ -45,7 +45,7 @@ export const Input = styled('input', {
   },
   '&[type="radio"] + span': {
     borderRadius: '2em',
-    background: '$bg',
+    background: '#ccc',
     padding: '0.5rem 1rem',
     position: 'relative',
   },
@@ -57,6 +57,7 @@ export const Input = styled('input', {
 
 export const RadioGroup = styled('div', {
   gridColumn: 'span 2',
+  gridGap: '.25em',
   display: 'flex',
   margin: 'auto 0',
 })

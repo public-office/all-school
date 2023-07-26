@@ -1,13 +1,6 @@
-import { VideoItem } from './Video'
 import { styled } from 'stitches.config'
-import { ArtistNameList } from 'components/ArtistNameList'
+import { Producer } from './Producer'
 import Link from 'next/link'
-
-const Videos = styled('div', {
-  display: 'grid',
-  gridTemplateColumns: '1fr',
-  gridColumnGap: '1em',
-})
 
 const Section = styled('div', {
   section: {
@@ -56,42 +49,44 @@ const Section = styled('div', {
   },
 })
 
+const Producers = styled('div', {
+  display: 'grid',
+  gridTemplateColumns: '1fr',
+  gridColumnGap: '1em',
+})
 
-
-export function VideoList({ videos }) {
-
+export function ProducersList({ producers }) {
   return (
     <Section>
       <section>
         <h2>
           <span className="breadcrumb">
             <Link className="no-link" href="/commissions">Commissions</Link><br />
-            {videos &&
-              videos.map((video, id) => (
-                <ArtistNameList key={id} artists={video.artists} />
+            {producers &&
+              producers.map((producer, id) => (
+                <ArtistNameList key={id} artists={producer.artists} />
               ))
             }
           </span>
-          Videos
+          Producers
         </h2>
-        <Videos>
-          {videos &&
-            videos.map((video) => (
-              <VideoItem
-                key={video.id}
-                id={video.id}
-                title={video.title}
-                video={video.video}
-                artists={video.artists}
-                placeholder={video.placeholder}
-                context={video.context}
-                description={video.description}
-                embed={video.youtube_embed}
+        <Producers>
+          {producers &&
+            producers.map((producer) => (
+              <Producer
+                key={producer.id}
+                id={producer.id}
+                name={producer.name}
+                project={producer.project}
+                img={producer.img}
+                url={producer.project_url}
               />
             ))
           }
-        </Videos>
+        </Producers>
       </section>
     </Section>
+    
+    
   )
 }

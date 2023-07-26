@@ -35,6 +35,24 @@ export async function getServerSideProps() {
             }
           }
         }
+        producers {
+          data {
+            id
+            attributes {
+              name
+              project
+              project_url
+              img {
+                data {
+                  attributes {
+                    url
+                    caption
+                  }
+                }
+              }
+            }
+          }
+        }
         videos (pagination: {limit: 100}) {
           data {
             id
@@ -204,6 +222,13 @@ export async function getServerSideProps() {
     }
   })
 
+  const producers = get(data, 'producers.data').map((data) => {
+    return {
+      id: data.id,
+      ...data.attributes,
+    }
+  })
+
   const resources = get(data, 'resources.data').map((data) => {
     return {
       id: data.id,
@@ -258,6 +283,7 @@ export async function getServerSideProps() {
         artists: JSON.parse(JSON.stringify(artists)),
         resources: JSON.parse(JSON.stringify(resources)),
         videos: JSON.parse(JSON.stringify(videos)),
+        producers: JSON.parse(JSON.stringify(producers)),
         venues,
         marquee,
         information,
@@ -273,4 +299,4 @@ export async function getServerSideProps() {
   }
 }
 
-export default Landing
+export default Landing;

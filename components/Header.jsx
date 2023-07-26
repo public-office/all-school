@@ -1,14 +1,17 @@
 import { Nav } from 'components/Nav'
 import { styled } from 'stitches.config'
+import { useRouter } from 'next/router'
 import Link from 'next/link'
 
 const Header = styled('div', {
   position: 'relative',
-  width: '100%',
-  top: '0',
+  width: 'calc(100% - 10px)',
+  top: '5px',
+  left: '5px',
   zIndex: '10',
   fontSize: '$sans5',
   lineHeight: '$sans5',
+  zIndex: '200',
   '&:hover': {
     cursor: 'pointer',
   },
@@ -30,19 +33,23 @@ const Header = styled('div', {
     letterSpacing: '0',
   },
   '.head': {
-    position: 'sticky',
-    top: '.15em',
     display: 'grid',
-    gridTemplateColumns: '1fr 1fr',
+    gridTemplateColumns: 'repeat(4, 1fr)',
     padding: '0 var(--space-margin) var(--space-1)',
     h1: {
+      gridColumn: 'span 3',
       letterSpacing: '-2px',
+      mixBlendMode: 'difference',
+      '&:hover': {
+        color: 'red',
+      },
       '@mobile': {
         fontSize: '$sans6',
         letterSpacing: '-0.05rem',
       },
       a: {
         TextDecoration: 'none !important',
+        color: 'white',
         span: {
           '&.secondary': {
             display: 'none',
@@ -50,7 +57,14 @@ const Header = styled('div', {
 
         },
         '&:hover': {
-          color: 'white',
+          color: '#ccc !important',
+        },
+      },
+    },
+    '& ./': {
+      h1: {
+        a: {
+          color: 'red',
         },
       },
     },
@@ -72,13 +86,16 @@ const Header = styled('div', {
 })
 
 export function SiteHeader() {
-
+  const router = useRouter();
+  const { query } = router;
+  const currentRoute = router.pathname;
+  
   return (
     <Header>
-      <div className="head" id="top">
+      <div className={`${currentRoute} head`} id="top">
         <h1>
           <Link href="/">
-            <span>All School</span>
+            All School, by Next Wave
           </Link>
         </h1>
         <Nav />

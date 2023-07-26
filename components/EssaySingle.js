@@ -315,7 +315,7 @@ export function EssaySingle({ id, title, url, logo, author, notes, pdf, text, in
                 ))
               }
             </span>
-
+            
             <span>{author}</span>
             <span>{title}</span>
           </h2>

@@ -8,7 +8,7 @@ module.exports = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
-  reactStrictMode: true,
+  reactStrictMode: false,
   async rewrites() {
     return [
       {

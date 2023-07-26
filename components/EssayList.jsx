@@ -5,7 +5,7 @@ import Link from 'next/link'
 const Essays = styled('div', {
   '.essays': {
     display: 'grid',
-    gridTemplateColumns: '1fr',
+    gridTemplateColumns: '1fr 1fr',
     gridColumnGap: '1em',
     gridRowGap: '1em',
     
@@ -27,6 +27,10 @@ const Essays = styled('div', {
       display: 'none',
     },
     a: {
+      pointerEvents: 'none',
+      '&.no-link': {
+        pointerEvents: 'none',
+      },
       '&:first-child': {
         '&:before': {
           content: '\\2191',
@@ -64,7 +68,7 @@ export function EssayList({ essays }) {
       <section>
         <h2>
           <span className="breadcrumb">
-            <Link href="/commissions">Commissions</Link><br />
+            <Link className="no-link" href="/commissions">Commissions</Link><br />
             {essays &&
               essays.map((essay, key) => (
                 <Link key={key} href={`/essays/${essay.slug}`}>{essay.essayAuthor}</Link>

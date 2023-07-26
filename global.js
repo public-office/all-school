@@ -10,6 +10,11 @@ export const globalStyles = globalCss({
       fontFamily: 'Neue Haas Grotesk',
       src: `url('/fonts/NHaasGroteskTXPro-65Md.woff')`,
     },
+    {
+      fontFamily: 'Neue Haas Grotesk',
+      src: `url('/fonts/NHaasGroteskTXPro-66MdIt.woff')`,
+      fontStyle: 'italic',
+    },
   ],
   '*': {
     margin: 0,

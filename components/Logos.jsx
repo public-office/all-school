@@ -7,7 +7,7 @@ const LogoWrapper = styled('div', {
   display: 'grid',
   gridTemplateColumns: '1fr 1fr',
   gridColumnGap: '1em',
-  background: '#e1e1e1',
+  background: '#f7f7f7',
   '@mobile': {
     display: 'block',
     padding: '2em',

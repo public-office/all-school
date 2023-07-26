@@ -19,7 +19,7 @@ export const theme = {
     sans1: '1.3rem',
     sans2: '1.8rem',
     sans3: '2.1rem',
-    sans4: '3rem',
+    sans4: '3.6rem',
     sans5: '5.4rem',
     sans6: '6.7rem',
     serif1: '1rem',
@@ -29,7 +29,7 @@ export const theme = {
   lineHeights: {
     sans1: 1.2,
     sans2: 1.2,
-    sans3: 1.2,
+    sans3: 1.15,
     sans4: 1.05,
     sans5: 1.1,
     sans6: 1.05,

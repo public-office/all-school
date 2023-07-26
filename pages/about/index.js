@@ -452,11 +452,6 @@ export default function AboutPage({ page = {} }) {
 
   return (
     <Template>
-      {motion ? (
-        <Marquee gradient={false}>{page.marquee}</Marquee>
-      ) : (
-        <StaticMarquee>{page.marquee}</StaticMarquee>
-      )}
       <SiteHeader />
 
       <Main>
@@ -464,8 +459,6 @@ export default function AboutPage({ page = {} }) {
       </Main>
 
       <Program>
-        
-
         <Logos
           nextWaveLogos={page.nextWaveLogos}
           allSchoolLogos={page.allSchoolLogos}

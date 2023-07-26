@@ -1,5 +1,4 @@
 import { styled } from 'stitches.config'
-import { Link, animateScroll as scroll } from 'react-scroll';
 import { useEffect, useState } from 'react'
 
 const StickyNav = styled('div', {
@@ -19,14 +18,11 @@ const StickyNav = styled('div', {
     fontSize: '$sans5',
   },
   '&.visible': {
-    top: '1em',
+    top: '.5em',
   },
   top: '-4em',
   nav: {
     a: {
-      // '&:not(:last-of-type):after': {
-      //   content: ', ',
-      // },
       paddingRight: '.5em',
       '&:hover': {
         textDecoration: 'none',
@@ -34,7 +30,6 @@ const StickyNav = styled('div', {
     },
   },
   '.no-link': {
-    // textDecoration: 'line-through',
     opacity: '0.25',
     pointerEvents: 'none',
     '@mobile': {
@@ -47,6 +42,7 @@ export function FloatingNav() {
 
   const [scroll, setScroll] = useState(false);
   const [isVisible, setIsVisible] = useState(false)
+  const [display, setDisplay] = useState(false)
   const menuState = (event) => {
     setIsVisible((isVisible) => !isVisible)
   }
@@ -61,20 +57,7 @@ export function FloatingNav() {
   return(
     <StickyNav className={scroll ? "visible" : ""}>
       <nav>
-        <Link
-          onClick={menuState}
-          to="top"
-          smooth={true}
-          offset={-20}
-        >Home</Link>
-        <Link
-          onClick={menuState}
-          to="about"
-          smooth={true}
-          offset={-20}
-        >About</Link>
-        <Link className="no-link" href="/commissions">Commissions</Link>
-        <Link className="no-link" href="/events">Events</Link>
+      <span className="nav_trigger" onClick={() => setDisplay((prevDisplay) => !prevDisplay)}>Menu</span>
       </nav>
     </StickyNav>
   )

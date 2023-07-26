@@ -16,6 +16,13 @@ body.content {
   all: revert;
 }
 
+[data-route="/commissions"] .head h1 a,
+[data-route="/commissions"] .head .nav_trigger {
+  color: black !important;
+}
+
+
+
 /* [data-theme="#d9c1fa"] a:hover,
 [data-theme="#d9c1fa"] .extra-content_trigger:hover {
   color: #d9c1fa !important;
@@ -35,7 +42,7 @@ body.content {
 
 [data-theme="#54d16a"] .nav-trigger:hover,
 [data-theme="#54d16a"] nav a:hover {
-  color: #d9c1fa !important;
+  /* color: #d9c1fa !important; */
 }
 
 a, button {
@@ -47,7 +54,19 @@ a {
 }
 
 a:hover {
-  color: rgb(200,200,200) !important;
+  color: rgb(200,200,200);
+}
+
+h2 {
+  letter-spacing: -0.02em;
+}
+
+h2 a {
+  letter-spacing: -0.01em;
+}
+
+h2 span div {
+  letter-spacing: -0.01em;
 }
 
 /* .logo-wrapper p {

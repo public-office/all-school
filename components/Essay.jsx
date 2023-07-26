@@ -29,10 +29,14 @@ const Essay = styled('div', {
     color: 'black',
     textAlign: 'left',
     textDecoration: 'none',
-    padding: '.5em .5em .65em .5em' ,
+    padding: '.5em' ,
     letterSpacing: '-0.02em',
     lineHeight: '1',
-    fontSize: '$sans5',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    fontSize: '$sans4',
+    minHeight: '50vh',
     '@mobile': {
       padding: '.75em .75em 1em',
       lineHeight: '1.15',
@@ -41,9 +45,9 @@ const Essay = styled('div', {
       display: 'block',
       fontSize: '$sans2',
       lineHeight: '$sans2',
-      letterSpacing: '0',
+      letterSpacing: '-0.01em',
       textAlign: 'center',
-      paddingBottom: '.5em',
+      width: '100%',
       '@mobile': {
         fontSize: '$sans4',
       },
@@ -143,7 +147,7 @@ export function EssayItem({ id, title, url, author, notes, pdf, text, intro, tag
     <Link href={`/essays/${slug}`} scroll={false}>
       <Essay>
         <button>
-          <span>An essay by {author}</span>{title}
+          {title} <span>An essay by {author}</span>
         </button>
           
         <div className={'essay' + (isVisible ? ' visible' : '')}>

@@ -31,7 +31,7 @@ const ModalBackdrop = motion(
 
 const ModalContainer = motion(
   styled('div', {
-    background: '$bg',
+    background: '#ccc',
     color: '$fg',
     position: 'fixed',
     top: '$margin',
